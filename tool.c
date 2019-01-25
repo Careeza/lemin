@@ -9,6 +9,7 @@ t_room ft_fill_name(char *str, t_room room)
 		len++;
 	room.name = ft_strndup(str, len);
 	room.links = 0;
+	room.index = ft_strnew(0);
 	return (room);
 }
 
@@ -66,19 +67,11 @@ int		ft_verif_link2(t_room *room, char *str, t_all *all, int inlink)
 		return (-1);
 	if (inlink == index)
 		return (-1);
-	if (room[index].links != 0)
-		free(room[index].index);
-	if (room[inlink].links != 0)
-		free(room[index].index);
-//	printf("links = %d\n", room[index].links);
-//	printf("inlink = %d links =  %d\n", inlink, index);
 	room[index].links += 1;
 	room[inlink].links += 1;
-	if (!(room[index].index = (int*)malloc(sizeof(int) * room[index].links)))
-		return (-1);
-	if (!(room[inlink].index = (int*)malloc(sizeof(int) * room[inlink].links)))
-		return (-1);
-	room[index].index[room[index].links - 1] = inlink;
-	room[inlink].index[room[inlink].links - 1] = index;
+	room[index].index = ft_strjoin(room[index].index, ft_itoa(inlink));
+	room[index].index = ft_strjoin(room[index].index, " ");
+	room[inlink].index = ft_strjoin(room[inlink].index, ft_itoa(index));
+	room[inlink].index = ft_strjoin(room[inlink].index, " ");
 	return (index);
 }

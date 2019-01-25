@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/25 15:57:48 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/01/25 16:59:05 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct	s_room
 	int		start_end; //ok
 	char	*name; //ok
 	int		links;
-	int		*index;
+	char	*index;
 }				t_room;
 
 int		ft_verif_link(t_room *room, char *str, t_all *all);

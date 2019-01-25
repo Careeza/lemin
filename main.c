@@ -62,7 +62,7 @@ int main(void)
 	i = 0;
 	while (i < all.room)
 	{
-		printf("room = %d\nstart_end = %d\nname = %s\n nbrlink = %d\n flink = %s\n\n", i, room[i].start_end, room[i].name, room[i].links, room[room[i].index[0]].name);
+		printf("room = %d\nstart_end = %d\nname = %s\n nbrlink = %d\n link = %s\n\n", i, room[i].start_end, room[i].name, room[i].links, room[i].index);
 		i++;
 	}
 	return 0;
