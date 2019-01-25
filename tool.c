@@ -38,18 +38,14 @@ int		ft_verif_link(t_room *room, char *str, t_all *all)
 
 	len = 0;
 	index = 0;
-	printf("--DEBUG1--\n");
 	while (str[len] != '-' && str[len])
 		len++;
-	printf("--DEBUG2--%d -- %s\n", len, str);
 	name = ft_strndup(str, len);
-	printf("--DEBUG3--\n");
-	while (ft_strcmp(name, room[index].name) != 0 && index < all->room)
+	while (ft_strcmp(name, room[index].name) != 0 && index < all->room - 1)
 		index++;
-	printf("--DEBUG4--\n");
 	if (ft_strcmp(name, room[index].name) != 0)
 		return (-1);
-	printf("DEBUG5\n");
+	free(name);
 	return (index);
 }
 
@@ -64,18 +60,25 @@ int		ft_verif_link2(t_room *room, char *str, t_all *all, int inlink)
 	while (str[len] != '-' && str[len])
 		len++;
 	name = ft_strdup(&str[len + 1]);
-//	printf("%s\n", name);
 	while (ft_strcmp(name, room[index].name) != 0 && index < all->room)
 		index++;
 	if (ft_strcmp(name, room[index].name) != 0)
 		return (-1);
-//	if (room[index].links != 0)
-//		free(room[index].index);
-//	printf("%d\n", room[index].links);
+	if (inlink == index)
+		return (-1);
+	if (room[index].links != 0)
+		free(room[index].index);
+	if (room[inlink].links != 0)
+		free(room[index].index);
+//	printf("links = %d\n", room[index].links);
+//	printf("inlink = %d links =  %d\n", inlink, index);
 	room[index].links += 1;
+	room[inlink].links += 1;
 	if (!(room[index].index = (int*)malloc(sizeof(int) * room[index].links)))
 		return (-1);
-	room[index].index[index - 1] = inlink;
-
+	if (!(room[inlink].index = (int*)malloc(sizeof(int) * room[inlink].links)))
+		return (-1);
+	room[index].index[room[index].links - 1] = inlink;
+	room[inlink].index[room[inlink].links - 1] = index;
 	return (index);
 }

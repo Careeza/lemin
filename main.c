@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-int		ft_nbr_room(t_all *all)
+int	ft_nbr_room(t_all *all)
 {
 	int		i;
 
@@ -59,5 +59,11 @@ int main(void)
 	printf("%d\n", i);
 	if (ft_check_link(&all, room, i) == -1)
 		printf("NOP\n");
+	i = 0;
+	while (i < all.room)
+	{
+		printf("room = %d\nstart_end = %d\nname = %s\n nbrlink = %d\n flink = %s\n\n", i, room[i].start_end, room[i].name, room[i].links, room[room[i].index[0]].name);
+		i++;
+	}
 	return 0;
 }
