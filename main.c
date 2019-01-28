@@ -33,14 +33,21 @@ int		ft_reading(t_all *all)
 	char	*str;
 	char	buff[BUFF_SIZE];
 	int		ret;
+	int		check;
 
+	check = 0;
 	str = ft_strnew(0);
 	while ((ret = read(0, buff, BUFF_SIZE)) > 0)
 	{
+		check++;
 		buff[ret] = '\0';
-		str = ft_strjoin(str, buff);
+		if (!(str = ft_strjoin(str, buff)))
+			return (-1);
 	}
-	all->map = ft_strsplit(str, '\n');
+	if(!(all->map = ft_strsplit(str, '\n')))
+		return (-1);
+	if (ret < 0 || check == 0)
+		return (-1);
 	return (0);
 }
 
@@ -50,8 +57,10 @@ int main(void)
 	t_all	all;
 	int		i;
 
-	ft_reading(&all);
+	if (ft_reading(&all) == -1)
+		return (0);
 	ft_nbrfourmis(&all);
+	printf("TEST\n");
 	ft_nbr_room(&all);
 	if(!(room = (t_room*)malloc(sizeof(t_room) * (all.room + 1))))
 		return(0);
