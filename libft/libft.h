@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 14:48:43 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/23 13:13:42 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/28 11:14:25 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char			*ft_strcat(char *dst, const char *src);
 char			*ft_strncat(char *s1, const char *s2, size_t n);
 int				ft_strcmp(const char *s1, const char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
-int				ft_atoi(const char *str);
+long			ft_atoi(const char *str);
 char			*ft_strstr(const char *s1, const char *tofind);
 char			*ft_strnstr(const char *s1, const char *tofind, size_t len);
 int				ft_isalpha(int c);

@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/25 16:59:05 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/01/28 11:21:00 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 typedef struct	s_all
 {
 	char	**map;
-	int		fourmis;
+	long	fourmis;
 	int		room;
 }				t_all;
 
@@ -33,11 +33,16 @@ typedef struct	s_room
 	char	*index;
 }				t_room;
 
+int		ft_str_is_digit(char *str, char c);
 int		ft_verif_link(t_room *room, char *str, t_all *all);
 int		nbr_space(char *str, char c);
 int		ft_verif_link2(t_room *room, char *str, t_all *all, int inlink);
+
+int		ft_index_for(char *str, t_room *room, int nbrroom, int lenstr);
+void	ft_print_struct(t_room *room, int nb);
+int		ft_parser_error(char *str);
 int		ft_parser(t_all *all, t_room *room);
-t_room	ft_fill_name(char *str, t_room room);
+int		ft_fill_name(char *str, t_room *room);
 int		ft_check_link(t_all *all, t_room *room, int start);
 
 #endif

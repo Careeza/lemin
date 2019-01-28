@@ -6,13 +6,13 @@
 #    By: prastoin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 11:13:09 by prastoin          #+#    #+#              #
-#    Updated: 2019/01/25 13:56:24 by fbecerri         ###   ########.fr        #
+#    Updated: 2019/01/28 10:25:42 by prastoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem-in
 
-SRC = main.c tool.c parser.c
+SRC = main.c struct_tools.c parser.c tools.c
 
 OBJ = $(SRC:.c=.o)
 

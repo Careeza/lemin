@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
+/*   Updated: 2019/01/28 11:47:29 by prastoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 int	ft_nbr_room(t_all *all)
@@ -8,10 +20,17 @@ int	ft_nbr_room(t_all *all)
 	all->room = 0;
 	while (all->map[i])
 	{
-		if (nbr_space(all->map[i], ' ') == 2)
-			all->room++;
+		if (nbr_space(all->map[i], '-') == 1) //s'arrete au liaison
+			break;
+		if (all->map[i][0] != '#') //evites les commandes et les comments
+		{
+			if (nbr_space(all->map[i], ' ') == 2)
+				all->room++;
+		}
 		i++;
 	}
+	if (all->room <= 1)
+		return (-1);
 	return (0);
 }
 
@@ -23,7 +42,7 @@ int		ft_nbrfourmis(t_all *all)
 	while (all->map[i][0] == '#')
 		i++;
 	all->fourmis = ft_atoi(all->map[i]);
-	if (all->fourmis <= 0)
+	if (all->fourmis <= 0 || all->fourmis >= INT_MAX)
 		return (-1);
 	return(0);
 }
@@ -58,21 +77,19 @@ int main(void)
 	int		i;
 
 	if (ft_reading(&all) == -1)
-		return (0);
-	ft_nbrfourmis(&all);
-	printf("TEST\n");
-	ft_nbr_room(&all);
-	if(!(room = (t_room*)malloc(sizeof(t_room) * (all.room + 1))))
-		return(0);
-	i = ft_parser(&all, room);
-	printf("%d\n", i);
+		return (ft_parser_error("Reading failed\n"));
+	if (ft_nbrfourmis(&all) == -1)
+		return (ft_parser_error("Nombre de fourmis invalides\n"));
+	if (ft_nbr_room(&all) == -1)
+		return (ft_parser_error("Pas assez de room\n"));
+	if (!(room = (t_room *)malloc(sizeof(t_room) * (all.room + 1))))
+		return (ft_parser_error("Impossible malloc\n"));
+	if ((i = ft_parser(&all, room)) == -1)
+		return (-1);
+	printf("LETS GO PARSER\n");
 	if (ft_check_link(&all, room, i) == -1)
-		printf("NOP\n");
+		return (ft_parser_error("on sait pas trop\n"));
 	i = 0;
-	while (i < all.room)
-	{
-		printf("room = %d\nstart_end = %d\nname = %s\n nbrlink = %d\n link = %s\n\n", i, room[i].start_end, room[i].name, room[i].links, room[i].index);
-		i++;
-	}
-	return 0;
+	ft_print_struct(room, all.room);
+	return (0);
 }

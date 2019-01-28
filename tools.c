@@ -1,36 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 15:14:11 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/28 11:14:07 by prastoin         ###   ########.fr       */
+/*   Created: 2019/01/28 10:24:22 by prastoin          #+#    #+#             */
+/*   Updated: 2019/01/28 11:04:07 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lem_in.h"
 
-long	ft_atoi(const char *str)
+int		ft_parser_error(char *str)
 {
-	long res;
-	long neg;
-	long i;
+	ft_putstr(str);
+	return (-1);
+}
+
+
+int	nbr_space(char *str, char c)
+{
+	int	i;
+	int	space;
 
 	i = 0;
-	neg = 1;
-	res = 0;
-	while (str[i] == ' ' || (str[i] >= '\a' && str[i] <= '\r'))
-		i++;
-	if (str[i] == '-')
-		neg = -1;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
+	space = 0;
+	if (str[0] == '#')
+		return (0);
+	while (str[i])
 	{
-		res = res * 10 + (str[i] - '0');
+		if (str[i] == c)
+			space++;
 		i++;
 	}
-	return ((long)(res * neg));
+	return (space);
+}
+
+int		ft_str_is_digit(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != c)
+	{
+		if (ft_isdigit(str[i]) == 0 && str[i] != ' ' && str[i] != '\0')
+			return (-1);
+		i++;
+	}
+	return (0);
 }
