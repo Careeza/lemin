@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/28 12:17:59 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/28 17:04:18 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,17 @@ int		ft_fill_name(char *str, t_room *room)
 	len = 0;
 	while (str[len] != ' ')
 		len++;
-	printf("%s\n", str);
 	if (nbr_space(str, ' ') != 2)
 		return (-1);
 	if (ft_str_is_digit((str + len), '\0') == -1)
 		return (-1);
 	room->name = ft_strndup(str, len);
 	room->links = 0;
+	if (room->start_end != 2)
+	room->power = INT_MAX;
+	room->slot = 0;
+	room->i = 0;
+	room->previous = 0;
 	room->index = ft_strnew(0);
 	return (0);
 }
@@ -42,6 +46,7 @@ void	ft_print_struct(t_room *room, int nb)
 		printf("Start_end =%d\n", room[i].start_end);
 		printf("Links =%d\n", room[i].links);
 		printf("liaisons =%s\n", room[i].index);
+		printf("power = %d\n", room[i].power);
 		printf("\n");
 		i++;
 	}

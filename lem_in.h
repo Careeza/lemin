@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/28 11:21:00 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/28 16:04:24 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,32 @@ typedef struct	s_room
 	char	*name; //ok
 	int		links;
 	char	*index;
+	char	**way;
+	int		power;
+	int		slot;
+	int		previous;
+	int		i;
 }				t_room;
+
+typedef struct	s_algo
+{
+	int		index_start;
+	int		index_end;
+}				t_algo;
+
+int		ft_algo(t_room *room, t_algo *algo, long fourmis);
+
+int		ft_verif_doublons(t_room *room, t_all *all, t_algo *algo);
 
 int		ft_str_is_digit(char *str, char c);
 int		ft_verif_link(t_room *room, char *str, t_all *all);
 int		nbr_space(char *str, char c);
 int		ft_verif_link2(t_room *room, char *str, t_all *all, int inlink);
-
 int		ft_index_for(char *str, t_room *room, int nbrroom, int lenstr);
+
 void	ft_print_struct(t_room *room, int nb);
 int		ft_parser_error(char *str);
-int		ft_parser(t_all *all, t_room *room);
+int		ft_parser(t_all *all, t_room *room, int i);
 int		ft_fill_name(char *str, t_room *room);
 int		ft_check_link(t_all *all, t_room *room, int start);
 

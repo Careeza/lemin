@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/28 11:47:29 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/28 16:54:00 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		ft_nbrfourmis(t_all *all)
 	all->fourmis = ft_atoi(all->map[i]);
 	if (all->fourmis <= 0 || all->fourmis >= INT_MAX)
 		return (-1);
-	return(0);
+	return(i + 1);
 }
 
 int		ft_reading(t_all *all)
@@ -74,22 +74,23 @@ int main(void)
 {
 	t_room	*room;
 	t_all	all;
+	t_algo	algo;
 	int		i;
 
 	if (ft_reading(&all) == -1)
 		return (ft_parser_error("Reading failed\n"));
-	if (ft_nbrfourmis(&all) == -1)
+	if ((i = ft_nbrfourmis(&all)) == -1)
 		return (ft_parser_error("Nombre de fourmis invalides\n"));
 	if (ft_nbr_room(&all) == -1)
 		return (ft_parser_error("Pas assez de room\n"));
 	if (!(room = (t_room *)malloc(sizeof(t_room) * (all.room + 1))))
 		return (ft_parser_error("Impossible malloc\n"));
-	if ((i = ft_parser(&all, room)) == -1)
+	if ((i = ft_parser(&all, room, i)) == -1)
 		return (-1);
-	printf("LETS GO PARSER\n");
 	if (ft_check_link(&all, room, i) == -1)
-		return (ft_parser_error("on sait pas trop\n"));
-	i = 0;
+		return (-1);
+	ft_verif_doublons(room, &all, &algo);
+	ft_algo(room, &algo, all.fourmis);
 	ft_print_struct(room, all.room);
 	return (0);
 }
