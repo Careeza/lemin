@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/29 15:41:22 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/29 16:41:47 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "libft/libft.h"
 # include <stdio.h>
-# define BUFF_SIZE 4096
 
+# define BUFF_SIZE 4096
 
 typedef struct	s_all
 {
@@ -34,9 +34,6 @@ typedef struct	s_room
 	char	**way;
 	int		power;
 	int		slot;
-	int		previous;
-	int		passage;
-	int		i;
 }				t_room;
 
 typedef struct	s_algo
@@ -45,8 +42,15 @@ typedef struct	s_algo
 	int		index_end;
 	int		*list1;
 	int		*list2;
-
+	int		fourmis;
 }				t_algo;
+
+typedef struct	s_fourmi
+{
+	int		name;
+	int		curr;
+	int		next;
+}				t_fourmi;
 
 int		ft_algo(t_room *room, t_algo *algo, long fourmis, int nbrroom);
 
@@ -58,6 +62,7 @@ int		nbr_space(char *str, char c);
 int		ft_verif_link2(t_room *room, char *str, t_all *all, int inlink);
 int		ft_index_for(char *str, t_room *room, int nbrroom, int lenstr);
 
+void	ft_print_ant(t_fourmi *room, int nb);
 void	ft_print_struct(t_room *room, int nb);
 int		ft_parser_error(char *str);
 int		ft_parser(t_all *all, t_room *room, int i);

@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/29 15:17:17 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/29 16:33:02 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,23 @@ int		ft_fill_name(char *str, t_room *room)
 	if (room->start_end != 2)
 		room->power = 0;
 	room->slot = 0;
-	room->i = 0;
-	room->passage = 0;
-	room->previous = 0;
 	room->index = ft_strnew(0);
 	return (0);
+}
+
+void	ft_print_ant(t_fourmi *room, int nb)
+{
+	int	i;
+
+	i = 0;
+	while (i < nb)
+	{
+		printf("ROOM[%d]\n", i);
+		printf("Name =%d\n", room[i].name);
+		printf("index = %d\n", room[i].curr);
+		printf("\n");
+		i++;
+	}
 }
 
 void	ft_print_struct(t_room *room, int nb)

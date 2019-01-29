@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/29 15:36:50 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/29 16:26:04 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ int main(void)
 		return (-1);
 	ft_verif_doublons(room, &all, &algo);
 	ft_algo(room, &algo, all.fourmis, all.room);
-	ft_print_struct(room, all.room);
+//	ft_print_struct(room, all.room);
 	return (0);
 }
