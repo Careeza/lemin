@@ -6,74 +6,65 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 13:41:56 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/28 18:20:52 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/29 15:39:56 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		ft_restart(t_room *room, t_algo *algo)
-{
-//	if (room[algo->index_end].i < room[algo->index_end].links)
-//		return (-42);
-	printf ("RESTART%d\n", room[algo->index_end].i);
-	if (room[ft_atoi(room[algo->index_end].way[room[algo->index_end].i])].i < room[ft_atoi(room[algo->index_end].way[room[algo->index_end].i])].links)
-		return (algo->index_end);
-	else
-		room[algo->index_end].i++;
-	if (room[algo->index_end].i >= room[algo->index_end].links)
-		return (-42);
-	return (algo->index_end);
-}
-
-int		ft_previous(t_room *room, int index)
-{
-	printf("start ou end\n");
-	while (room[index].i >= room[index].links || room[index].start_end == 1)
-	{
-		if (room[index].start_end == 2)
-			return (-42);
-		room[index].i = 0;
-		index = room[index].previous;
-	}
-	return (index);
-}
-
 int		ft_fill_power(t_room *room, t_algo *algo)
 {
-	int		index;
-	int		next;
+	int i;
+	int j;
+	int cmt;
+	int k;
 
-	index = algo->index_end;
-	while (index != -42)
+	k = 2;
+	cmt = 1;
+	while (cmt != 0)
 	{
-		if (room[index].i < room[index].links && ft_atoi(room[index].way[room[index].i]) != room[index].previous && (room[ft_atoi(room[index].way[room[index].i])].start_end != 2))
+		i = 0;
+		cmt = 0;
+		while (algo->list1[i] != -42)
 		{
-			next = ft_atoi(room[index].way[room[index].i]);
-			printf("From %d to %d\n", index, next);
-			room[next].previous = index;
-			if (room[index].power + 1 <= room[next].power)
-				room[next].power = room[index].power + 1;
-			if (room[index].start_end != 2)
-				room[index].i++;
-			index = next;
-			if (room[index].start_end == 1)
-				if ((index = ft_restart(room, algo)) == -42)
-					break ;
+			j = 0;
+			while (j < room[algo->list1[i]].links)
+			{
+				if (room[ft_atoi(room[algo->list1[i]].way[j])].power == 0)
+				{
+					room[atoi(room[algo->list1[i]].way[j])].power = k;
+					algo->list2[cmt] = ft_atoi(room[algo->list1[i]].way[j]);
+					cmt++;
+				}
+				j++;
+			}
+			i++;
 		}
-		else
+		algo->list2[cmt] = -42;
+		i = 0;
+		while (algo->list2[i] != -42)
 		{
-			room[index].i++;
-			if (room[index].i >= room[index].links)
-				index = ft_previous(room, index);
+	//		printf("ITER%d = %d\n", k, algo->list2[i]);
+			algo->list1[i] = algo->list2[i];
+			i++;
 		}
+		algo->list1[i] = -42;
+		k++;
 	}
 	return (0);
 }
 
-int		ft_algo(t_room *room, t_algo *algo, long fourmis)
+int		ft_algo(t_room *room, t_algo *algo, long fourmis, int nbrroom)
 {
+	if (!(algo->list1 = (int*)malloc(sizeof(int) * (nbrroom))))
+		return (0);
+	if (!(algo->list2 = (int*)malloc(sizeof(int) * (nbrroom))))
+		return (0);
 	(void)fourmis;
+	algo->list1[0] = algo->index_end;
+	algo->list1[1] = -42;
 	ft_fill_power(room, algo);
+	free(algo->list1);
+	free(algo->list2);
 	return (0);
 }

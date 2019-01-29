@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/28 17:04:18 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/29 15:17:17 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ int		ft_fill_name(char *str, t_room *room)
 	room->name = ft_strndup(str, len);
 	room->links = 0;
 	if (room->start_end != 2)
-	room->power = INT_MAX;
+		room->power = 0;
 	room->slot = 0;
 	room->i = 0;
+	room->passage = 0;
 	room->previous = 0;
 	room->index = ft_strnew(0);
 	return (0);

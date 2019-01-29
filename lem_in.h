@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/28 16:04:24 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/29 15:41:22 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct	s_room
 	int		power;
 	int		slot;
 	int		previous;
+	int		passage;
 	int		i;
 }				t_room;
 
@@ -42,9 +43,12 @@ typedef struct	s_algo
 {
 	int		index_start;
 	int		index_end;
+	int		*list1;
+	int		*list2;
+
 }				t_algo;
 
-int		ft_algo(t_room *room, t_algo *algo, long fourmis);
+int		ft_algo(t_room *room, t_algo *algo, long fourmis, int nbrroom);
 
 int		ft_verif_doublons(t_room *room, t_all *all, t_algo *algo);
 
