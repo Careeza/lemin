@@ -6,13 +6,13 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/29 16:33:02 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/30 13:53:21 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		ft_fill_name(char *str, t_room *room)
+int		ft_fill_name(char *str, t_room *room, int fourmis)
 {
 	int len;
 
@@ -25,9 +25,9 @@ int		ft_fill_name(char *str, t_room *room)
 		return (-1);
 	room->name = ft_strndup(str, len);
 	room->links = 0;
-	if (room->start_end != 2)
-		room->power = 0;
 	room->slot = 0;
+	if (room->start_end == 1)
+		room->slot = fourmis;
 	room->index = ft_strnew(0);
 	return (0);
 }

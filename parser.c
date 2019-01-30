@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:45 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/29 17:09:41 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/30 13:39:56 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_parser(t_all *all, t_room *room, int i)
 	{
 		if (all->map[i][0] != '#')
 		{
-			if (ft_fill_name(all->map[i], &room[index]) == -1)
+			if (ft_fill_name(all->map[i], &room[index], all->fourmis) == -1)
 				return (ft_parser_error("Coordoonnees invalides\n"));
 			index++;
 		}

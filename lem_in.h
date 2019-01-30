@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/29 16:41:47 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/30 13:43:34 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct	s_fourmi
 {
 	int		name;
 	int		curr;
-	int		next;
+	int		previous;
 }				t_fourmi;
 
 int		ft_algo(t_room *room, t_algo *algo, long fourmis, int nbrroom);
@@ -66,7 +66,7 @@ void	ft_print_ant(t_fourmi *room, int nb);
 void	ft_print_struct(t_room *room, int nb);
 int		ft_parser_error(char *str);
 int		ft_parser(t_all *all, t_room *room, int i);
-int		ft_fill_name(char *str, t_room *room);
+int		ft_fill_name(char *str, t_room *room, int fourmis);
 int		ft_check_link(t_all *all, t_room *room, int start);
 
 #endif
