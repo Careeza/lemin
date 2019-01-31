@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:45 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/30 13:39:56 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/31 16:28:27 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int		ft_parser(t_all *all, t_room *room, int i)
 					start_end = 2;
 				i++;
 			}
-			if (start_end == 2)
-				room[index].power = 1;
 			room[index].start_end = start_end;
 			start += start_end == 1 ? 1 : 0;
 			end += start_end == 2 ? 1 : 0;
-			start_end = 0;
 			i--;
 		}
+		if (start_end == 0)
+			room[index].start_end = 0;
+		start_end = 0;
 		i++;
 	}
 //	printf("%d et %d i%d?\n", start, end, i);

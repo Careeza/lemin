@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/30 13:43:34 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/31 18:59:56 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ typedef struct	s_room
 	int		start_end; //ok
 	char	*name; //ok
 	int		links;
+	int		links2;
 	char	*index;
 	char	**way;
 	int		power;
+	int		power2;
 	int		slot;
 }				t_room;
 
@@ -52,7 +54,7 @@ typedef struct	s_fourmi
 	int		previous;
 }				t_fourmi;
 
-int		ft_algo(t_room *room, t_algo *algo, long fourmis, int nbrroom);
+int		ft_algo(t_room *room, t_algo *algo, long fourmis, t_all *all);
 
 int		ft_verif_doublons(t_room *room, t_all *all, t_algo *algo);
 
@@ -62,6 +64,7 @@ int		nbr_space(char *str, char c);
 int		ft_verif_link2(t_room *room, char *str, t_all *all, int inlink);
 int		ft_index_for(char *str, t_room *room, int nbrroom, int lenstr);
 
+void	ft_print_room(t_room *room, int i);
 void	ft_print_ant(t_fourmi *room, int nb);
 void	ft_print_struct(t_room *room, int nb);
 int		ft_parser_error(char *str);

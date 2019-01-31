@@ -6,7 +6,7 @@
 #    By: prastoin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 11:13:09 by prastoin          #+#    #+#              #
-#    Updated: 2019/01/28 14:04:44 by prastoin         ###   ########.fr        #
+#    Updated: 2019/01/31 16:13:10 by prastoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ DOT = lem_in.h
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIB) $(DOT)
-		gcc $(FLAG) $(LIB) $(LIB2) $(INC) $(OBJ) $(LIBX) -o $(NAME)
+		gcc $(FLAG) -g -fsanitize=address $(LIB) $(LIB2) $(INC) $(OBJ) $(LIBX) -o $(NAME)
 
 $(LIB):
 		make -C libft/ fclean
