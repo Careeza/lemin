@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:24:22 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/04 13:14:42 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/04 16:01:24 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		ft_verif_tube(int indexa, int indexb, t_room *room)
 	while (i < room[indexa].links)
 	{
 		val = ft_atoi((room[indexa].index) + len);
-		len = ft_lennbr(val) + 1;
+		len += ft_lennbr(val) + 1;
 		if (indexb == val)
 			return (-1);
 		i++;

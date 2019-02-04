@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/04 13:13:28 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/04 16:03:01 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ int		ft_reading(t_all *all)
 
 	check = 0;
 	str = ft_strnew(0);
-	while ((ret = read(0, buff, BUFF_SIZE)) > 0)
+	while ((ret = read(0, buff, BUFF_SIZE - 1)) > 0)
 	{
-		check++;
 		buff[ret] = '\0';
+		check++;
 		if (!(str = ft_strjoin(str, buff)))
 			return (-1);
 	}

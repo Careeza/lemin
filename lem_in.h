@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/04 13:21:41 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/04 15:19:06 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@
 #define CSI_RESET CSI "0m"
 
 
+typedef struct	s_special_ant
+{
+	int		curr;
+	int		previous;
+	int		power;
+}				t_special_ant;
+
 typedef struct	s_all
 {
 	char	**map;
@@ -39,11 +46,14 @@ typedef struct	s_room
 	char	*name; //ok
 	int		links;
 	int		links2;
+	int		previous;
 	char	*index;
 	char	**way;
+	long	*powertest;
 	int		power;
 	int		power2;
 	int		slot;
+	int		pass;
 }				t_room;
 
 typedef struct	s_algo
@@ -84,5 +94,7 @@ int		ft_check_link(t_all *all, t_room *room, int start);
 
 int		ft_parser_error(char *str);
 int		ft_light_error(char *str);
+
+int		ft_power_algo(t_room *room, t_all *all, t_algo *algo);
 
 #endif

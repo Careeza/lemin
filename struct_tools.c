@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/04 13:14:02 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/04 16:04:37 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,25 @@ int		ft_fill_name(char *str, t_room *room, int fourmis)
 	room->slot = 0;
 	room->power = 0;
 	room->power2 = 0;
-
+	room->previous = -42;
+	room->pass = 0;
 	if (room->start_end == 1)
 		room->slot = fourmis;
 	room->index = ft_strnew(0);
 	return (0);
+}
+
+void	print_dbint(long *tab, int len)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
+	{
+		printf("-- %ld -- ", tab[i]);
+		i++;
+	}
+	printf("\n");
 }
 
 void	ft_print_ant(t_fourmi *room, int nb)
@@ -57,12 +71,9 @@ void	ft_print_room(t_room *room, int i)
 	printf("Start_end =%d\n", room[i].start_end);
 	printf("Links =%d\n", room[i].links);
 	printf("liaisons =%s\n", room[i].index);
-	printf("power = %d\n", room[i].power);
-	printf("power2 = %d\n", room[i].power2);
 	printf("links2 = %d\n", room[i].links2);
 	printf("\n");
 }
-
 void	ft_print_struct(t_room *room, int nb)
 {
 	int	i;
@@ -75,8 +86,7 @@ void	ft_print_struct(t_room *room, int nb)
 		printf("Start_end =%d\n", room[i].start_end);
 		printf("Links =%d\n", room[i].links);
 		printf("liaisons =%s\n", room[i].index);
-		printf("power = %d\n", room[i].power);
-		printf("power2 = %d\n", room[i].power2);
+	print_dbint(room[i].powertest, room[i].links);
 		printf("links2 = %d\n", room[i].links2);
 		printf("\n");
 		i++;

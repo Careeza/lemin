@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 13:41:56 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/04 13:20:59 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/04 14:41:43 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,26 +273,27 @@ int		ft_destroy(t_all *all, t_room *room, t_algo *algo)
 
 int		ft_algo(t_room *room, t_algo *algo, long fourmis, t_all *all)
 {
-	t_fourmi *ant;
-
-	ft_malloc_list(algo, all->room);
-	algo->list1[0] = algo->index_end;
-	algo->list1[1] = -42;
-	room[algo->index_end].power = 1;
-	room[algo->index_end].power2 = 1;
+//	t_fourmi *ant;
+	(void)fourmis;
+//	ft_malloc_list(algo, all->room);
+//	algo->list1[0] = algo->index_end;
+//	algo->list1[1] = -42;
+//	room[algo->index_end].power = 1;
+//	room[algo->index_end].power2 = 1;
 //	ft_print_struct(room, all->room);
-	ft_fill_power(room, algo);
-	free(algo->list1);
-	free(algo->list2);
-	if (room[algo->index_start].power == 0)
-		return (ft_parser_error("Broken path\n"));
+	ft_power_algo(room, all, algo);
+//	free(algo->list1);
+//	free(algo->list2);
+//	if (room[algo->index_start].power == 0)
+//		return (ft_parser_error("Broken path\n"));
 //	ft_destroy(all, room, algo);
 	//checker si start a une power pour regarder si le path est valide entre start et end
-	ant = ft_foumisse(fourmis, algo);
+//	ant = ft_foumisse(fourmis, algo);
 //	ft_print_ant(ant, fourmis);
-	algo->fourmis = fourmis;
-	printf("start = %d end = %d\n", room[algo->index_start].links, room[algo->index_end].links);
+//	algo->fourmis = fourmis;
+//	printf("start = %d end = %d\n", room[algo->index_start].links, room[algo->index_end].links);
 //	ft_print_struct(room, all->room);
-	ft_fill_path(ant, algo, room, all);
+//	ft_fill_path(ant, algo, room, all);
+	ft_print_struct(room, all->room);
 	return (0);
 }

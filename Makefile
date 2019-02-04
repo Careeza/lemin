@@ -6,17 +6,17 @@
 #    By: prastoin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 11:13:09 by prastoin          #+#    #+#              #
-#    Updated: 2019/02/04 13:20:17 by prastoin         ###   ########.fr        #
+#    Updated: 2019/02/04 15:35:46 by prastoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem-in
 
-SRC = main.c struct_tools.c parser.c tools.c algo.c display.c
+SRC = main.c struct_tools.c parser.c tools.c algo.c display.c power.c
 
 OBJ = $(SRC:.c=.o)
 
-FLAG = -Wall -Wextra -Werror
+FLAG = -Wall -Wextra -Werror -g -fsanitize=address
 
 LIB = libft/libft.a
 
@@ -27,7 +27,7 @@ DOT = lem_in.h
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIB) $(DOT)
-		gcc $(FLAG) -g -fsanitize=address $(LIB) $(LIB2) $(INC) $(OBJ) $(LIBX) -o $(NAME)
+		gcc $(FLAG) $(LIB) $(LIB2) $(INC) $(OBJ) $(LIBX) -o $(NAME)
 
 $(LIB):
 		make -C libft/ fclean
