@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 13:41:56 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/31 19:28:14 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/04 13:03:28 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,13 +180,13 @@ int		ft_play(t_fourmi *ant, t_room *room, t_algo *algo, int curr_ant, t_all *all
 	{
 		if (room[ft_atoi(room[curr].way[i])].slot == 0 || ft_atoi(room[curr].way[i]) == algo->index_end)
 		{
-			if (score > room[ft_atoi(room[curr].way[i])].power)// && ft_atoi(room[curr].way[i]) != ant[curr_ant].previous)
+			if (score > room[ft_atoi(room[curr].way[i])].power) // && ft_atoi(room[curr].way[i]) != ant[curr_ant].previous)
 			{
 
 				score = room[ft_atoi(room[curr].way[i])].power;
 				best = ft_atoi(room[curr].way[i]);
-//				if (score - score2 == 2)
-//					score = ft_verif_boucle(ant, room, algo, curr_ant, best, all);
+				if (score - score2 == 2)
+					score = ft_verif_boucle(ant, room, algo, curr_ant, best, all);
 /*				if (curr_ant == 1)
 				{
 					ft_putstr(" --  index =");
@@ -206,15 +206,28 @@ int		ft_play(t_fourmi *ant, t_room *room, t_algo *algo, int curr_ant, t_all *all
 	return (best);
 }
 
-void	ft_display(int curr_ant, int best, t_room *room)
+void	ft_display(int best, t_room *room, t_algo *algo, t_fourmi ant)
 {
 	if (best != -1)
 	{
+		if (ant.previous == algo->index_start)
+			write(1, CSI_RED, (sizeof(CSI_RED) - 1));
+		else if (best == algo->index_end)
+			write(1, CSI_BLUE, (sizeof(CSI_BLUE) - 1));
+		else
+			write(1, CSI_WHITE, (sizeof(CSI_WHITE) - 1));
+		ft_putchar('l');
+		ft_putnbr(ant.name);
+		ft_putchar('-');
+		ft_putstr(room[best].name);
+		ft_putchar(' ');
+		write(1, CSI_RESET, (sizeof(CSI_RESET) - 1));
+		/*
 		ft_putchar('L');
 		ft_putnbr(curr_ant + 1);
 		ft_putchar('-');
 		ft_putstr(room[best].name);
-		ft_putchar(' ');
+		ft_putchar(' ');*/
 	}
 }
 
@@ -231,18 +244,22 @@ int		ft_fill_path(t_fourmi *ant, t_algo *algo, t_room *room, t_all *all)
 {
 	int	i;
 	int best;
+	int	x;
 
 	while (room[algo->index_end].slot != algo->fourmis)
 	{
 		i = 0;
-		while (i != (algo->fourmis))
+		x = 0;
+		while (i != (algo->fourmis) && x < room[algo->index_end].links)
 		{
 			if (ant[i].curr != algo->index_end)
 			{
 				if ((best = ft_play(ant, room, algo, i, all)) != -1)
 				{
+					if (ant[i].curr == algo->index_start)
+						x++;
 					ft_move_ant(best, room, ant, i);
-					ft_display(i, best, room);
+					ft_display(best, room, algo, ant[i]);
 				}
 			}
 			i++;
@@ -311,6 +328,8 @@ int		ft_algo(t_room *room, t_algo *algo, long fourmis, t_all *all)
 	ant = ft_foumisse(fourmis, algo);
 //	ft_print_ant(ant, fourmis);
 	algo->fourmis = fourmis;
+	printf("start = %d end = %d\n", room[algo->index_start].links, room[algo->index_end].links);
+//	ft_print_struct(room, all->room);
 	ft_fill_path(ant, algo, room, all);
 	return (0);
 }

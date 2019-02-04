@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/31 18:59:26 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/01 15:01:57 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,11 +139,14 @@ int		ft_verif_link2(t_room *room, char *str, t_all *all, int indexa)
 	if (indexb == all->room)
 		return (ft_parser_error("Linked room doesn't exist\n"));
 	if (indexa == indexb)
-		return (ft_parser_error("A room is linked to herself\n"));
+		return(ft_light_error("A room is linked to herself\n"));
+	if (ft_verif_tube(indexa, indexb, room) == -1)
+		return (ft_light_error("Tube already exists\n"));
 	room[indexb].links += 1;
 	room[indexa].links += 1;
 	room[indexb].links2 += 1;
 	room[indexa].links2 += 1;
+//	printf("indexa = %d, indexb = %d\n", indexa, indexb);
 	if ((!(room[indexb].index = ft_strjoin(room[indexb].index, ft_itoa(indexa))))
 			|| (!(room[indexb].index = ft_strjoin(room[indexb].index, " "))))
 		return (ft_parser_error("Ouspy join crashed\n"));

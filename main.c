@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/31 16:11:10 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/01 15:04:13 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int		ft_reading(t_all *all)
 	return (0);
 }
 
+//verifier que le tube n exsite pas dans le way de end et de start car pb au niveau de links
+
 int main(void)
 {
 	t_room	*room;
@@ -89,8 +91,8 @@ int main(void)
 		return (-1);
 	if (ft_check_link(&all, room, i) == -1)
 		return (-1);
+//	ft_print_struct(room, all.room);
 	ft_verif_doublons(room, &all, &algo);
 	ft_algo(room, &algo, all.fourmis, &all);
-//	ft_print_struct(room, all.room);
 	return (0);
 }

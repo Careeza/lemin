@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/31 18:59:56 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/04 12:16:14 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 # include <stdio.h>
 
 # define BUFF_SIZE 4096
+
+#define CSI "\033["
+#define CSI_WHITE CSI "37;01m"
+#define CSI_BLUE CSI "34;01m"
+#define CSI_YELLOW CSI "33;01m"
+#define CSI_RED CSI "31m"
+#define CSI_RESET CSI "0m"
+
 
 typedef struct	s_all
 {
@@ -63,13 +71,16 @@ int		ft_verif_link(t_room *room, char *str, t_all *all);
 int		nbr_space(char *str, char c);
 int		ft_verif_link2(t_room *room, char *str, t_all *all, int inlink);
 int		ft_index_for(char *str, t_room *room, int nbrroom, int lenstr);
+int		ft_verif_tube(int indexa, int indexb, t_room *room);
 
 void	ft_print_room(t_room *room, int i);
 void	ft_print_ant(t_fourmi *room, int nb);
 void	ft_print_struct(t_room *room, int nb);
-int		ft_parser_error(char *str);
 int		ft_parser(t_all *all, t_room *room, int i);
 int		ft_fill_name(char *str, t_room *room, int fourmis);
 int		ft_check_link(t_all *all, t_room *room, int start);
+
+int		ft_parser_error(char *str);
+int		ft_light_error(char *str);
 
 #endif
