@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/04 12:16:14 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/04 13:21:41 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct	s_fourmi
 	int		previous;
 }				t_fourmi;
 
+void	ft_display(int best, t_room *room, t_algo *algo, t_fourmi ant);
+int		ft_malloc_list(t_algo *algo, int room);
 int		ft_algo(t_room *room, t_algo *algo, long fourmis, t_all *all);
 
 int		ft_verif_doublons(t_room *room, t_all *all, t_algo *algo);

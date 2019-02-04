@@ -6,23 +6,11 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 13:41:56 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/04 13:03:28 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/04 13:20:59 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-int		ft_malloc_list(t_algo *algo, int room)
-{
-	if (!(algo->list1 = (int*)malloc(sizeof(int) * (room))))
-		return (-1);
-	if (!(algo->list2 = (int*)malloc(sizeof(int) * (room))))
-		return (-1);
-	algo->list1[0] = algo->index_end;
-	algo->list1[1] = -42;
-	return (0);
-}
-
 
 int		ft_fill_power2(t_room *room, t_algo *algo)
 {
@@ -204,31 +192,6 @@ int		ft_play(t_fourmi *ant, t_room *room, t_algo *algo, int curr_ant, t_all *all
 	if (score == INT_MAX)
 		return (-1);
 	return (best);
-}
-
-void	ft_display(int best, t_room *room, t_algo *algo, t_fourmi ant)
-{
-	if (best != -1)
-	{
-		if (ant.previous == algo->index_start)
-			write(1, CSI_RED, (sizeof(CSI_RED) - 1));
-		else if (best == algo->index_end)
-			write(1, CSI_BLUE, (sizeof(CSI_BLUE) - 1));
-		else
-			write(1, CSI_WHITE, (sizeof(CSI_WHITE) - 1));
-		ft_putchar('l');
-		ft_putnbr(ant.name);
-		ft_putchar('-');
-		ft_putstr(room[best].name);
-		ft_putchar(' ');
-		write(1, CSI_RESET, (sizeof(CSI_RESET) - 1));
-		/*
-		ft_putchar('L');
-		ft_putnbr(curr_ant + 1);
-		ft_putchar('-');
-		ft_putstr(room[best].name);
-		ft_putchar(' ');*/
-	}
 }
 
 int		ft_move_ant(int best_index, t_room *room, t_fourmi *ant, int curr_ant)
