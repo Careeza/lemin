@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/05 12:46:21 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/05 16:03:33 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		ft_fill_name(char *str, t_room *room, int fourmis, int nbroom)
 	room->previous = -42;
 	room->pass = 0;
 	room->i = 0;
+	room->j = 1;
 	room->nbrpath = 0;
 	if (!(room->path = (int *)malloc(sizeof(int) * nbroom)))
 		return (-2);
@@ -38,14 +39,14 @@ int		ft_fill_name(char *str, t_room *room, int fourmis, int nbroom)
 	return (0);
 }
 
-void	print_dbint(long *tab, int len)
+void	print_dbint(int *tab, int len)
 {
 	int	i;
 
 	i = 0;
 	while (i < len)
 	{
-		printf("-- %ld -- ", tab[i]);
+		printf("-- %d -- ", tab[i]);
 		i++;
 	}
 	printf("\n");
@@ -86,6 +87,7 @@ void	ft_print_struct(t_room *room, int nb)
 		printf("Start_end =%d\n", room[i].start_end);
 		printf("Links =%d\n", room[i].links);
 		printf("liaisons =%s\n", room[i].index);
+		print_dbint(room[i].path, room[i].nbrpath);
 		printf("\n");
 		i++;
 	}

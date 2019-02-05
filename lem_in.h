@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/05 14:01:44 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/05 16:01:50 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct	s_room
 	int		i;
 	int		nbrpath;
 	int		*path;
+	int		j;
 }				t_room;
 
 typedef struct	s_algo
@@ -93,7 +94,7 @@ int		ft_algo(t_room *room, t_algo *algo, long fourmis, t_all *all);
 
 int		ft_verif_doublons(t_room *room, t_all *all, t_algo *algo);
 
-void	print_dbint(long *list, int len);
+void	print_dbint(int *list, int len);
 int		ft_str_is_digit(char *str, char c);
 int		ft_verif_link(t_room *room, char *str, t_all *all);
 int		nbr_space(char *str, char c);
@@ -111,6 +112,7 @@ int		ft_check_link(t_all *all, t_room *room, int start);
 int		ft_parser_error(char *str);
 int		ft_light_error(char *str);
 
+int		*ft_realloc_int(int *list, int len, t_all *all);
 t_path	*ft_realloc_path(t_path *path, t_all *all);
 int		ft_power_algo(t_room *room, t_all *all, t_algo *algo);
 int		ft_fill_power_path(t_algo *algo, t_room *room, t_all *all, t_path *path);

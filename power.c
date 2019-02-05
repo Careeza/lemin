@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 13:52:03 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/05 14:48:03 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/05 16:03:24 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_previous(t_room *room, int index, t_special_ant *ghost, int index_end, t
 	ghost->power--;
 	ghost->curr = room[index].previous;
 	path[ghost->nb].len--;
-//	ghost->previous = index; //normalement inutile
+	//	ghost->previous = index; //normalement inutile
 	room[room[index].previous].i++;;
 	return(room[index].previous);
 }
@@ -52,13 +52,13 @@ int		ft_move_ghost_ant(t_room *room, t_special_ant *ghost, t_algo *algo, t_path 
 			room[ghost->curr].pass = 1;
 			ghost->power++;
 			room[next].previous = ghost->curr;
-//			printf("ghost.nb %d et len %d\n", ghost->nb, path[ghost->nb].len);
+			//			printf("ghost.nb %d et len %d\n", ghost->nb, path[ghost->nb].len);
 			(*path)[ghost->nb].path[(*path)[ghost->nb].len] = ghost->curr;
 			(*path)[ghost->nb].len++;
 			if (next == algo->index_start)
 			{
 				(*path)[ghost->nb].path[(*path)[ghost->nb].len] = next;
-//				(*path)[nb].len++;
+				//				(*path)[nb].len++;
 				(*path)[ghost->nb].power = ghost->power;
 				ghost->nb++;
 				if (ghost->nb >= all->room * ghost->i)
@@ -96,16 +96,35 @@ static int		ft_fill_power(t_room *room, t_algo *algo, t_special_ant *ghost, t_pa
 		//		printf("from %d to %d\n", ghost->previous, ghost->curr);
 		if ((curr = (ft_move_ghost_ant(room, ghost, algo, &path, all))) != -42)
 		{
-//			printf("from %d ", ghost->curr);
+			//			printf("from %d ", ghost->curr);
 			ghost->curr = curr;
-//			printf("to %d\n", ghost->curr);
+			//			printf("to %d\n", ghost->curr);
 		}
 		else
 		{
 			ok = ft_previous(room, ghost->curr, ghost, algo->index_end, path);
-//			printf("I NEED TO GO BACK TO %d\n", ok);
+			//			printf("I NEED TO GO BACK TO %d\n", ok);
 		}
-//		printf("%d\n", ok);
+		//		printf("%d\n", ok);
+	}
+	i = 0;
+	while (i < ghost->nb)
+	{
+		j = 1;
+		while (j < path[i].len)
+		{
+			printf("%d\n", room[path[i].path[j]].nbrpath);
+			room[path[i].path[j]].path[room[path[i].path[j]].nbrpath] = i;
+			room[path[i].path[j]].nbrpath++;
+			if (room[path[i].path[j]].nbrpath >= all->room * room[path[i].path[j]].j)
+			{
+				printf("OK\n");
+				room[path[i].path[j]].path = ft_realloc_int(room[path[i].path[j]].path, room[path[i].path[j]].nbrpath, all);
+				room[path[i].path[j]].j++;
+			}
+			j++;
+		}
+		i++;
 	}
 	i = 0;
 	while (i < ghost->nb)
@@ -121,12 +140,13 @@ static int		ft_fill_power(t_room *room, t_algo *algo, t_special_ant *ghost, t_pa
 		printf("power = %d\n", path[i].len);
 		i++;
 	}
+	print_dbint(room[3].path, room[3].nbrpath);
+	printf("\n%d -- %d\n", room[3].path[0], room[3].nbrpath);
 	return (0);
 }
 
 int		ft_fill_power_path(t_algo *algo, t_room *room, t_all *all, t_path *path)
 {
-	ft_print_struct(room, all->room);
 	room[algo->index_end].pass = 1;
 	t_special_ant ghost;
 	ghost.power = 0;
@@ -135,5 +155,6 @@ int		ft_fill_power_path(t_algo *algo, t_room *room, t_all *all, t_path *path)
 	ghost.nb = 0;
 	ghost.previous = -42;
 	ft_fill_power(room, algo, &ghost, path, all);
+	ft_print_struct(room, all->room);
 	return (0);
 }
