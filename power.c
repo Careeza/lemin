@@ -6,78 +6,81 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 13:52:03 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/04 16:45:41 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/05 14:48:03 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		ft_init_power(t_room *room, t_all *all)
+int		ft_previous(t_room *room, int index, t_special_ant *ghost, int index_end, t_path *path)
 {
-	int	i;
-	int	j;
-
-	j = 0;
-	i = 0;
-	while (i < all->room)
-	{
-		j = 0;
-		if (!(room[i].powertest = (long *)malloc(sizeof(long) * room[i].links)))
-			return (-1);
-		while (j < room[i].links)
-		{
-			room[i].powertest[j] = INT_MAX;
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
-int		ft_previous(t_room *room, int index, t_special_ant *ghost, int index_end)
-{
-	room[ghost->curr].pass = 0;
-//	printf("No way need to previous %d\n", room[index].previous);
+	//	printf("No way need to previous %d\n", room[index].previous);
 	if (index == index_end)
 		return (-42);
+	room[ghost->curr].pass = 0;
+	room[ghost->curr].i = 0;
 	ghost->power--;
 	ghost->curr = room[index].previous;
-	ghost->previous = index; //normalement inutile
+	path[ghost->nb].len--;
+//	ghost->previous = index; //normalement inutile
+	room[room[index].previous].i++;;
 	return(room[index].previous);
 }
 
-int		ft_move_ghost_ant(t_room *room, t_special_ant *ghost, t_algo *algo)
+void	ft_cpint_n(int *path, int *dest, int len)
 {
 	int i;
-	int j;
-	int next;
 
 	i = 0;
-	room[ghost->curr].pass = 1;
-	while (i < room[ghost->curr].links)
+	while (i < len)
 	{
-		next = ft_atoi(room[ghost->curr].way[i]);
-		if (next != algo->index_end && room[next].pass != 1)
-		{
-//			printf("from %d now %d to %d\n", room[ghost->curr].previous, ghost->curr, next);
-			j = 0;
-			while (atoi(room[next].way[j]) != ghost->curr)
-				j++;
-			if (room[next].powertest[j] > ghost->power + 1)
-			{
-				room[next].powertest[j] = ghost->power + 1;
-				ghost->power++;
-				room[next].previous = ghost->curr;
-//				printf("achieve to go to%d\n", next);
-				return (next);
-			}
-		}
+		dest[i] = path[i];
 		i++;
+	}
+}
+
+int		ft_move_ghost_ant(t_room *room, t_special_ant *ghost, t_algo *algo, t_path **path, t_all *all)
+{
+	int next;
+
+	next = -42;
+	while (room[ghost->curr].i < room[ghost->curr].links)
+	{
+		next = ft_atoi(room[ghost->curr].way[room[ghost->curr].i]);
+		if (room[next].pass != 1)
+		{
+			room[ghost->curr].pass = 1;
+			ghost->power++;
+			room[next].previous = ghost->curr;
+//			printf("ghost.nb %d et len %d\n", ghost->nb, path[ghost->nb].len);
+			(*path)[ghost->nb].path[(*path)[ghost->nb].len] = ghost->curr;
+			(*path)[ghost->nb].len++;
+			if (next == algo->index_start)
+			{
+				(*path)[ghost->nb].path[(*path)[ghost->nb].len] = next;
+//				(*path)[nb].len++;
+				(*path)[ghost->nb].power = ghost->power;
+				ghost->nb++;
+				if (ghost->nb >= all->room * ghost->i)
+				{
+					printf("I USE REAL\n");
+					*path = ft_realloc_path(*path, all);
+					ghost->i++;
+				}
+				(*path)[ghost->nb].len = (*path)[(ghost->nb - 1)].len - 1;
+				(*path)[ghost->nb].power = (*path)[(ghost->nb - 1)].power - 1;
+				ft_cpint_n((*path)[(ghost->nb - 1)].path, (*path)[ghost->nb].path, (*path)[ghost->nb].len);
+				room[ghost->curr].i++;
+				return (ghost->curr);
+			}
+			return (next);
+		}
+		room[ghost->curr].i++;
 	}
 	return (-42);
 }
 
-static int		ft_fill_power(t_room *room, t_algo *algo, t_special_ant *ghost)
+static int		ft_fill_power(t_room *room, t_algo *algo, t_special_ant *ghost, t_path *path, t_all *all)
 {
 	int	i;
 	int j;
@@ -90,26 +93,47 @@ static int		ft_fill_power(t_room *room, t_algo *algo, t_special_ant *ghost)
 	j = 0;
 	while (ok != -42)
 	{
-//		printf("from %d to %d\n", ghost->previous, ghost->curr);
-		if ((curr = (ft_move_ghost_ant(room, ghost, algo))) != -42)
+		//		printf("from %d to %d\n", ghost->previous, ghost->curr);
+		if ((curr = (ft_move_ghost_ant(room, ghost, algo, &path, all))) != -42)
 		{
-//			printf("so curr =%d\n", curr);
+//			printf("from %d ", ghost->curr);
 			ghost->curr = curr;
+//			printf("to %d\n", ghost->curr);
 		}
 		else
-			ok = ft_previous(room, ghost->curr, ghost, algo->index_end);
-//		ghost->curr = ft_atoi(room[ghost->curr].way[i]);
+		{
+			ok = ft_previous(room, ghost->curr, ghost, algo->index_end, path);
+//			printf("I NEED TO GO BACK TO %d\n", ok);
+		}
+//		printf("%d\n", ok);
+	}
+	i = 0;
+	while (i < ghost->nb)
+	{
+		j = 0;
+		printf("path =");
+		while (j < path[i].len)
+		{
+			printf ("%d --", path[i].path[j]);
+			j++;
+		}
+		printf ("%d --", j);
+		printf("power = %d\n", path[i].len);
+		i++;
 	}
 	return (0);
 }
 
-int		ft_power_algo(t_room *room, t_all *all, t_algo *algo)
+int		ft_fill_power_path(t_algo *algo, t_room *room, t_all *all, t_path *path)
 {
+	ft_print_struct(room, all->room);
+	room[algo->index_end].pass = 1;
 	t_special_ant ghost;
-	ft_init_power(room, all);
 	ghost.power = 0;
+	ghost.i = 1;
 	ghost.curr = algo->index_end;
+	ghost.nb = 0;
 	ghost.previous = -42;
-	ft_fill_power(room, algo, &ghost);
+	ft_fill_power(room, algo, &ghost, path, all);
 	return (0);
 }

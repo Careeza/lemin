@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/04 17:03:22 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/05 10:23:31 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,20 @@ int		ft_nbrfourmis(t_all *all)
 
 int		ft_reading(t_all *all)
 {
-	char	*str;
 	char	buff[BUFF_SIZE];
 	int		ret;
 	int		check;
 
 	check = 0;
-	str = ft_strnew(0);
+	all->str = ft_strnew(0);
 	while ((ret = read(0, buff, BUFF_SIZE - 1)) > 0)
 	{
 		buff[ret] = '\0';
 		check++;
-		if (!(str = ft_strjoin(str, buff)))
+		if (!(all->str = ft_strjoin(all->str, buff)))
 			return (-1);
 	}
-	if(!(all->map = ft_strsplit(str, '\n')))
+	if(!(all->map = ft_strsplit(all->str, '\n')))
 		return (-1);
 	if (ret < 0 || check == 0)
 		return (-1);

@@ -6,99 +6,96 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 16:50:33 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/04 18:53:18 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/05 13:42:51 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		ft_power_plus(int center_room, int cac_room, t_room *room)
+int			*ft_realloc_int(int *list, int len, t_all *all)
 {
-	int		i;
-
-	i = 0;
-	while (i < room[cac_room].links)
-	{
-		if (ft_atoi(room[cac_room].way[i]) == center_room)
-		{
-			room[cac_room].powertest[i]++;
-			return(0);
-		}
-		i++;
-	}
-	return (0);
-}
-
-int	ft_ant_path(int curr_ant, t_room *room, t_algo *algo, t_fourmi *ant)
-{
-	int	i;
-	long power;
-	int j;
-	int	k;
-
-	i = 0;
-	while (ant[curr_ant].curr != algo->index_end)
-	{
-		j = 0;
-		power = INT_MAX;
-		while (j < room[ant[curr_ant].curr].links)
-		{
-			if (power > room[ant[curr_ant].curr].powertest[j])
-			{
-				power = room[ant[curr_ant].curr].powertest[j];
-				ant[curr_ant].path[i] = j;
-	//			ant[curr_ant].next = j;
-			}
-			j++;
-		}
-		k = 0;
-		while (k < room[ft_atoi(room[ant[curr_ant].curr].way[ant[curr_ant].path[i]])].links)
-		{
-			ft_power_plus(ft_atoi(room[ant[curr_ant].curr].way[ant[curr_ant].path[i]]), ft_atoi(room[ft_atoi(room[ant[curr_ant].curr].way[ant[curr_ant].path[i]])].way[k]), room);
-			k++;
-		}
-//		printf("from %d to %d finsish %d\n", ant[curr_ant].curr, atoi(room[ant[curr_ant].curr].way[ant[curr_ant].next]), algo->index_end);
-//		printf("%d -- %d\n", ant[curr_ant].path[i], i);
-//		printf("%d -- ", ant[curr_ant].pat);
-		ant[curr_ant].curr = atoi(room[ant[curr_ant].curr].way[ant[curr_ant].path[i]]);
-//		ant[curr_ant].path[i] = ant[curr_ant].next;
-		i++;
-	}
-	return (i);
-}
-
-int		ft_fill_path(t_fourmi *ant, t_algo *algo, t_room *room, t_all *all)
-{
-	int	i;
+	static int i;
 	int	j;
-	int index;
-	int	k = 0;
-	int	four = 0;
+	int	*fresh;
+
+	i++;
+	j = 0;
+	if (!(fresh = (int *)malloc(sizeof(int) * (all->room + len ))))
+		return (NULL);
+	while (j < len)
+	{
+		fresh[j] = list[j];
+		j++;
+	}
+	free(list);
+	return (fresh);
+}
+
+int			*ft_cpdbint(int *list, int len, t_all *all)
+{
+	int i;
+	int *list2;
 
 	i = 0;
-	j = 0;
-	(void)all;
-	while (i < all->fourmis)
+	if (!(list2 = (int *)malloc(sizeof(int) * all->room)))
+		return (NULL);
+	while (i < len)
 	{
-		printf("\n ____________________________ \n ____________________________ \n ____________________________ \n");
-	//	ft_print_struct(room, all->room);
-		j = ft_ant_path(i, room, algo, ant);
+		list2[i] = list[i];
 		i++;
-//	while (four < all->fourmis)
-//	{
-		k = 0;
-		index = algo->index_start;
-		while ((index = ft_atoi(room[index].way[ant[four].path[k]])) != algo->index_end)
-		{
-			printf("%s -- ", room[index].name);
-			k++;
-		}
-		printf("%s\n", room[index].name);
-		four++;
 	}
-//	printf("%d -- %d\n", algo->index_end, index);
-	return (0);
+	if (list != NULL)
+	{
+		free(list);
+		list = NULL;
+	}
+	return (list2);
 }
+
+t_path		*ft_realloc_path(t_path *path, t_all *all)
+{
+	t_path		*path2;
+	static int	i;
+	int			j;
+
+	i++;
+	j = 0;
+	if (!(path2 = (t_path *)malloc(sizeof(t_path) * (all->room * (i + 1)))))
+		return (NULL);
+	while (j < (all->room * i))
+	{
+		path2[j].len = path[j].len;
+		path2[j].power = path[j].power;
+		path2[j].path = ft_cpdbint(path[j].path, path2[j].len, all);
+		j++;
+	}
+	if (path != NULL)
+	{
+		free (path);
+		path = NULL;
+	}
+	while (j < (all->room * (i + 1)))
+	{
+		path2[j].len = 0;
+		path2[j].power = 0;
+		if (!(path2[j].path = (int *)malloc(sizeof(int) * all->room)))
+			return (NULL);
+		j++;
+	}
+	return (path2);
+}
+
+/*int	ft_ant_path(int curr_ant, t_room *room, t_algo *algo, t_fourmi *ant)
+{
+	return (0);
+}*/
+
+/*int		ft_fill_path(t_fourmi *ant, t_algo *algo, t_room *room, t_all *all)
+{
+	int		curr;
+
+	return (0);
+}*/
 
 t_fourmi	*ft_foumisse(long fourmis, t_algo *algo, t_all *all)
 {
@@ -120,18 +117,36 @@ t_fourmi	*ft_foumisse(long fourmis, t_algo *algo, t_all *all)
 	return (ants);
 }
 
+t_path		*ft_init_path(t_all *all)
+{
+	int	i;
+	t_path *path;
+
+	i = 0;
+	if (!(path = (t_path *)malloc(sizeof(t_path) * all->room)))
+		return (NULL);
+	while (i < all->room)
+	{
+		path[i].power = 0;
+		path[i].len = 0;
+		if (!(path[i].path = (int *)malloc(sizeof(int) * all->room)))
+			return (NULL);
+		i++;
+	}
+	return (path);
+}
+
 int		ft_algo(t_room *room, t_algo *algo, long fourmis, t_all *all)
 {
+	t_path *path;
 	t_fourmi *ant;
+
+	(void)room;
 	(void)fourmis;
-//	ft_print_struct(room, all->room);
-	ft_power_algo(room, all, algo);
-//	ft_check_start(room, algo->index_start); //checker si start a une power pour regarder si le path est valide entre start et end
-	ant = ft_foumisse(fourmis, algo, all);
-//	ft_print_ant(ant, fourmis);
-	algo->fourmis = fourmis;
-//	printf("start = %d end = %d\n", room[algo->index_start].links, room[algo->index_end].links);
-	ft_fill_path(ant, algo, room, all);
-//	ft_print_struct(room, all->room);
+	if (!(path = ft_init_path(all)))
+		return (-1);
+	if (!(ant = ft_foumisse(algo->fourmis, algo, all)))
+		return (-1);
+	ft_fill_power_path(algo, room, all, path);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/04 17:47:23 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/05 14:01:44 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct	s_special_ant
 	int		curr;
 	int		previous;
 	int		power;
+	int		nb;
+	int		i;
 }				t_special_ant;
 
 typedef struct	s_all
@@ -38,22 +40,33 @@ typedef struct	s_all
 	char	**map;
 	long	fourmis;
 	int		room;
+	char	*str;
 }				t_all;
+
+typedef struct	s_data
+{
+	int	power;
+	int len;
+	int	*path;
+}				t_path;
 
 typedef struct	s_room
 {
 	int		start_end; //ok
 	char	*name; //ok
 	int		links;
-	int		links2;
+//	int		links2;
 	int		previous;
 	char	*index;
 	char	**way;
-	long	*powertest;
-	int		power;
-	int		power2;
+//	long	*powertest;
+//	int		power;
+//	int		power2;
 	int		slot;
 	int		pass;
+	int		i;
+	int		nbrpath;
+	int		*path;
 }				t_room;
 
 typedef struct	s_algo
@@ -80,7 +93,7 @@ int		ft_algo(t_room *room, t_algo *algo, long fourmis, t_all *all);
 
 int		ft_verif_doublons(t_room *room, t_all *all, t_algo *algo);
 
-void	print_dbint(int *list, int len);
+void	print_dbint(long *list, int len);
 int		ft_str_is_digit(char *str, char c);
 int		ft_verif_link(t_room *room, char *str, t_all *all);
 int		nbr_space(char *str, char c);
@@ -92,12 +105,14 @@ void	ft_print_room(t_room *room, int i);
 void	ft_print_ant(t_fourmi *room, int nb);
 void	ft_print_struct(t_room *room, int nb);
 int		ft_parser(t_all *all, t_room *room, int i);
-int		ft_fill_name(char *str, t_room *room, int fourmis);
+int		ft_fill_name(char *str, t_room *room, int fourmis, int nbroom);
 int		ft_check_link(t_all *all, t_room *room, int start);
 
 int		ft_parser_error(char *str);
 int		ft_light_error(char *str);
 
+t_path	*ft_realloc_path(t_path *path, t_all *all);
 int		ft_power_algo(t_room *room, t_all *all, t_algo *algo);
+int		ft_fill_power_path(t_algo *algo, t_room *room, t_all *all, t_path *path);
 
 #endif
