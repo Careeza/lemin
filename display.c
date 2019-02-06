@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 13:20:30 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/04 13:21:43 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/06 15:24:29 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,27 @@ int		ft_parser_error(char *str)
 	return (-1);
 }
 
-void	ft_display(int best, t_room *room, t_algo *algo, t_fourmi ant)
+void	ft_display(int curr_ant, t_special_ant *ghost, t_room *room, t_algo *algo)
 {
-	if (best != -1)
+	if (curr_ant != -1)
 	{
-		if (ant.previous == algo->index_start)
+		if (ghost[curr_ant].path[(ghost[curr_ant].i) - 1] == algo->index_start)
 			write(1, CSI_RED, (sizeof(CSI_RED) - 1));
-		else if (best == algo->index_end)
+		else if (ghost[curr_ant].path[ghost[curr_ant].i] == algo->index_end)
 			write(1, CSI_BLUE, (sizeof(CSI_BLUE) - 1));
 		else
 			write(1, CSI_WHITE, (sizeof(CSI_WHITE) - 1));
 		ft_putchar('l');
-		ft_putnbr(ant.name);
+		ft_putnbr(curr_ant + 1);
 		ft_putchar('-');
-		ft_putstr(room[best].name);
+		ft_putstr(room[ghost[curr_ant].path[ghost[curr_ant].i]].name);
 		ft_putchar(' ');
 		write(1, CSI_RESET, (sizeof(CSI_RESET) - 1));
 		/*
 		ft_putchar('L');
 		ft_putnbr(curr_ant + 1);
 		ft_putchar('-');
-		ft_putstr(room[best].name);
+		ft_putstr(room[curr_ant].name);
 		ft_putchar(' ');*/
 	}
 }

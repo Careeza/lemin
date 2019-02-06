@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/06 12:43:52 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/06 15:13:13 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ typedef struct	s_fourmi
 	int		*path;
 }				t_fourmi;
 
-void	ft_display(int best, t_room *room, t_algo *algo, t_fourmi ant);
 int		ft_malloc_list(t_algo *algo, int room);
 int		ft_algo(t_room *room, t_algo *algo, t_all *all);
 
@@ -102,6 +101,7 @@ int		ft_verif_link2(t_room *room, char *str, t_all *all, int inlink);
 int		ft_index_for(char *str, t_room *room, int nbrroom, int lenstr);
 int		ft_verif_tube(int indexa, int indexb, t_room *room);
 
+void	ft_display(int best, t_special_ant *ghost, t_room *room, t_algo *algo);
 void	ft_print_room(t_room *room, int i);
 void	ft_print_ant(t_fourmi *room, int nb);
 void	ft_print_struct(t_room *room, int nb);

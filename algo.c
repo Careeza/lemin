@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 10:11:53 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/06 12:46:37 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/06 15:26:42 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ int		ft_move_ghost(t_room *room, t_algo *algo, t_special_ant *ghost, int i)
 	k = 0;
 	while (k < ghost[i].len)
 	{
-		printf("%s --", room[ghost[i].path[k]].name);
+//		printf("%s --", room[ghost[i].path[k]].name);
 		k++;
 	}
-	printf("\n");
+//	printf("\n");
 	return (0);
 }
 
@@ -90,11 +90,12 @@ int		ft_fill_power(t_room *room, t_algo *algo)
 			{
 				curr = ft_atoi(room[algo->list1[i]].way[j]);
 //				printf("Je suis dans %d Et j'ai une power de %d Je regare dans %d il a une power de %d\n", algo->list1[i], room[algo->list1] curr, room[curr].power);
-				if ((room[curr].power + room[curr].pass) > (room[algo->list1[i]].power + room[algo->list1[i]].pass))
+				if ((room[curr].power) > (room[algo->list1[i]].power))
 				{
 //					printf("Je suis dans ce if ?\n");
 					room[curr].power = room[algo->list1[i]].power + 1;
-					room[curr].pass = room[algo->list1[i]].pass;
+					if (room[curr].pass > room[algo->list1[i]].pass)
+						room[curr].power += (room[curr].pass - room[algo->list1[i]].pass);
 					algo->list2[cmt] = curr;
 					cmt++;
 				}
@@ -139,13 +140,41 @@ t_special_ant	*ft_init_ghost(t_all *all)
 		return (NULL);
 	while (i < all->fourmis)
 	{
-		ghost[i].i = i;
+		ghost[i].i = 1;
 		ghost[i].len = 0;
 		if (!(ghost[i].path = (int*)malloc(sizeof(int) * (all->room))))
 			return (NULL);
 		i++;
 	}
 	return (ghost);
+}
+
+void	ft_moove_ant(t_room *room, t_special_ant *ghost, t_algo *algo, t_all *all)
+{
+	int i;
+
+	while (room[algo->index_end].slot < all->fourmis)
+	{
+		i = 0;
+		while (i < all->fourmis)
+		{
+//			ft_putnbr(i);
+//			ft_putchar('\n');
+			if (ghost[i].i < ghost[i].len)
+			{
+				if (room[ghost[i].path[ghost[i].i]].slot == 0 || ghost[i].path[ghost[i].i] == algo->index_end)
+				{
+//					printf("JE SUIS DEDANS\n");
+					ft_display(i, ghost, room, algo);
+					room[ghost[i].path[(ghost[i].i) - 1]].slot--;
+					room[ghost[i].path[(ghost[i].i)]].slot++;
+					ghost[i].i++;
+				}
+			}
+			i++;
+		}
+		ft_putchar('\n');
+	}
 }
 
 int		ft_power_call(t_algo *algo, t_room *room, t_all *all, t_special_ant *ghost)
@@ -159,11 +188,14 @@ int		ft_power_call(t_algo *algo, t_room *room, t_all *all, t_special_ant *ghost)
 		algo->list1[1] = -42;
 		ft_refresh_power(all, room, algo);
 		ft_fill_power(room, algo);
-		ft_print_struct(room, all->room);
-		printf("\n\n\nC'estfinis\n\n\n");
+//		ft_print_struct(room, all->room);
+//		printf("\n\n\nLa fourmis marche\n\n\n");
 		ft_move_ghost(room, algo, ghost, i);
+//		ft_print_struct(room, all->room);
+//		printf("\n\n\n\n\n\n");
 		i++;
 	}
+	ft_moove_ant(room, ghost, algo, all);
 	return (0);
 }
 
