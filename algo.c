@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 10:11:53 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/06 15:26:42 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/06 15:52:44 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ int		ft_move_ghost(t_room *room, t_algo *algo, t_special_ant *ghost, int i)
 	k = 0;
 	while (k < ghost[i].len)
 	{
-//		printf("%s --", room[ghost[i].path[k]].name);
+		printf("%s --", room[ghost[i].path[k]].name);
 		k++;
 	}
-//	printf("\n");
+	printf("%d\n", ghost[i].len);
 	return (0);
 }
 
@@ -171,6 +171,7 @@ void	ft_moove_ant(t_room *room, t_special_ant *ghost, t_algo *algo, t_all *all)
 					ghost[i].i++;
 				}
 			}
+			printf("fourmis sont dans end%d sur %ld fourmis\n", room[algo->index_end].slot, all->fourmis);
 			i++;
 		}
 		ft_putchar('\n');
@@ -195,8 +196,9 @@ int		ft_power_call(t_algo *algo, t_room *room, t_all *all, t_special_ant *ghost)
 //		printf("\n\n\n\n\n\n");
 		i++;
 	}
-	ft_moove_ant(room, ghost, algo, all);
+	ft_print_ant(ghost, all->fourmis);
 	return (0);
+	ft_moove_ant(room, ghost, algo, all);
 }
 
 int		ft_algo(t_room *room, t_algo *algo, t_all *all)
@@ -204,9 +206,9 @@ int		ft_algo(t_room *room, t_algo *algo, t_all *all)
 	t_fourmi *ant;
 	t_special_ant *ghost;
 
-	if (!(algo->list1 = (int*)malloc(sizeof(int) * (all->room))))
+	if (!(algo->list1 = (int*)malloc(sizeof(int) * (all->room + 1))))
 		return (0);
-	if (!(algo->list2 = (int*)malloc(sizeof(int) * (all->room))))
+	if (!(algo->list2 = (int*)malloc(sizeof(int) * (all->room + 1))))
 		return (0);
 	ghost = ft_init_ghost(all);
 	ft_power_call(algo, room, all, ghost);

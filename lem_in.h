@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/06 15:13:13 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/06 15:42:44 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int		ft_verif_tube(int indexa, int indexb, t_room *room);
 
 void	ft_display(int best, t_special_ant *ghost, t_room *room, t_algo *algo);
 void	ft_print_room(t_room *room, int i);
-void	ft_print_ant(t_fourmi *room, int nb);
+void	ft_print_ant(t_special_ant *room, int nb);
 void	ft_print_struct(t_room *room, int nb);
 int		ft_parser(t_all *all, t_room *room, int i);
 int		ft_fill_name(char *str, t_room *room, int fourmis, int nbroom);

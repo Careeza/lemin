@@ -6,7 +6,7 @@
 #    By: prastoin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 11:13:09 by prastoin          #+#    #+#              #
-#    Updated: 2019/02/05 16:16:05 by prastoin         ###   ########.fr        #
+#    Updated: 2019/02/06 15:48:50 by prastoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC = main.c struct_tools.c parser.c tools.c algo.c display.c free.c
 
 OBJ = $(SRC:.c=.o)
 
-FLAG = -Wall -Wextra -Werror
+FLAG = -Wall -Wextra -Werror -g -fsanitize=address
 
 LIB = libft/libft.a
 

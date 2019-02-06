@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/06 12:44:13 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/06 15:49:23 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,24 @@ void	print_dbint(int *tab, int len)
 	i = 0;
 	while (i < len)
 	{
-		printf("-- %d -- ", tab[i]);
+		printf("-- %d -- \n", tab[i]);
 		i++;
 	}
 	printf("\n");
 }
 
-void	ft_print_ant(t_fourmi *room, int nb)
+void	ft_print_ant(t_special_ant *room, int nb)
 {
 	int	i;
 
 	i = 0;
 	while (i < nb)
 	{
-		printf("ROOM[%d]\n", i);
-		printf("Name =%d\n", room[i].name);
-		printf("index = %d\n", room[i].curr);
+		printf("ghost = [%d]\n", i);
+		printf("len = %d\n", room[i].len);
+		printf("path de 0 = %d", room[i].path[0]);
+		print_dbint(room[i].path, room[i].len);
+		//		printf("index = %d\n", room[i].curr);
 		printf("\n");
 		i++;
 	}
