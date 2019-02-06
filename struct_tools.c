@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/06 10:29:39 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/06 12:44:13 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	ft_print_struct(t_room *room, int nb)
 		printf("Start_end =%d\n", room[i].start_end);
 		printf("Links =%d\n", room[i].links);
 		printf("liaisons =%s\n", room[i].index);
+		printf("power =%ld\n", room[i].power);
+		printf("pass =%ld\n", room[i].pass);
 		printf("\n");
 		i++;
 	}

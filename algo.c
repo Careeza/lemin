@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 10:11:53 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/06 10:46:07 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/06 12:46:37 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		ft_move_ghost(t_room *room, t_algo *algo, t_special_ant *ghost, int i)
 	curr = algo->index_start;
 	ghost[i].path[ghost[i].len] = curr;
 	ghost[i].len++;
+	room[curr].pass++;
 	while (curr != algo->index_end)
 	{
 		power = INT_MAX;
@@ -88,8 +89,10 @@ int		ft_fill_power(t_room *room, t_algo *algo)
 			while (j < room[algo->list1[i]].links)
 			{
 				curr = ft_atoi(room[algo->list1[i]].way[j]);
-				if (room[curr].power + room[curr].pass > room[algo->list1[i]].power + room[algo->list1[i]].pass)
+//				printf("Je suis dans %d Et j'ai une power de %d Je regare dans %d il a une power de %d\n", algo->list1[i], room[algo->list1] curr, room[curr].power);
+				if ((room[curr].power + room[curr].pass) > (room[algo->list1[i]].power + room[algo->list1[i]].pass))
 				{
+//					printf("Je suis dans ce if ?\n");
 					room[curr].power = room[algo->list1[i]].power + 1;
 					room[curr].pass = room[algo->list1[i]].pass;
 					algo->list2[cmt] = curr;
@@ -156,6 +159,8 @@ int		ft_power_call(t_algo *algo, t_room *room, t_all *all, t_special_ant *ghost)
 		algo->list1[1] = -42;
 		ft_refresh_power(all, room, algo);
 		ft_fill_power(room, algo);
+		ft_print_struct(room, all->room);
+		printf("\n\n\nC'estfinis\n\n\n");
 		ft_move_ghost(room, algo, ghost, i);
 		i++;
 	}

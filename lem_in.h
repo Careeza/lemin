@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/06 11:56:02 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/06 12:43:52 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ typedef struct	s_room
 	char	*index;
 	char	**way;
 //	long	*powertest;
-	int		power;
+	long	power;
 //	int		power2;
 	int		slot;
-	int		pass;
+	long	pass;
 //	int		i;
 //	int		nbrpath;
 //	int		*path;
