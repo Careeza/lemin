@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 09:52:55 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/05 09:55:02 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/06 17:15:42 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@ int		ft_free_room(t_room *room, int nb)
 		{
 			free(room[i].name);
 			room[i].name = NULL;
-		}
-		if (room[i].way)
-			ft_freedbchar(room[i].way);
-		if (room[i].index)
-		{
-			free(room[i].index);
-			room[i].index = NULL;
 		}
 		i++;
 	}

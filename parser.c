@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:45 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/05 11:00:43 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/06 17:27:40 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int		ft_verif_doublons(t_room *room, t_all *all, t_algo *algo)
 //			ft_print_room(room ,i);
 			return (ft_parser_error("Doublons or no links\n"));
 		}
-		room[i].way = ft_strsplit((const char *)room[i].index, ' ');
 //		free(room[i].index);
 		i++;
 	}

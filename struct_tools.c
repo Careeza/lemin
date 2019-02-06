@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/06 15:49:23 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/06 17:32:09 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int		ft_fill_name(char *str, t_room *room, int fourmis, int nbroom)
 {
 	int len;
 
-	(void)nbroom;
 	len = 0;
 	while (str[len] != ' ')
 		len++;
@@ -27,12 +26,13 @@ int		ft_fill_name(char *str, t_room *room, int fourmis, int nbroom)
 	room->name = ft_strndup(str, len);
 	room->links = 0;
 	room->slot = 0;
-	room->power = INT_MAX;
+	room->power = 0;
 	room->previous = -42;
 	room->pass = 0;
+	if (!(room->index = (int*)malloc(sizeof(int) * nbroom)))
+		return (-2);
 	if (room->start_end == 1)
 		room->slot = fourmis;
-	room->index = ft_strnew(0);
 	return (0);
 }
 
@@ -43,7 +43,7 @@ void	print_dbint(int *tab, int len)
 	i = 0;
 	while (i < len)
 	{
-		printf("-- %d -- \n", tab[i]);
+		printf("%d--", tab[i]);
 		i++;
 	}
 	printf("\n");
@@ -71,7 +71,6 @@ void	ft_print_room(t_room *room, int i)
 	printf("Name =%s\n", room[i].name);
 	printf("Start_end =%d\n", room[i].start_end);
 	printf("Links =%d\n", room[i].links);
-	printf("liaisons =%s\n", room[i].index);
 	printf("\n");
 }
 void	ft_print_struct(t_room *room, int nb)
@@ -85,9 +84,9 @@ void	ft_print_struct(t_room *room, int nb)
 		printf("Name =%s\n", room[i].name);
 		printf("Start_end =%d\n", room[i].start_end);
 		printf("Links =%d\n", room[i].links);
-		printf("liaisons =%s\n", room[i].index);
 		printf("power =%ld\n", room[i].power);
 		printf("pass =%ld\n", room[i].pass);
+		print_dbint(room[i].index, room[i].links);
 		printf("\n");
 		i++;
 	}
@@ -152,14 +151,10 @@ int		ft_verif_link2(t_room *room, char *str, t_all *all, int indexa)
 		return(ft_light_error("A room is linked to herself\n"));
 	if (ft_verif_tube(indexa, indexb, room) == -1)
 		return (ft_light_error("Tube already exists\n"));
+	room[indexa].index[room[indexa].links] = indexb;
+	room[indexb].index[room[indexb].links] = indexa;
 	room[indexb].links += 1;
 	room[indexa].links += 1;
 //	printf("indexa = %d, indexb = %d\n", indexa, indexb);
-	if ((!(room[indexb].index = ft_strjoin(room[indexb].index, ft_itoa(indexa))))
-			|| (!(room[indexb].index = ft_strjoin(room[indexb].index, " "))))
-		return (ft_parser_error("Ouspy join crashed\n"));
-	if ((!(room[indexa].index = ft_strjoin(room[indexa].index, ft_itoa(indexb))))
-			|| (!(room[indexa].index = ft_strjoin(room[indexa].index, " "))))
-		return (ft_parser_error("Ouspy join crashed\n"));
 	return (0);
 }
