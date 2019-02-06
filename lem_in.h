@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/05 16:01:50 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/06 11:56:02 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@
 
 typedef struct	s_special_ant
 {
-	int		curr;
-	int		previous;
-	int		power;
-	int		nb;
-	int		i;
+	int i;
+	int *path;
+	int len;
+//	int		nb;
+//	int		i;
 }				t_special_ant;
 
 typedef struct	s_all
@@ -43,12 +43,12 @@ typedef struct	s_all
 	char	*str;
 }				t_all;
 
-typedef struct	s_data
+/*typedef struct	s_data
 {
 	int	power;
 	int len;
 	int	*path;
-}				t_path;
+}				t_path;*/
 
 typedef struct	s_room
 {
@@ -60,14 +60,14 @@ typedef struct	s_room
 	char	*index;
 	char	**way;
 //	long	*powertest;
-//	int		power;
+	int		power;
 //	int		power2;
 	int		slot;
 	int		pass;
-	int		i;
-	int		nbrpath;
-	int		*path;
-	int		j;
+//	int		i;
+//	int		nbrpath;
+//	int		*path;
+//	int		j;
 }				t_room;
 
 typedef struct	s_algo
@@ -90,7 +90,7 @@ typedef struct	s_fourmi
 
 void	ft_display(int best, t_room *room, t_algo *algo, t_fourmi ant);
 int		ft_malloc_list(t_algo *algo, int room);
-int		ft_algo(t_room *room, t_algo *algo, long fourmis, t_all *all);
+int		ft_algo(t_room *room, t_algo *algo, t_all *all);
 
 int		ft_verif_doublons(t_room *room, t_all *all, t_algo *algo);
 
@@ -111,10 +111,5 @@ int		ft_check_link(t_all *all, t_room *room, int start);
 
 int		ft_parser_error(char *str);
 int		ft_light_error(char *str);
-
-int		*ft_realloc_int(int *list, int len, t_all *all);
-t_path	*ft_realloc_path(t_path *path, t_all *all);
-int		ft_power_algo(t_room *room, t_all *all, t_algo *algo);
-int		ft_fill_power_path(t_algo *algo, t_room *room, t_all *all, t_path *path);
 
 #endif

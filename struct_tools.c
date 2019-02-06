@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/05 16:03:33 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/06 10:29:39 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,9 @@ int		ft_fill_name(char *str, t_room *room, int fourmis, int nbroom)
 	room->name = ft_strndup(str, len);
 	room->links = 0;
 	room->slot = 0;
+	room->power = INT_MAX;
 	room->previous = -42;
 	room->pass = 0;
-	room->i = 0;
-	room->j = 1;
-	room->nbrpath = 0;
-	if (!(room->path = (int *)malloc(sizeof(int) * nbroom)))
-		return (-2);
 	if (room->start_end == 1)
 		room->slot = fourmis;
 	room->index = ft_strnew(0);
