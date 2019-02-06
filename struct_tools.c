@@ -16,6 +16,7 @@ int		ft_fill_name(char *str, t_room *room, int fourmis, int nbroom)
 {
 	int len;
 
+	(void)nbroom;
 	len = 0;
 	while (str[len] != ' ')
 		len++;
@@ -83,7 +84,6 @@ void	ft_print_struct(t_room *room, int nb)
 		printf("Start_end =%d\n", room[i].start_end);
 		printf("Links =%d\n", room[i].links);
 		printf("liaisons =%s\n", room[i].index);
-		print_dbint(room[i].path, room[i].nbrpath);
 		printf("\n");
 		i++;
 	}

@@ -92,6 +92,6 @@ int main(void)
 		return (-1);
 //	ft_print_struct(room, all.room);
 	ft_verif_doublons(room, &all, &algo);
-	ft_algo(room, &algo, all.fourmis, &all);
+	ft_algo(room, &algo, &all);
 	return (0);
 }

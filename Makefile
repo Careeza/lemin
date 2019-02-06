@@ -12,7 +12,7 @@
 
 NAME = lem-in
 
-SRC = main.c struct_tools.c parser.c tools.c algo.c display.c power.c free.c
+SRC = main.c struct_tools.c parser.c tools.c algo.c display.c free.c
 
 OBJ = $(SRC:.c=.o)
 

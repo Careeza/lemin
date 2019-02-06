@@ -32,6 +32,44 @@ t_fourmi	*ft_foumisse(long fourmis, t_algo *algo)
 	return (ants);
 }
 
+int		ft_move_ghost(t_room *room, t_algo *algo, t_special_ant *ghost, int i)
+{
+	int curr;
+	int next;
+	int power;
+	int k;
+
+	curr = algo->index_start;
+	ghost[i].path[ghost[i].len] = curr;
+	ghost[i].len++;
+	while (curr != algo->index_end)
+	{
+		power = INT_MAX;
+		k = 0;
+		while (k < room[curr].links)
+		{
+			if (power > room[ft_atoi(room[curr].way[k])].power + room[ft_atoi(room[curr].way[k])].pass)
+			{
+				power = room[ft_atoi(room[curr].way[k])].power + room[ft_atoi(room[curr].way[k])].pass;
+				next = ft_atoi(room[curr].way[k]);
+			}
+			k++;
+		}
+		curr = next;
+		room[curr].pass++;
+		ghost[i].path[ghost[i].len] = curr;
+		ghost[i].len++;
+	}
+	k = 0;
+	while (k < ghost[i].len)
+	{
+		printf("%s --", room[ghost[i].path[k]].name);
+		k++;
+	}
+	printf("\n");
+	return (0);
+}
+
 int		ft_fill_power(t_room *room, t_algo *algo)
 {
 	int i;
@@ -50,10 +88,11 @@ int		ft_fill_power(t_room *room, t_algo *algo)
 			while (j < room[algo->list1[i]].links)
 			{
 				curr = ft_atoi(room[algo->list1[i]].way[j]);
-				if (room[curr].power + room[curr].pass)
+				if (room[curr].power + room[curr].pass > room[algo->list1[i]].power + room[algo->list1[i]].pass)
 				{
-					room[atoi(room[algo->list1[i]].way[j])].power = k;
-					algo->list2[cmt] = ft_atoi(room[algo->list1[i]].way[j]);
+					room[curr].power = room[algo->list1[i]].power + 1;
+					room[curr].pass = room[algo->list1[i]].pass;
+					algo->list2[cmt] = curr;
 					cmt++;
 				}
 				j++;
@@ -69,7 +108,6 @@ int		ft_fill_power(t_room *room, t_algo *algo)
 			i++;
 		}
 		algo->list1[i] = -42;
-		k++;
 	}
 	return (0);
 }
@@ -81,12 +119,11 @@ void			ft_refresh_power(t_all *all, t_room *room, t_algo *algo)
 	i = 0;
 	while (i < all->room)
 	{
-		if (i != algo->index_end)
-			room[i].power = INT_MAX;
-		else
-			room[i].power = 0;
+		room[i].power = INT_MAX;
+		i++;
 	}
 	room[algo->index_end].pass = 0;
+	room[algo->index_end].power = 0;
 }
 
 t_special_ant	*ft_init_ghost(t_all *all)
@@ -108,13 +145,20 @@ t_special_ant	*ft_init_ghost(t_all *all)
 	return (ghost);
 }
 
-int		ft_power_call(t_algo *algo, t_room *room, t_all *all)
+int		ft_power_call(t_algo *algo, t_room *room, t_all *all, t_special_ant *ghost)
 {
-	algo->list1[0] = algo->index_end;
-	algo->list1[1] = -42;
-	ft_refresh_power(all, room, algo);
-	ft_fill_power(room, algo);
-//	ft_move_ghost(room, algo);
+	int i;
+
+	i = 0;
+	while (i < all->fourmis)
+	{
+		algo->list1[0] = algo->index_end;
+		algo->list1[1] = -42;
+		ft_refresh_power(all, room, algo);
+		ft_fill_power(room, algo);
+		ft_move_ghost(room, algo, ghost, i);
+		i++;
+	}
 	return (0);
 }
 
@@ -128,7 +172,7 @@ int		ft_algo(t_room *room, t_algo *algo, t_all *all)
 	if (!(algo->list2 = (int*)malloc(sizeof(int) * (all->room))))
 		return (0);
 	ghost = ft_init_ghost(all);
-	ft_power_call(algo, room, all);
+	ft_power_call(algo, room, all, ghost);
 	free(algo->list1);
 	free(algo->list2);
 	if (room[algo->index_start].power == 0)
