@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/07 13:41:16 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/07 20:30:48 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct	s_special_ant
 	int coup;
 	int *path;
 	int	*savepath;
+	int	*wait;
 	int savelen;
 	int len;
 //	int		nb;
