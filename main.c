@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/06 17:13:41 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/07 13:05:52 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		ft_reading(t_all *all)
 	{
 		buff[ret] = '\0';
 		check++;
-		if (!(all->str = ft_strjoin(all->str, buff)))
+		if (!(all->str = ft_strjoin(all->str, buff))) //leaks ici ?
 			return (-1);
 	}
 	if(!(all->map = ft_strsplit(all->str, '\n')))
@@ -92,6 +92,8 @@ int main(void)
 		return (-1);
 //	ft_print_struct(room, all.room);
 	ft_verif_doublons(room, &all, &algo);
-	ft_algo(room, &algo, &all);
+	if (ft_call_power(room, &algo, &all) == -1)
+		return (ft_parser_error("Impossible malloc\n"));
+	ft_found_path(&algo, room, &all);
 	return (0);
 }

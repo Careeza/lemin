@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/06 17:32:09 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/07 13:42:01 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ int		ft_fill_name(char *str, t_room *room, int fourmis, int nbroom)
 		return (-1);
 	room->name = ft_strndup(str, len);
 	room->links = 0;
+	room->i = 0;
 	room->slot = 0;
 	room->power = 0;
 	room->previous = -42;
 	room->pass = 0;
+	room->coup = NULL;
 	if (!(room->index = (int*)malloc(sizeof(int) * nbroom)))
 		return (-2);
 	if (room->start_end == 1)
@@ -36,14 +38,14 @@ int		ft_fill_name(char *str, t_room *room, int fourmis, int nbroom)
 	return (0);
 }
 
-void	print_dbint(int *tab, int len)
+void	print_dbint(int *tab, int len, t_room *room)
 {
 	int	i;
 
 	i = 0;
 	while (i < len)
 	{
-		printf("%d--", tab[i]);
+		printf("%s--", room[tab[i]].name);
 		i++;
 	}
 	printf("\n");
@@ -59,7 +61,7 @@ void	ft_print_ant(t_special_ant *room, int nb)
 		printf("ghost = [%d]\n", i);
 		printf("len = %d\n", room[i].len);
 		printf("path de 0 = %d", room[i].path[0]);
-		print_dbint(room[i].path, room[i].len);
+//		print_dbint(room[i].path, room[i].len, room);
 		//		printf("index = %d\n", room[i].curr);
 		printf("\n");
 		i++;
@@ -71,6 +73,7 @@ void	ft_print_room(t_room *room, int i)
 	printf("Name =%s\n", room[i].name);
 	printf("Start_end =%d\n", room[i].start_end);
 	printf("Links =%d\n", room[i].links);
+	printf("power =%ld\n", room[i].power);
 	printf("\n");
 }
 void	ft_print_struct(t_room *room, int nb)
@@ -86,7 +89,8 @@ void	ft_print_struct(t_room *room, int nb)
 		printf("Links =%d\n", room[i].links);
 		printf("power =%ld\n", room[i].power);
 		printf("pass =%ld\n", room[i].pass);
-		print_dbint(room[i].index, room[i].links);
+		printf("liens :\n");
+		print_dbint(room[i].index, room[i].links, room);
 		printf("\n");
 		i++;
 	}

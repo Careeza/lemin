@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 13:52:03 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/06 16:47:42 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/07 12:43:45 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,17 +101,9 @@ static int		ft_fill_power(t_room *room, t_algo *algo, t_special_ant *ghost, t_pa
 	while (ok != -42 && ghost->nb < (room[algo->index_end].links + room[algo->index_start].links) * 10)
 	{
 		if ((curr = (ft_move_ghost_ant(room, ghost, algo, &path, all))) != -42)
-		{
-//					printf("from %d ", ghost->curr);
 			ghost->curr = curr;
-//						printf("to %d\n", ghost->curr);
-		}
 		else
-		{
 			ok = ft_previous(room, ghost->curr, ghost, algo->index_end, path);
-//					printf("I NEED TO GO BACK TO %d\n", ok);
-		}
-		//		printf("%d\n", ok);
 	}
 	i = 0;
 	while (i < ghost->nb)
@@ -119,12 +111,10 @@ static int		ft_fill_power(t_room *room, t_algo *algo, t_special_ant *ghost, t_pa
 		j = 1;
 		while (j < path[i].len)
 		{
-//			printf("%d\n", room[path[i].path[j]].nbrpath);
 			room[path[i].path[j]].path[room[path[i].path[j]].nbrpath] = i;
 			room[path[i].path[j]].nbrpath++;
 			if (room[path[i].path[j]].nbrpath >= all->room * room[path[i].path[j]].j)
 			{
-//				printf("OK\n");
 				room[path[i].path[j]].path = ft_realloc_int(room[path[i].path[j]].path, room[path[i].path[j]].nbrpath, all);
 				room[path[i].path[j]].j++;
 			}
