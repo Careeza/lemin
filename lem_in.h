@@ -30,6 +30,8 @@ typedef struct	s_special_ant
 {
 	int coup;
 	int *path;
+	int	*savepath;
+	int savelen;
 	int len;
 //	int		nb;
 	int		curr;
@@ -72,6 +74,7 @@ typedef struct	s_algo
 	int		*list1;
 	int		*list2;
 	int		fourmis;
+	int		lesscoup;
 }				t_algo;
 
 typedef struct	s_fourmi
