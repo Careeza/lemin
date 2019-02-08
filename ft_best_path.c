@@ -71,7 +71,7 @@ int			ft_move(t_room *room, t_special_ant *ant, int curr_ant, t_algo *algo)
 	while (room[curr].i < room[curr].links)
 	{
 		best = room[curr].index[room[curr].i];
-		if (best == room[curr].previous || best == algo->index_start)
+		if (best == room[curr].previous || room[best].pass == 1)
 		{
 			best = -42;
 			room[curr].i++;
@@ -86,12 +86,18 @@ int			ft_move(t_room *room, t_special_ant *ant, int curr_ant, t_algo *algo)
 	if(best == -42)
 		return (best);
 	ant[curr_ant].coup++;
+	if ((ant[curr_ant].coup == algo->lesscoup + 1) && best != algo->index_end)
+	{
+		ant[curr_ant].coup--;
+		return (-42);
+	}
 	while (room[best].coup[ant[curr_ant].coup] == 1)
 	{
 //		printf("curr %d\n", curr);
 		ant[curr_ant].wait[best]++;
 		ant[curr_ant].coup++;
 	}
+	room[best].pass = 1;
 //	printf("best = %d -- coup = %d\n", best, ant[curr_ant].coup);
 //	room[best].coup[ant[curr_ant].coup] = 1;
 	return (best);
@@ -108,6 +114,7 @@ int		ft_previous(t_algo *algo, t_room *room, t_special_ant *ant, int curr_ant)
 		return (-42);
 //	printf("coup = %d et coup de start %d\n", ant[curr_ant].coup, room[algo->index_start].coup[0]);
 //	printf("%d curr-- %s\n", ant[curr_ant].wait[curr], room[curr].name);
+	room[ant[curr_ant].curr].pass = 0;
 	ant[curr_ant].coup -= ant[curr_ant].wait[curr];
 	ant[curr_ant].wait[curr] = 0;
 	ant[curr_ant].coup--;
@@ -144,6 +151,7 @@ void	ft_reset_i(t_room *room, int nbroom)
 	i = 0;
 	while (i < nbroom)
 	{
+		room[i].pass = 0;
 		room[i].i = 0;
 		room[i].previous = -42;
 		i++;
@@ -155,12 +163,13 @@ int		ft_find_best_path(t_algo *algo, t_room *room, t_all *all, t_special_ant *an
 	int		curr_ant = 0;
 	int		next;
 	int		cmt;
-	int		i;
+	int		exploit;
 
-	(void)all;
-	cmt = 0;
-	while (curr_ant < 4)
+	while (curr_ant < all->fourmis)
 	{
+		exploit = 0;
+		cmt = 0;
+		printf("je suis sur la fourmis %d\n", curr_ant);
 		ant[curr_ant].curr = algo->index_start;
 		while (cmt != -42)
 		{
@@ -168,16 +177,17 @@ int		ft_find_best_path(t_algo *algo, t_room *room, t_all *all, t_special_ant *an
 			{
 				if ((next = ft_move(room, ant, curr_ant, algo)) != -42) // && ant[curr_ant].coup <= (algo->lesscoup + 1))
 				{
-	//				printf("from %s to %s je suis a mon %deme coups\n", room[ant[curr_ant].curr].name, room[next].name, ant[curr_ant].coup);
+//					printf("from %s to %s je suis a mon %deme coups\n", room[ant[curr_ant].curr].name, room[next].name, ant[curr_ant].coup);
 					ant[curr_ant].path[ant[curr_ant].len] = next;
 					ant[curr_ant].len++;
 					ant[curr_ant].curr = next;
 				}
 				else
 				{
-				//	if (ant[curr_ant].coup >= algo->lesscoup + 1)
-//						printf("CHEMIN de MERDE%d\n", ant[curr_ant].coup);
-//					printf("I am here %s And i am stuck\n", room[ant[curr_ant].curr].name);
+			//		if (ant[curr_ant].coup == algo->lesscoup + 1)
+//						printf("CHEMIN de MERDE  je voulais aller a  en %d coup\n", ant[curr_ant].coup);
+			//		else
+//						printf("I am here %s And i am stuck\n", room[ant[curr_ant].curr].name);
 					cmt = ft_previous(algo, room, ant, curr_ant);
 //					printf("Je reviens en arrier\n");
 				}
@@ -189,15 +199,22 @@ int		ft_find_best_path(t_algo *algo, t_room *room, t_all *all, t_special_ant *an
 				{
 					ft_cpint_n(ant[curr_ant].path, ant[curr_ant].savepath, ant[curr_ant].len);
 					ant[curr_ant].savelen = ant[curr_ant].len;
-					printf("CHEMIN de Exploitable\n");
+					exploit++;
+	//				if (exploit > all->room)
+	//				{
+		//				cmt = -42;
+		//				break ;
+		//			}
+	//				printf("CHEMIN de Exploitable %d\n", exploit);
+	//				print_dbint(ant[curr_ant].savepath, ant[curr_ant].savelen, room);
 				}
 				if (algo->lesscoup == ant[curr_ant].coup)
 				{
-					printf("UNE fourmis A TROUVER UN CHEMIN OPTI\n");
+//					printf("UNE fourmis A TROUVER UN CHEMIN OPTI\n");
 					break ;
 				}
 		//		printf("Previous\n");
-	//			printf("I am in end with a coup of %d", ant[curr_ant].coup);
+//				printf("I am in end with a coup of %d\n", ant[curr_ant].coup);
 				cmt = ft_previous(algo, room, ant, curr_ant);
 //					printf("Je reviens en arrier\n");
 			}
@@ -214,7 +231,7 @@ int		ft_find_best_path(t_algo *algo, t_room *room, t_all *all, t_special_ant *an
 			ft_fill_coup(room, ant[curr_ant].savepath, ant[curr_ant].savelen);
 			print_dbint(ant[curr_ant].savepath, ant[curr_ant].savelen, room);
 		}
-		i = 0;
+//		i = 0;
 /*		while (i < 5)
 		{
 			printf("room 1 coup[%d] = %d\n", i, room[4].coup[i]);
@@ -232,19 +249,22 @@ int		ft_found_path(t_algo *algo, t_room *room, t_all *all)
 	t_special_ant *ant;
 	int i;
 
+	room[algo->index_start].pass = 0;
 	algo->lesscoup = room[room[algo->index_start].index[0]].power;
 	i = 0;
 	while (i < all->room)
 	{
-		if (!(room[i].coup = (int*)malloc(sizeof(int) * (algo->lesscoup + 1000))))
+		if (!(room[i].coup = (int*)malloc(sizeof(int) * (algo->lesscoup + 10000))))
 			return (-2);
-		ft_init_db_int(room[i].coup, algo->lesscoup + 1000);
+		ft_init_db_int(room[i].coup, algo->lesscoup + 10000);
 		i++;
 	}
 //	room[4].coup[1] = 1;
 	ant = ft_init_ant(all->fourmis, all);
 //	printf("TOUT SE PASSSE BIEN\n");
 //	printf("%d -- %d\n", algo->lesscoup, room[algo->index_start].links * all->room);
+	printf("lesscoup = %d\n", algo->lesscoup);
 	ft_find_best_path(algo, room, all, ant);
+	printf("lesscoup = %d\n", algo->lesscoup);
 	return (0);
 }
