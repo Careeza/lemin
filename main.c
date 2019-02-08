@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/07 13:05:52 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/08 18:22:25 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		ft_reading(t_all *all)
 		if (!(all->str = ft_strjoin(all->str, buff))) //leaks ici ?
 			return (-1);
 	}
-	if(!(all->map = ft_strsplit(all->str, '\n')))
+	if(!(all->map = ft_strsplit_lem(all->str, '\n')))
 		return (-1);
 	if (ret < 0 || check == 0)
 		return (-1);
@@ -70,14 +70,48 @@ int		ft_reading(t_all *all)
 }
 
 //verifier que le tube n exsite pas dans le way de end et de start car pb au niveau de links
+void		ft_stop(void)
+{
+	ft_putstr("Usage = ./lem-in -c -l < [map]\n-c :print colors\n-l print lines\n");
+		exit(0);
+}
 
-int main(void)
+
+int		ft_check_arg(t_algo *algo, const char **argv, int argc)
+{
+	int		i;
+
+	algo->flag = 0;
+	i = 1;
+	if (argc > 3)
+		ft_stop();
+	while (i < argc)
+	{
+		if (ft_strlen(argv[i]) != 2)
+			ft_stop();
+		else
+		{
+			if (ft_strcmp("-c", argv[i]) == 0)
+				algo->flag += 2;
+			else if (ft_strcmp("-l", argv[i]) == 0)
+				algo->flag += 1;
+			else
+				ft_stop();
+		}
+		i++;
+	}
+	return (0);
+}
+
+int main(int argc, const char **argv)
 {
 	t_room	*room;
 	t_all	all;
 	t_algo	algo;
 	int		i;
 
+	if (argc != 1)
+		ft_check_arg(&algo, argv, argc);
 	if (ft_reading(&all) == -1)
 		return (ft_parser_error("Reading failed\n"));
 	if ((i = ft_nbrfourmis(&all)) == -1)

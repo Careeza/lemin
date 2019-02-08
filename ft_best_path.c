@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 13:52:03 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/08 14:13:12 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/08 17:28:28 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,6 +261,8 @@ int		ft_found_path(t_algo *algo, t_room *room, t_all *all)
 	int i;
 
 	room[algo->index_start].pass = 1;
+	if (room[algo->index_start].links == 0)
+		return (ft_parser_error("Broken path\n"));
 	algo->lesscoup = room[room[algo->index_start].index[0]].power;
 	i = 0;
 	while (i < all->room)

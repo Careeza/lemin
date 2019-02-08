@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/08 13:56:20 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/08 17:58:54 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define BUFF_SIZE 4096
 
 #define CSI "\033["
+#define CSI_GREEN CSI "32;01m"
 #define CSI_WHITE CSI "37;01m"
 #define CSI_BLUE CSI "34;01m"
 #define CSI_YELLOW CSI "33;01m"
@@ -76,6 +77,9 @@ typedef struct	s_algo
 	int		*list2;
 	int		fourmis;
 	int		lesscoup;
+	int		step;
+
+	int		flag;
 }				t_algo;
 
 typedef struct	s_fourmi
@@ -87,10 +91,12 @@ typedef struct	s_fourmi
 	int		*path;
 }				t_fourmi;
 
+char		**ft_strsplit_lem(char const *s, char c);
 int		ft_malloc_list(t_algo *algo, int room);
 int		ft_algo(t_room *room, t_algo *algo, t_all *all);
 
 int		ft_verif_doublons(t_room *room, t_all *all, t_algo *algo);
+char	*ft_strsub_lem(char const *s, unsigned int start, size_t len);
 
 void	print_dbint(int *list, int len, t_room *room);
 int		ft_str_is_digit(char *str, char c);
@@ -119,5 +125,7 @@ void	ft_cpint_n(int *path, int *dest, int len);
 int		ft_fill_fourmi(int curr_ant, t_special_ant *ant, int lencycle, t_all *all);
 
 int		ft_print_ant_path(t_special_ant *ant, t_all *all, t_room *room, t_algo *algo);
+
+void	ft_color(int step, int i);
 
 #endif

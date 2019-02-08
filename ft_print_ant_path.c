@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 13:52:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/08 14:26:10 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/08 18:23:13 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ int		ft_print_ant_path(t_special_ant *ant, t_all *all, t_room *room, t_algo *alg
 {
 	int i;
 
+	ft_putstr(all->str);
+	ft_putchar('\n');
+	algo->step = 1;
 	i = -1;
 	while (++i < all->fourmis)
 		ant[i].i = 0;
@@ -23,6 +26,8 @@ int		ft_print_ant_path(t_special_ant *ant, t_all *all, t_room *room, t_algo *alg
 	room[algo->index_start].slot = all->fourmis;
 	while (room[algo->index_end].slot != all->fourmis)
 	{
+		if (algo->flag == 1 || algo->flag == 3)
+			ft_color(algo->step, 0);
 		i = 0;
 		while (i < all->fourmis)
 		{
@@ -42,6 +47,7 @@ int		ft_print_ant_path(t_special_ant *ant, t_all *all, t_room *room, t_algo *alg
 			}
 			i++;
 		}
+		algo->step++;
 		ft_putchar('\n');
 	}
 	return(0);
