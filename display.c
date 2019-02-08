@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 13:20:30 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/08 13:44:31 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/08 14:15:01 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_display(int curr_ant, t_special_ant *ghost, t_room *room, t_algo *algo)
 {
 	if (curr_ant != -1)
 	{
-		if (ghost[curr_ant].path[(ghost[curr_ant].i) - 1] == algo->index_start)
+		if (ghost[curr_ant].i == 0)
 			write(1, CSI_RED, (sizeof(CSI_RED) - 1));
 		else if (ghost[curr_ant].path[ghost[curr_ant].i] == algo->index_end)
 			write(1, CSI_BLUE, (sizeof(CSI_BLUE) - 1));

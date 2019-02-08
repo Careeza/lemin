@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/08 13:31:54 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/08 13:56:20 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,7 @@ int		ft_found_path(t_algo *algo, t_room *room, t_all *all);
 int		ft_cycle_detector(t_special_ant *fourmis, t_algo *algo, int curr_ant);
 void	ft_cpint_n(int *path, int *dest, int len);
 int		ft_fill_fourmi(int curr_ant, t_special_ant *ant, int lencycle, t_all *all);
+
+int		ft_print_ant_path(t_special_ant *ant, t_all *all, t_room *room, t_algo *algo);
 
 #endif

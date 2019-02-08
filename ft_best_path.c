@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 13:52:03 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/08 13:44:23 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/08 14:13:12 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,9 +252,6 @@ int		ft_find_best_path(t_algo *algo, t_room *room, t_all *all, t_special_ant *an
 		}
 		curr_ant++;
 	}
-	int k = -1;
-	while (++k < all->fourmis)
-		print_dbint(ant[k].path, ant[k].len, room);
 	return (0);
 }
 
@@ -279,6 +276,8 @@ int		ft_found_path(t_algo *algo, t_room *room, t_all *all)
 //	printf("%d -- %d\n", algo->lesscoup, room[algo->index_start].links * all->room);
 //	printf("lesscoup = %d\n", algo->lesscoup);
 	ft_find_best_path(algo, room, all, ant);
-//	printf("lesscoup = %d\n", algo->lesscoup);
+	ft_reset_i(room, all->room);
+	ft_print_ant_path(ant, all, room, algo);
+	//	printf("lesscoup = %d\n", algo->lesscoup);
 	return (0);
 }
