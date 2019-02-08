@@ -126,6 +126,6 @@ int		ft_call_power(t_room *room, t_algo *algo,t_all *all)
 //	ft_print_struct(room, all->room);
 	ft_sort_room(room, all);
 	room[algo->index_start].links -= save;
-	ft_print_struct(room, all->room);
+//	ft_print_struct(room, all->room);
 	return (0);
 }
