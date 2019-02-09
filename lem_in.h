@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/08 17:58:54 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/09 03:45:27 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,6 @@ int		ft_fill_fourmi(int curr_ant, t_special_ant *ant, int lencycle, t_all *all);
 int		ft_print_ant_path(t_special_ant *ant, t_all *all, t_room *room, t_algo *algo);
 
 void	ft_color(int step, int i);
+void	ft_stop(void);
 
 #endif

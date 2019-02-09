@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:24:22 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/07 10:34:51 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/09 03:49:04 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_verif_tube(int indexa, int indexb, t_room *room)
 	return (0);
 }
 
-int	nbr_space(char *str, char c)
+int		nbr_space(char *str, char c)
 {
 	int	i;
 	int	space;
@@ -70,4 +70,11 @@ int		ft_malloc_list(t_algo *algo, int room)
 	algo->list1[0] = algo->index_end;
 	algo->list1[1] = -42;
 	return (0);
+}
+
+void	ft_stop(void)
+{
+	ft_putstr("Usage = ./lem-in -c -l < [map]\n");
+	ft_putstr("-c :print colors\n-l print lines\n");
+	exit(0);
 }
