@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 09:52:55 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/06 17:15:42 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/09 05:32:24 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_free_room(t_room *room, int nb)
 		free(room);
 		room = NULL;
 	}
-		return (0);
+	return (0);
 }
 
 int		ft_free_all(t_all *all)
