@@ -6,60 +6,12 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 13:52:03 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/09 05:36:12 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/09 05:48:34 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	ft_cpint_n(int *path, int *dest, int len)
-{
-	int i;
-
-	i = 0;
-	while (i < len)
-	{
-		dest[i] = path[i];
-		i++;
-	}
-}
-
-void	ft_init_db_int(int *list, int len)
-{
-	int i;
-
-	i = 0;
-	while (i < len)
-	{
-		list[i] = 0;
-		i++;
-	}
-}
-
-t_special_ant *ft_init_ant(int nbrfourmis, t_all *all)
-{
-	t_special_ant *ant;
-	int i;
-
-	i = 0;
-	if(!(ant = (t_special_ant*)malloc(sizeof(t_special_ant) * (nbrfourmis))))
-		return (NULL);
-	while (i < nbrfourmis)
-	{
-		ant[i].coup = 0;
-		if (!(ant[i].wait = (int*)malloc(sizeof(int) * (all->room))))
-			return (NULL);
-		ft_init_db_int(ant[i].wait, all->room);
-		if (!(ant[i].path = (int*)malloc(sizeof(int) * (all->room))))
-			return (NULL);
-		if (!(ant[i].savepath = (int*)malloc(sizeof(int) * (all->room))))
-			return (NULL);
-		ant[i].len = 0;
-		ant[i].savelen = 0;
-		i++;
-	}
-	return (ant);
-}
 
 int			ft_move(t_room *room, t_special_ant *ant, int curr_ant, t_algo *algo)
 {
@@ -137,28 +89,16 @@ void		ft_fill_coup(t_room *room, int *path, int len)
 	return ;
 }
 
-void	ft_reset_i(t_room *room, int nbroom)
-{
-	int i;
-
-	i = 0;
-	while (i < nbroom)
-	{
-		room[i].pass = 0;
-		room[i].i = 0;
-		room[i].previous = -42;
-		i++;
-	}
-}
 
 int		ft_find_best_path(t_algo *algo, t_room *room, t_all *all, t_special_ant *ant)
 {
-	int		curr_ant = 0;
+	int		curr_ant;
 	int		next;
 	int		cmt;
 	int		lesslink;
 	int		len;
 
+	curr_ant = 0;
 	lesslink = room[algo->index_start].links > room[algo->index_end].links ? room[algo->index_end].links : room[algo->index_start].links;
 	while (curr_ant < all->fourmis)
 	{
@@ -233,7 +173,8 @@ int		ft_found_path(t_algo *algo, t_room *room, t_all *all)
 	i = 0;
 	while (i < all->room)
 	{
-		if (!(room[i].coup = (int*)malloc(sizeof(int) * (algo->lesscoup + 1000))))
+		if (!(room[i].coup = (int*)malloc(sizeof(int)
+							* (algo->lesscoup + 1000))))
 			return (-2);
 		ft_init_db_int(room[i].coup, algo->lesscoup + 1000);
 		i++;

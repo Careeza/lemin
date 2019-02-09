@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/09 05:33:57 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/09 05:44:48 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #define CSI_WHITE CSI "37;01m"
 #define CSI_BLUE CSI "34;01m"
 #define CSI_YELLOW CSI "33;01m"
-#define CSI_RED CSI "31m"
+#define CSI_RED CSIEmE "31m"
 #define CSI_RESET CSI "0m"
 
 
@@ -132,5 +132,8 @@ void	ft_sort_room(t_room *room, t_all *all);
 
 int		ft_putstr_color_red(char *str);
 int		ft_putstr_color_yellow(char *str);
+void	ft_reset_i(t_room *room, int nbroom);
+void	ft_init_db_int(int *list, int len);
+t_special_ant *ft_init_ant(int nbrfourmis, t_all *all);
 
 #endif
