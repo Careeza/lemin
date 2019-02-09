@@ -6,13 +6,13 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/08 18:22:25 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/09 03:45:12 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int	ft_nbr_room(t_all *all)
+int		ft_nbr_room(t_all *all)
 {
 	int		i;
 
@@ -20,9 +20,9 @@ int	ft_nbr_room(t_all *all)
 	all->room = 0;
 	while (all->map[i])
 	{
-		if (nbr_space(all->map[i], '-') == 1) //s'arrete au liaison
-			break;
-		if (all->map[i][0] != '#') //evites les commandes et les comments
+		if (nbr_space(all->map[i], '-') == 1)
+			break ;
+		if (all->map[i][0] != '#')
 		{
 			if (nbr_space(all->map[i], ' ') == 2)
 				all->room++;
@@ -44,7 +44,7 @@ int		ft_nbrfourmis(t_all *all)
 	all->fourmis = ft_atoi(all->map[i]);
 	if (all->fourmis <= 0 || all->fourmis >= INT_MAX)
 		return (-1);
-	return(i + 1);
+	return (i + 1);
 }
 
 int		ft_reading(t_all *all)
@@ -59,23 +59,15 @@ int		ft_reading(t_all *all)
 	{
 		buff[ret] = '\0';
 		check++;
-		if (!(all->str = ft_strjoin(all->str, buff))) //leaks ici ?
+		if (!(all->str = ft_strjoin(all->str, buff)))
 			return (-1);
 	}
-	if(!(all->map = ft_strsplit_lem(all->str, '\n')))
+	if (!(all->map = ft_strsplit_lem(all->str, '\n')))
 		return (-1);
 	if (ret < 0 || check == 0)
 		return (-1);
 	return (0);
 }
-
-//verifier que le tube n exsite pas dans le way de end et de start car pb au niveau de links
-void		ft_stop(void)
-{
-	ft_putstr("Usage = ./lem-in -c -l < [map]\n-c :print colors\n-l print lines\n");
-		exit(0);
-}
-
 
 int		ft_check_arg(t_algo *algo, const char **argv, int argc)
 {
@@ -103,7 +95,7 @@ int		ft_check_arg(t_algo *algo, const char **argv, int argc)
 	return (0);
 }
 
-int main(int argc, const char **argv)
+int		main(int argc, const char **argv)
 {
 	t_room	*room;
 	t_all	all;
@@ -124,7 +116,6 @@ int main(int argc, const char **argv)
 		return (-1);
 	if (ft_check_link(&all, room, i) == -1)
 		return (-1);
-//	ft_print_struct(room, all.room);
 	ft_verif_doublons(room, &all, &algo);
 	if (ft_call_power(room, &algo, &all) == -1)
 		return (ft_parser_error("Impossible malloc\n"));
