@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 11:59:10 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/08 13:42:32 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/09 04:04:47 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int		ft_int_cmp(int *list1, int *list2, int len)
 	return (0);
 }
 
-int		ft_fill_fourmi(int curr_ant, t_special_ant *ant, int lencycle, t_all *all)
+int		ft_fill_fourmi(int curr_ant, t_special_ant *ant, int lencycle,
+		t_all *all)
 {
 	int		i;
 	int		deb_cy;
@@ -36,7 +37,8 @@ int		ft_fill_fourmi(int curr_ant, t_special_ant *ant, int lencycle, t_all *all)
 	curr_ant++;
 	while (curr_ant < all->fourmis)
 	{
-		ft_cpint_n(ant[deb_cy + (i % (lencycle + 1))].path, ant[curr_ant].path, ant[deb_cy + (i % (lencycle + 1))].len);
+		ft_cpint_n(ant[deb_cy + (i % (lencycle + 1))].path, ant[curr_ant].path,
+				ant[deb_cy + (i % (lencycle + 1))].len);
 		ant[curr_ant].len = ant[deb_cy + (i % (lencycle + 1))].len;
 		i++;
 		curr_ant++;
@@ -44,19 +46,13 @@ int		ft_fill_fourmi(int curr_ant, t_special_ant *ant, int lencycle, t_all *all)
 	return (0);
 }
 
-int		ft_cycle_detector(t_special_ant *ant, t_algo *algo, int curr_ant)
+int		ft_cycle_detector(t_special_ant *ant, int curr_ant, int len, int *path)
 {
-	int	*path;
-	int	len;
 	int cycle;
 	int lencycle;
 	int count;
 
-	(void)algo;
 	cycle = 0;
-	len = ant[curr_ant].len;
-	path = ant[curr_ant].path;
-	curr_ant--;
 	count = 0;
 	while (curr_ant >= 0)
 	{
@@ -70,10 +66,7 @@ int		ft_cycle_detector(t_special_ant *ant, t_algo *algo, int curr_ant)
 				count = -1;
 			}
 		if (cycle == 2)
-		{
-//			printf("Len cycle = %d\n", lencycle);
-				return (lencycle);
-		}
+			return (lencycle);
 		curr_ant--;
 		count++;
 	}

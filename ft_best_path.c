@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 13:52:03 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/08 17:28:28 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/09 04:03:56 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,7 @@ int		ft_find_best_path(t_algo *algo, t_room *room, t_all *all, t_special_ant *an
 		ft_reset_i(room, all->room);
 		if (curr_ant > (3 * lesslink + 5))
 		{
-			if ((len = ft_cycle_detector(ant, algo, curr_ant)) != -1)
+			if ((len = ft_cycle_detector(ant, curr_ant - 1, ant[curr_ant].len, ant[curr_ant].path)) != -1)
 			{
 	//			printf("j'ai TROUVER un cycle\n");
 				ft_fill_fourmi(curr_ant, ant, len, all);
