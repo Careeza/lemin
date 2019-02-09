@@ -6,11 +6,49 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/09 04:11:20 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/09 04:20:08 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+void	ft_sort_index(t_room *room, int i)
+{
+	int j;
+	long tmp;
+	int corr;
+
+	corr = 1;
+	while (corr != 0)
+	{
+		corr = 0;
+		j = 1;
+		while (j < room[i].links)
+		{
+			if (room[room[i].index[j - 1]].power > room[room[i].index[j]].power)
+			{
+				tmp = room[i].index[j];
+				room[i].index[j] = room[i].index[j - 1];
+				room[i].index[j - 1] = tmp;
+				j = j >= 2 ? j - 2 : 0;
+				corr++;
+			}
+			j++;
+		}
+	}
+}
+
+void	ft_sort_room(t_room *room, t_all *all)
+{
+	int i;
+
+	i = 0;
+	while (i < all->room)
+	{
+		ft_sort_index(room, i);
+		i++;
+	}
+}
 
 int		ft_fill_name(char *str, t_room *room, int fourmis, int nbroom)
 {

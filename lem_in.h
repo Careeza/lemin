@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/09 04:01:48 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/09 04:20:02 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,6 @@ int		ft_print_ant_path(t_special_ant *ant, t_all *all, t_room *room, t_algo *alg
 
 void	ft_color(int step, int i);
 void	ft_stop(void);
+void	ft_sort_room(t_room *room, t_all *all);
 
 #endif

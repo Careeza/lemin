@@ -6,12 +6,11 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 15:53:49 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/25 14:34:45 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/09 04:13:39 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 char	*ft_strndup(const char *s1, size_t n)
 {
@@ -29,5 +28,3 @@ char	*ft_strndup(const char *s1, size_t n)
 	dst[i] = '\0';
 	return (dst);
 }
-
-
