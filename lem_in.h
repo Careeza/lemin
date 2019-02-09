@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/09 04:20:02 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/09 05:26:44 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ void	ft_display(int best, t_special_ant *ghost, t_room *room, t_algo *algo);
 void	ft_print_room(t_room *room, int i);
 void	ft_print_ant(t_special_ant *room, int nb);
 void	ft_print_struct(t_room *room, int nb);
-int		ft_parser(t_all *all, t_room *room, int i);
-int		ft_fill_name(char *str, t_room *room, int fourmis, int nbroom);
+int		ft_parser(t_all *all, t_room *room, int i, int index);
+int		ft_nm(char *str, t_room *room, int fourmis, int nbroom);
 int		ft_check_link(t_all *all, t_room *room, int start);
 
 int		ft_parser_error(char *str);

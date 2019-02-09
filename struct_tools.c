@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/09 04:20:08 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/09 05:29:58 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_sort_index(t_room *room, int i)
 {
-	int j;
-	long tmp;
-	int corr;
+	int		j;
+	long	tmp;
+	int		corr;
 
 	corr = 1;
 	while (corr != 0)
@@ -50,7 +50,7 @@ void	ft_sort_room(t_room *room, t_all *all)
 	}
 }
 
-int		ft_fill_name(char *str, t_room *room, int fourmis, int nbroom)
+int		ft_nm(char *str, t_room *room, int fourmis, int nbroom)
 {
 	int len;
 
