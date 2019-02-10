@@ -23,7 +23,7 @@
 #define CSI_WHITE CSI "37;01m"
 #define CSI_BLUE CSI "34;01m"
 #define CSI_YELLOW CSI "33;01m"
-#define CSI_RED CSIEmE "31m"
+#define CSI_RED CSI "31m"
 #define CSI_RESET CSI "0m"
 
 
