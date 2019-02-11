@@ -6,7 +6,7 @@
 #    By: prastoin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 11:13:09 by prastoin          #+#    #+#              #
-#    Updated: 2019/02/09 05:45:04 by prastoin         ###   ########.fr        #
+#    Updated: 2019/02/11 11:44:50 by prastoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = lem-in
 
 SRC = main.c struct_tools.c parser.c tools.c display.c free.c power.c \
 	  ft_best_path.c cycle_detector.c ft_print_ant_path.c ft_strsplitlem.c \
-	  ft_strsublem.c parser_2.c tools2.c
+	  ft_strsublem.c parser_2.c tools2.c debug.c
 
 OBJ = $(SRC:.c=.o)
 

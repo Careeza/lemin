@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 13:52:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/11 11:26:54 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/11 12:06:11 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ int				ft_print_ant_path(t_special_ant *ant, t_all *all, t_room *room,
 	room[algo->index_start].slot = all->fourmis;
 	while (room[algo->index_end].slot != all->fourmis)
 	{
+//		ft_putstr("VOICI LE NOMBRE DE FOURMI DANS END");
+//		ft_putnbr(room[algo->index_end].slot);
+//		ft_putchar('\n');
 		ft_reset_play(ant, all->fourmis);
 		if (algo->flag == 1 || algo->flag == 3)
 			ft_color(algo->step, 0);

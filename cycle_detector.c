@@ -6,25 +6,11 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 11:59:10 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/09 04:04:47 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/11 15:36:34 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-int		ft_int_cmp(int *list1, int *list2, int len)
-{
-	int	i;
-
-	i = 0;
-	while (i < len)
-	{
-		if (list1[i] != list2[i])
-			return (-42);
-		i++;
-	}
-	return (0);
-}
 
 int		ft_fill_fourmi(int curr_ant, t_special_ant *ant, int lencycle,
 		t_all *all)
@@ -46,29 +32,40 @@ int		ft_fill_fourmi(int curr_ant, t_special_ant *ant, int lencycle,
 	return (0);
 }
 
-int		ft_cycle_detector(t_special_ant *ant, int curr_ant, int len, int *path)
+int		ft_cycle_detector(t_special_ant *ant, int curr_ant, t_room *room)
 {
-	int cycle;
-	int lencycle;
 	int count;
+	int save;
+	int i;
+	int lenpath[2];
 
-	cycle = 0;
 	count = 0;
-	while (curr_ant >= 0)
+	save = ant[curr_ant].path[0];
+	i = curr_ant - 1;
+	lenpath[0] = 0;
+	lenpath[1] = INT_MAX;
+//	printf("Je commence ave =");
+//	print_dbint(ant[curr_ant].path, ant[curr_ant].len, room);
+	while (i >= 0 && count < 2)
 	{
-		if (len == ant[curr_ant].len)
-			if ((ft_int_cmp(path, ant[curr_ant].path, len)) != -42)
-			{
-				if (cycle == 1 && lencycle != count)
-					return (-1);
-				lencycle = count;
-				cycle++;
-				count = -1;
-			}
-		if (cycle == 2)
-			return (lencycle);
-		curr_ant--;
-		count++;
+		if (save == ant[i].path[0])
+		{
+//			printf("Je finis ave =");
+//			print_dbint(ant[i].path, ant[i].len, room);
+//			printf("%d -- %d\n", save, ant[i].path[0]);
+			lenpath[count] = curr_ant - i;
+			count++;
+			curr_ant = i;
+		}
+		i--;
 	}
+//	printf("%d -- %d -- %d -- %d\n", lenpath[0], lenpath[1], lenpath[2], lenpath[3]);
+	if (lenpath[0] == lenpath[1])
+	{
+//		printf("FAP\n");
+		return (lenpath[1] - 1);
+	}
+	(void)room;
+//	printf("DFAP\n");
 	return (-1);
 }

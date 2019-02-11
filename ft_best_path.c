@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 13:52:03 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/09 05:48:34 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/11 15:23:55 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			ft_move(t_room *room, t_special_ant *ant, int curr_ant, t_algo *algo)
 	if(best == -42)
 		return (best);
 	ant[curr_ant].coup++;
-	if ((ant[curr_ant].coup == algo->lesscoup + 1) && best != algo->index_end)
+	if ((ant[curr_ant].coup + room[best].power - 1 >= algo->lesscoup + 1) && best != algo->index_end)
 	{
 		ant[curr_ant].coup--;
 		return (-42);
@@ -122,11 +122,13 @@ int		ft_find_best_path(t_algo *algo, t_room *room, t_all *all, t_special_ant *an
 			{
 				if (ant[curr_ant].coup == algo->lesscoup + 1)
 				{
+//					printf("j4qi trouver un chemic ok\n");
 					ft_cpint_n(ant[curr_ant].path, ant[curr_ant].savepath, ant[curr_ant].len);
 					ant[curr_ant].savelen = ant[curr_ant].len;
 				}
 				if (algo->lesscoup == ant[curr_ant].coup)
 				{
+//					printf("j4qi trouver un chemic cool %d\n", algo->lesscoup);
 					if (curr_ant != 0 || all->fourmis == 1 || algo->lesscoup == 1)
 						break ;
 					else
@@ -148,16 +150,34 @@ int		ft_find_best_path(t_algo *algo, t_room *room, t_all *all, t_special_ant *an
 			ft_fill_coup(room, ant[curr_ant].path, ant[curr_ant].len);
 		}
 		ft_reset_i(room, all->room);
-		if (curr_ant > (3 * lesslink + 5))
+//		printf("%d\n", curr_ant);
+		len = 0;
+		if (curr_ant > 3 * lesslink + 5)
 		{
-			if ((len = ft_cycle_detector(ant, curr_ant - 1, ant[curr_ant].len, ant[curr_ant].path)) != -1)
+			if ((len = ft_cycle_detector(ant, curr_ant, room)) != -1)
 			{
+				printf("len = %d\n", len);
+		//		print_dbint(ant[curr_ant].path, ant[curr_ant].len, room);
+		//		printf("\n");
+		//		print_dbint(ant[curr_ant - 1].path, ant[curr_ant - 1].len, room);
+		//		printf("\n");
+		//		print_dbint(ant[curr_ant - len * 2].path, ant[curr_ant - len * 2].len, room);
+		//		printf("\n");
+		//		printf("%d found a cycle\n", len);
+		//		exit (0);
 				ft_fill_fourmi(curr_ant, ant, len, all);
 				break ;
 			}
 		}
 		curr_ant++;
 	}
+	printf("len = %d\n", len);
+	int k = -1;
+	while (++k < 15)
+	{
+		print_dbint(ant[k].path, ant[k].len, room);
+	}
+//	exit (0);
 	return (0);
 }
 
