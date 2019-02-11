@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/09 05:44:48 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/11 11:31:26 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_special_ant
 //	int		nb;
 	int		curr;
 	int		i;
+	int		play;
 }				t_special_ant;
 
 typedef struct	s_all
@@ -81,15 +82,6 @@ typedef struct	s_algo
 
 	int		flag;
 }				t_algo;
-
-typedef struct	s_fourmi
-{
-	int		name;
-	int		curr;
-	int		previous;
-	int		next;
-	int		*path;
-}				t_fourmi;
 
 char		**ft_strsplit_lem(char const *s, char c);
 int		ft_malloc_list(t_algo *algo, int room);
