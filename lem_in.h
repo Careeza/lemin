@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/11 13:03:28 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/12 19:14:35 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ typedef struct	s_special_ant
 	int		i;
 	int		play;
 }				t_special_ant;
+
+typedef struct	s_path
+{
+	int		**path;
+	int		nb_path;
+	int		*len_path;
+	int		*power;
+}				t_path;
 
 typedef struct	s_all
 {
