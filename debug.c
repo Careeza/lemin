@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 04:06:36 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/09 05:31:03 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/13 06:29:05 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	ft_print_room(t_room *room, int i)
 	printf("Start_end =%d\n", room[i].start_end);
 	printf("Links =%d\n", room[i].links);
 	printf("power =%ld\n", room[i].power);
+	printf("prev2 =%d\n", room[i].prev2);
+	if (room[i].previous != -42)
+		printf("previous =%s\n", room[room[i].previous].name);
 	printf("\n");
 }
 
@@ -59,12 +62,13 @@ void	ft_print_struct(t_room *room, int nb)
 	i = 0;
 	while (i < nb)
 	{
-		printf("ROOM[%d]\n", i);
-		printf("Name =%s\n", room[i].name);
+		printf("ROOM[%s]\n", room[i].name);
 		printf("Start_end =%d\n", room[i].start_end);
 		printf("Links =%d\n", room[i].links);
 		printf("power =%ld\n", room[i].power);
-		printf("pass =%ld\n", room[i].pass);
+		printf("courant =%d\n", room[i].courant);
+		if (room[i].previous != -42)
+			printf("previous =%s\n", room[room[i].previous].name);
 		printf("liens :\n");
 		print_dbint(room[i].index, room[i].links, room);
 		printf("\n");

@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:48:47 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/09 04:50:28 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/13 07:00:38 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,25 @@ int		ft_list2_to1(t_algo *algo, int cmt, int *k)
 	return (0);
 }
 
-void	ft_fill_power(t_room *room, t_algo *algo, int cmt, int k)
+void			ft_reset_courant(t_room *room, int nbrroom)
+{
+	int i;
+
+	i = 0;
+	while (i < nbrroom)
+	{
+		room[i].courant = INT_MAX;
+		i++;
+	}
+}
+
+
+int		ft_fill_power(t_room *room, t_algo *algo, int cmt, int k)
 {
 	int i;
 	int j;
 
+	algo->courant = 0;
 	while (cmt != 0)
 	{
 		i = 0;
@@ -42,17 +56,43 @@ void	ft_fill_power(t_room *room, t_algo *algo, int cmt, int k)
 			j = -1;
 			while (++j < room[algo->list1[i]].links)
 			{
+				if (room[algo->list1[i]].index[j] == algo->index_end && room[algo->list1[i]].courant == INT_MAX)
+				{
+					room[room[algo->list1[i]].index[j]].previous = algo->list1[i];
+					return (0);
+				}
 				if (room[room[algo->list1[i]].index[j]].power == 0)
 				{
-					room[room[algo->list1[i]].index[j]].power = k;
-					algo->list2[cmt] = room[algo->list1[i]].index[j];
-					cmt++;
+					if (room[algo->list1[i]].index[j] != algo->index_end)
+					{
+//						printf("Je suis ici %s et je veux aller %s\n J'ai un courant de %d et il a un courant de %d\n", room[algo->list1[i]].name, room[room[algo->list1[i]].index[j]].name, room[algo->list1[i]].courant, room[room[algo->list1[i]].index[j]].courant);
+						if (room[algo->list1[i]].courant == INT_MAX || room[algo->list1[i]].courant <= room[room[algo->list1[i]].index[j]].courant)
+						{
+//							printf("donc je peux renter\n");
+							room[room[algo->list1[i]].index[j]].power = k;
+							if ((room[algo->list1[i]].courant == INT_MAX || algo->list1[i] == algo->index_start || room[room[algo->list1[i]].index[j]].courant == INT_MAX))
+							{
+								if (room[room[algo->list1[i]].index[j]].courant == INT_MAX)
+									room[room[algo->list1[i]].index[j]].previous = algo->list1[i];
+							}
+							else
+							{
+								room[algo->list1[i]].prev2 = 1;
+								room[algo->list1[i]].prev = 1;
+							}
+							room[room[algo->list1[i]].index[j]].prev = room[algo->list1[i]].prev;
+							algo->list2[cmt] = room[algo->list1[i]].index[j];
+							cmt++;
+						}
+					}
 				}
 			}
 			i++;
 		}
 		ft_list2_to1(algo, cmt, &k);
 	}
+//	printf ("Je suis sortis par ici\n");
+	return (-1);
 }
 
 int		ft_init_algo(t_algo *algo, t_all *all, t_room *room)
@@ -61,45 +101,175 @@ int		ft_init_algo(t_algo *algo, t_all *all, t_room *room)
 		return (-1);
 	if (!(algo->list2 = (int*)malloc(sizeof(int) * (all->room))))
 		return (-1);
-	room[algo->index_end].power = 1;
-	algo->list1[0] = algo->index_end;
+	algo->list1[0] = algo->index_start;
 	algo->list1[1] = -42;
-	room[algo->index_start].power = (LONG_MAX / 2) + 1;
+	room[algo->index_start].power = 1;
 	return (0);
 }
 
-int		ft_check_lonely_room(t_room *room, t_algo *algo)
+void			ft_reset_previous(t_room *room, int nbroom)
 {
 	int i;
-	int save;
 
-	save = 0;
 	i = 0;
-	while (i < room[algo->index_start].links)
+	while (i < nbroom)
 	{
-		if (room[room[algo->index_start].index[i]].power == 0)
+		if (room[i].courant == INT_MAX)
+			room[i].previous = -42;
+		i++;
+	}
+}
+
+void			ft_reset_power(t_room *room, int nbroom, t_algo *algo)
+{
+	int i;
+
+	i = 0;
+	while (i < nbroom)
+	{
+		room[i].power = 0;
+		room[i].prev = 0;
+//		room[i].previous = -42;
+		i++;
+	}
+	room[algo->index_start].power = 1;
+	algo->list1[0] = algo->index_start;
+	algo->list1[1] = -42;
+}
+
+t_path *ft_init_path(t_room *room, t_algo *algo, t_all *all)
+{
+	t_path		*way;
+	int			i;
+	int			j;
+	int			lesslink;
+
+	lesslink = room[algo->index_start].links > room[algo->index_end].links ? room[algo->index_end].links : room[algo->index_start].links;
+	if (!(way = (t_path*)malloc(sizeof(t_path) * (lesslink))))
+		return (NULL);
+	i = 0;
+	while (i < lesslink)
+	{
+		way[i].nb_path = 0;
+		if (!(way[i].len_path = (int*)malloc(sizeof(int) * (lesslink))))
+			return (NULL);
+		j = 0;
+		while (j < lesslink)
 		{
-			save++;
-			room[room[algo->index_start].index[i]].power = INT_MAX;
+			way[i].len_path[j] = 0;
+			j++;
+		}
+		if (!(way[i].rev = (int*)malloc(sizeof(int) * (all->room))))
+			return (NULL);
+		if (!(way[i].path = (int**)malloc(sizeof(int*) * (lesslink))))
+			return (NULL);
+		j = 0;
+		while (j < lesslink)
+		{
+			if (!(way[i].path[j] = (int*)malloc(sizeof(int) * (all->room))))
+				return (NULL);
+			j++;
 		}
 		i++;
 	}
-	return (save);
+	return (way);
+}
+
+int		ft_create_flux(t_room *room, t_algo *algo, t_path *way)
+{
+	int i;
+	int len;
+	int curr;
+	int prev;
+	static int k;
+
+	len = 0;
+	prev = 0;
+	curr = algo->index_end;
+	while (curr != algo->index_start)
+	{
+//		printf("len == %d curr = %s\n", len, room[curr].name);
+		way[0].rev[len] = curr;
+		curr = room[curr].previous;
+//		printf("curr = %d\n", curr);
+		len++;
+		room[curr].courant = len;
+	}
+	i = 0;
+	len--;
+//	printf ("%d -- \n", room[room[algo->index_end].previous].prev);
+	if (room[room[algo->index_end].previous].prev == 1)
+		k++;
+	algo->k = k;
+//		printf("JE dois switch\n");
+	while (len >= 0)
+	{
+		i = way[k].len_path[way[k].nb_path];
+//		printf("i = %d\n", i);
+		way[k].path[way[k].nb_path][i] = way[0].rev[len];
+		way[k].len_path[way[k].nb_path]++;
+		len--;
+	}
+//	way[0].len_path[0] = i;
+//	printf("nb_path = %d && k = %d && et len = %d\n", way[k].nb_path, k, way[k].len_path[way[k].nb_path]);
+//	printf("%d\n", way[k].path[way[k].nb_path][0]);
+	print_dbint(way[k].path[way[k].nb_path], way[k].len_path[way[k].nb_path], room);
+	printf("-------------------------------------------------------\n");
+	way[k].nb_path++;
+//	printf("%s --", room[curr].name);
+	return (0);
 }
 
 int		ft_call_power(t_room *room, t_algo *algo, t_all *all)
 {
-	int		save;
+	t_path	*way;
+	int		ok;
+	int		prev;
+	int		lesslink;
 
+	algo->k = 0;
+	ok = 0;
+	prev = 0;
+	lesslink = room[algo->index_start].links > room[algo->index_end].links ? room[algo->index_end].links : room[algo->index_start].links;
 	if (ft_init_algo(algo, all, room) == -1)
 		return (-1);
+	if (!(way = (ft_init_path(room, algo, all))))
+		return (-1);
+	while (1)
+	{
+		ok = ft_fill_power(room, algo, 1, 2);
+		if (ok == -1)
+			break ;
+		if (room[room[algo->index_end].previous].prev == 1)
+		{
+			printf("Ok\n");
+			prev++;
+			ft_reset_courant(room, all->room);
+			ft_create_flux(room, algo, way);
+		}
+		else
+			ft_create_flux(room, algo, way);
+		if (prev == lesslink)
+			break ;
+		ft_print_room(room, 5);
+		ft_reset_power(room, all->room, algo);
+	}
+/*	ft_fill_power(room, algo, 1, 2);
+	ft_create_flux(room, algo, way);
+	ft_reset_power(room, all->room, algo);
 	ft_fill_power(room, algo, 1, 2);
-	save = ft_check_lonely_room(room, algo);
-	free(algo->list1);
-	free(algo->list2);
-	if (room[algo->index_start].power == 0)
-		return (ft_parser_error("Broken path\n"));
-	ft_sort_room(room, all);
-	room[algo->index_start].links -= save;
+	ft_reset_courant(room, all->room);
+	ft_create_flux(room, algo, way);
+	ft_reset_power(room, all->room, algo);
+	ft_fill_power(room, algo, 1, 2);
+	ft_create_flux(room, algo, way);*/
+//	ft_print_struct(room, all->room);
+//	save = ft_check_lonely_room(room, algo);
+//	free(algo->list1);
+//	free(algo->list2);
+//	if (room[algo->index_start].power == 0)
+//		return (ft_parser_error("Broken path\n"));
+//	ft_sort_room(room, all);
+//	room[algo->index_start].links -= save;
 	return (0);
 }

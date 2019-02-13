@@ -6,13 +6,13 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 05:41:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/09 05:47:01 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/12 21:24:45 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void			ft_reset_i(t_room *room, int nbroom)
+/*void			ft_reset_i(t_room *room, int nbroom)
 {
 	int i;
 
@@ -24,7 +24,7 @@ void			ft_reset_i(t_room *room, int nbroom)
 		room[i].previous = -42;
 		i++;
 	}
-}
+}*/
 
 void			ft_cpint_n(int *path, int *dest, int len)
 {

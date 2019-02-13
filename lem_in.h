@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/12 19:14:35 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/13 06:27:37 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct	s_path
 	int		nb_path;
 	int		*len_path;
 	int		*power;
+	int		*rev;
 }				t_path;
 
 typedef struct	s_all
@@ -71,11 +72,10 @@ typedef struct	s_room
 	int		links;
 	int		previous;
 	int		*index;
-	int		i;
 	long	power;
-	int		slot;
-	long	pass;
-	int		*coup;
+	int		courant;
+	int		prev;
+	int		prev2;
 }				t_room;
 
 typedef struct	s_algo
@@ -87,8 +87,9 @@ typedef struct	s_algo
 	int		fourmis;
 	int		lesscoup;
 	int		step;
-
+	int		courant;
 	int		flag;
+	int		k;
 }				t_algo;
 
 char		**ft_strsplit_lem(char const *s, char c);

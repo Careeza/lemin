@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/09 05:24:37 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/12 20:52:26 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,5 @@ int		main(int argc, const char **argv)
 	ft_verif_doublons(room, &all, &algo);
 	if (ft_call_power(room, &algo, &all) == -1)
 		return (ft_parser_error("Impossible malloc\n"));
-	ft_found_path(&algo, room, &all);
 	return (0);
 }
