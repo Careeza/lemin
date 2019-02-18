@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 04:06:36 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/13 06:29:05 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/18 15:48:55 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	ft_print_room(t_room *room, int i)
 	printf("Start_end =%d\n", room[i].start_end);
 	printf("Links =%d\n", room[i].links);
 	printf("power =%ld\n", room[i].power);
-	printf("prev2 =%d\n", room[i].prev2);
 	if (room[i].previous != -42)
 		printf("previous =%s\n", room[room[i].previous].name);
 	printf("\n");

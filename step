@@ -1,0 +1,83 @@
+		if (algo->flag == 2 || algo->flag == 3)
+			else if (ghost[curr_ant].path[ghost[curr_ant].i] == algo->index_end)
+		if (algo->flag == 2 || algo->flag == 3)
+	if ((ant[curr_ant].coup + room[best].power - 1 >= algo->lesscoup + 1) && best != algo->index_end)
+	if (curr == algo->index_start)
+	lesslink = room[algo->index_start].links > room[algo->index_end].links ? room[algo->index_end].links : room[algo->index_start].links;
+		room[algo->index_start].pass = 1;
+		ant[curr_ant].curr = algo->index_start;
+			if (ant[curr_ant].curr != algo->index_end)
+				if (ant[curr_ant].coup == algo->lesscoup + 1)
+				if (algo->lesscoup == ant[curr_ant].coup)
+//					printf("j4qi trouver un chemic cool %d\n", algo->lesscoup);
+					if (curr_ant != 0 || all->fourmis == 1 || algo->lesscoup == 1)
+			algo->lesscoup++;
+	room[algo->index_start].pass = 1;
+	if (room[algo->index_start].links == 0)
+	algo->lesscoup = room[room[algo->index_start].index[0]].power;
+							* (algo->lesscoup + 1000))))
+		ft_init_db_int(room[i].coup, algo->lesscoup + 1000);
+	algo->step = 1;
+	room[algo->index_end].slot = 0;
+	room[algo->index_start].slot = all->fourmis;
+	while (room[algo->index_end].slot != all->fourmis)
+//		ft_putnbr(room[algo->index_end].slot);
+		if (algo->flag == 1 || algo->flag == 3)
+			ft_color(algo->step, 0);
+						if (ant[i].path[ant[i].i] == algo->index_end)
+							room[algo->index_end].slot++;
+		algo->step++;
+	algo->flag = 0;
+				algo->flag += 2;
+				algo->flag += 1;
+			algo->index_start = i;
+			algo->index_end = i;
+	algo->list2[cmt] = -42;
+	while (algo->list2[i] != -42)
+		algo->list1[i] = algo->list2[i];
+	algo->list1[i] = -42;
+	algo->courant = 0;
+		while (algo->list1[i] != -42)
+			while (++j < room[algo->list1[i]].links)
+				if (room[algo->list1[i]].index[j] == algo->index_end && room[algo->list1[i]].courant == INT_MAX)
+					room[room[algo->list1[i]].index[j]].previous = algo->list1[i];
+				if (room[room[algo->list1[i]].index[j]].power == 0 && room[algo->list1[i]].index[j] != algo->index_end && (!(room[algo->list1[i]].prev == 1 && room[room[algo->list1[i]].index[j]].courant == INT_MAX)))
+								//		printf("Je suis ici %s et je veux aller %s\n J'ai un courant de %d et il a un courant de %d\n", room[algo->list1[i]].name, room[room[algo->list1[i]].index[j]].name, room[algo->list1[i]].courant, room[room[algo->list1[i]].index[j]].courant);
+						if (room[algo->list1[i]].courant == INT_MAX || room[algo->list1[i]].courant <= room[room[algo->list1[i]].index[j]].courant)
+							room[room[algo->list1[i]].index[j]].power = 1;
+							algo->list2[cmt] = room[algo->list1[i]].index[j];
+							if (room[room[algo->list1[i]].index[j]].courant == INT_MAX)
+								room[room[algo->list1[i]].index[j]].previous = algo->list1[i];
+								room[room[algo->list1[i]].index[j]].prev = room[algo->list1[i]].prev + 1;
+	if (!(algo->list1 = (int*)malloc(sizeof(int) * (all->room))))
+	if (!(algo->list2 = (int*)malloc(sizeof(int) * (all->room))))
+	algo->list1[0] = algo->index_start;
+	algo->list1[1] = -42;
+	room[algo->index_start].power = 1;
+	room[algo->index_start].power = 1;
+	algo->list1[0] = algo->index_start;
+	algo->list1[1] = -42;
+	lesslink = room[algo->index_start].links > room[algo->index_end].links ? room[algo->index_end].links : room[algo->index_start].links;
+	curr = algo->index_end;
+	while (curr != algo->index_start)
+		if (room[curr].courant != INT_MAX && curr != algo->index_start)
+		if (k + 1 == algo->lesslink)
+	algo->k = k;
+	while (i <= algo->k)
+		if (best > ((somme + algo->fourmis) / (float)way[i].nb_path) - 1)
+			best = ((somme + algo->fourmis) / (float)way[i].nb_path) - 1;
+	while (cmt < algo->fourmis)
+		ant[curr_ant].curr = algo->index_start;
+	room[algo->index_start].slot = all->fourmis;
+	while (room[algo->index_end].slot != all->fourmis)
+		if (algo->flag == 1 || algo->flag == 3)
+			ft_color(algo->step, 0);
+			if (ant[curr_ant].curr != algo->index_end)
+				if (room[ant[curr_ant].path[ant[curr_ant].i]].slot == 0 || ant[curr_ant].path[ant[curr_ant].i] == algo->index_end)
+		algo->step++;
+	algo->fourmis = all->fourmis;
+	algo->lesslink = room[algo->index_start].links > room[algo->index_end].links ? room[algo->index_end].links : room[algo->index_start].links;
+	if (!(algo->list1 = (int*)malloc(sizeof(int) * (room))))
+	if (!(algo->list2 = (int*)malloc(sizeof(int) * (room))))
+	algo->list1[0] = algo->index_end;
+	algo->list1[1] = -42;

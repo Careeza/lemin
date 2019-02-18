@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/13 06:27:55 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/18 23:19:16 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int		ft_nm(char *str, t_room *room, int fourmis, int nbroom)
 	if (ft_str_is_digit((str + len), '\0') == -1)
 		return (-1);
 	room->name = ft_strndup(str, len);
-	room->prev = 0;
-	room->prev2 = 0;
 	room->links = 0;
+	room->prev = 0;
+	room->slot = 0;
 	room->power = 0;
 	room->previous = -42;
 	room->courant = INT_MAX;

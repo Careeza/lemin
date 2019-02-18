@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 05:41:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/12 21:24:45 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/18 23:11:40 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,11 @@ t_special_ant	*ft_init_ant(int nbrfourmis, t_all *all)
 		return (NULL);
 	while (i < nbrfourmis)
 	{
-		ant[i].coup = 0;
-		if (!(ant[i].wait = (int*)malloc(sizeof(int) * (all->room))))
-			return (NULL);
-		ft_init_db_int(ant[i].wait, all->room);
 		if (!(ant[i].path = (int*)malloc(sizeof(int) * (all->room))))
 			return (NULL);
-		if (!(ant[i].savepath = (int*)malloc(sizeof(int) * (all->room))))
-			return (NULL);
 		ant[i].len = 0;
-		ant[i].savelen = 0;
+		ant[i].i = 0;
+		ant[i].curr = 0;
 		i++;
 	}
 	return (ant);

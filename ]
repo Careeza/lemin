@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/18 22:54:32 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/18 18:36:06 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 
 typedef struct	s_special_ant
 {
-	int		*path;
-	int		len;
+	int *path;
+	int len;
 	int		curr;
 	int		i;
 }				t_special_ant;
@@ -41,7 +41,7 @@ typedef struct	s_path
 	int		nb_path;
 	int		*len_path;
 	int		*rev;
-	float	powermax;
+	int		power;
 }				t_path;
 
 typedef struct	s_all
@@ -68,7 +68,6 @@ typedef struct	s_room
 	int		*index;
 	long	power;
 	int		courant;
-	int		slot;
 	int		prev;
 }				t_room;
 
@@ -85,7 +84,7 @@ typedef struct	s_algo
 	int		flag;
 	int		k;
 	int		lesslink;
-	int		deck;
+	int		thechooseone;
 }				t_algo;
 
 char		**ft_strsplit_lem(char const *s, char c);
@@ -103,7 +102,7 @@ int		ft_verif_link2(t_room *room, char *str, t_all *all, int inlink);
 int		ft_index_for(char *str, t_room *room, int nbrroom, int lenstr);
 int		ft_verif_tube(int indexa, int indexb, t_room *room);
 
-void	ft_display(int curr_ant, t_special_ant *ghost, t_room *room, t_algo *algo);
+void	ft_display(int best, t_special_ant *ghost, t_room *room, t_algo *algo);
 void	ft_print_room(t_room *room, int i);
 void	ft_print_ant(t_special_ant *room, int nb);
 void	ft_print_struct(t_room *room, int nb);
