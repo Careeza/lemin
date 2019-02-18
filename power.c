@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:48:47 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/18 23:30:42 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/18 23:45:32 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int		ft_init_algo(t_algo *algo, t_all *all, t_room *room)
 		return (-1);
 	algo->list1[0] = algo->index_start;
 	algo->list1[1] = -42;
+	algo->step = 1;
 	room[algo->index_start].power = 1;
 	return (0);
 }
@@ -323,6 +324,8 @@ int		ft_play_and_print(t_special_ant *ant, t_room *room, t_algo *algo, t_all *al
 
 	i = 0;
 	curr_ant = 0;
+	ft_putstr(all->str);
+	ft_putchar('\n');
 	while (i < all->fourmis)
 	{
 		ant[curr_ant].curr = algo->index_start;
