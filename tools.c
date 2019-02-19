@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:24:22 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 05:08:41 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 20:38:40 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		ft_free(t_room *room, t_all *all, t_path *way, t_algo *algo)
 {
+	(void)way;
 	ft_free_room(room, all->room);
 	ft_free_path(way, algo->lesslink);
 	ft_free_all(all);

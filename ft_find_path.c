@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 01:05:08 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 20:07:37 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 20:46:29 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,7 @@ t_special_ant	*ft_give_path_to_ant(t_algo *algo, t_path *way,
 		algo->cmt++;
 		power[index]++;
 	}
+	if (power != NULL)
+		free(power);
 	return (ant);
 }

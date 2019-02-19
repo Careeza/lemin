@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 09:52:55 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 04:28:19 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 20:50:40 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		ft_free_path(t_path *way, int nb)
 	i = 0;
 	while (i < nb)
 	{
-		ft_freedbint(way[i].path, way[i].nb_path);
+		ft_freedbint(way[i].path, nb);
 		if (way[i].len_path != NULL)
 		{
 			free(way[i].len_path);
@@ -81,6 +81,8 @@ int		ft_free_ant(t_special_ant *ant, int nb)
 		}
 		i++;
 	}
+	if (ant != NULL)
+		free (ant);
 	return (0);
 }
 

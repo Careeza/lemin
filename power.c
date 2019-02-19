@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:48:47 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 20:08:08 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 20:34:21 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ int		ft_call_power(t_room *room, t_algo *algo, t_all *all)
 	i = ft_gestion_pack(algo, way);
 	ant = ft_give_path_to_ant(algo, way, i, all);
 	ft_play_and_print(ant, room, algo, all);
+	ft_free_ant(ant, all->fourmis);
 	return (ft_free(room, all, way, algo));
 }
