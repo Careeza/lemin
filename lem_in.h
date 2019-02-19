@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 02:19:35 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 02:40:16 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,59 +81,109 @@ typedef struct	s_algo
 	int		cmt;
 }				t_algo;
 
-char			**ft_strsplit_lem(char const *s, char c);
-int				ft_algo(t_room *room, t_algo *algo, t_all *all);
+/*
+** ft_find_path.c
+*/
 
-int				ft_verif_doublons(t_room *room, t_all *all, t_algo *algo);
-char			*ft_strsub_lem(char const *s, unsigned int start, size_t len);
-
-void			print_dbint(int *list, int len, t_room *room);
-int				ft_str_is_digit(char *str, char c);
-int				ft_verif_link(t_room *room, char *str, t_all *all);
-int				nbr_space(char *str, char c);
-int				ft_verif_link2(t_room *room, char *str, t_all *all, int inlink);
-int				ft_verif_tube(int indexa, int indexb, t_room *room);
-
-void			ft_display(int curr_ant, t_special_ant *ghost, t_room *room,
-				t_algo *algo);
-void			ft_print_room(t_room *room, int i);
-void			ft_print_ant(t_special_ant *room, int nb);
-void			ft_print_struct(t_room *room, int nb);
-int				ft_parser(t_all *all, t_room *room, int i, int index);
-int				ft_nm(char *str, t_room *room, int fourmis, int nbroom);
-int				ft_check_link(t_all *all, t_room *room, int start);
-
-int				ft_parser_error(char *str);
-int				ft_light_error(char *str);
-
-int				ft_call_power(t_room *room, t_algo *algo, t_all *all);
-
-void			ft_cpint_n(int *path, int *dest, int len);
-
-void			ft_color(int step, int i);
-void			ft_stop(void);
-
-int				ft_putstr_color_red(char *str);
-int				ft_putstr_color_yellow(char *str);
-t_special_ant	*ft_init_ant(int nbrfourmis, t_all *all);
-
-t_path			*ft_init_path(t_room *room, t_algo *algo, t_all *all);
-int				ft_init_algo(t_algo *algo, t_all *all, t_room *room);
-void			ft_cp_dbdint(t_path *way, int k, int nb_path, int exept);
-
+void			ft_create_new_flux(t_room *room, t_path *way,
+		t_algo *algo, int len);
 int				ft_create_flux(t_room *room, t_algo *algo, t_path *way);
 int				ft_gestion_pack(t_algo *algo, t_path *way);
-t_special_ant	*ft_give_path_to_ant(t_algo *algo, t_path *way, int i,
-				t_all *all);
-int				ft_play_and_print(t_special_ant *ant, t_room *room,
-				t_algo *algo, t_all *all);
+int				ft_give_path_to_ant2(t_path *way, int i, int *power);
+t_special_ant	*ft_give_path_to_ant(t_algo *algo, t_path *way,
+		int i, t_all *all);
 
-void			ft_reset_power(t_room *room, int nbroom, t_algo *algo);
-int				ft_list2_to1(t_algo *algo, int cmt);
+/*
+** ft_find_path2.c
+*/
+void			ft_create_flux2(t_room *room, t_path *way,
+		t_algo *algo, int len);
+void			ft_init_create_flux(int *len, int *curr,
+		int *prev, t_algo *algo);
 
-void			ft_init_create_flux(int *len, int *curr, int *prev,
-				t_algo *algo);
-void			ft_create_flux2(t_room *room, t_path *way, t_algo *algo,
-				int len);
+/*
+** display.c
+*/
+
+int		ft_putstr_color_yellow(char *str);
+int		ft_putstr_color_red(char *str);
+void	ft_color(int line, int i);
+void	ft_display(int curr_ant, t_special_ant *ghost, t_room *room,
+		t_algo *algo);
+
+/*
+** ft_play_print.c
+*/
+
+void		ft_move(t_special_ant *ant, int curr_ant, t_room *room);
+int		ft_play_and_print(t_special_ant *ant, t_room *room, t_algo *algo,
+		t_all *all);
+
+/*
+** init.c
+*/
+
+int		ft_init_algo(t_algo *algo, t_all *all, t_room *room);
+t_path *ft_init_path(t_room *room, t_algo *algo, t_all *all);
+
+/*
+** parser.c
+*/
+
+int			ft_start_end(t_room *room, t_all *all, int index, int *i);
+int			ft_result(int start_and_end[2], int i);
+int			ft_parser(t_all *all, t_room *room, int i, int index);
+
+/*
+** parser_2.c
+*/
+int		ft_verif_doublons(t_room *room, t_all *all, t_algo *algo);
+int		ft_check_link(t_all *all, t_room *room, int start);
+int		ft_light_error(char *str);
+int		ft_parser_error(char *str);
+
+/*
+** power.c
+*/
+
+void	ft_fill_power_cut(t_room *room, t_algo *algo, int i, int j);
+int		ft_fill_power(t_room *room, t_algo *algo, int i);
+int		ft_call_power(t_room *room, t_algo *algo, t_all *all);
+
+/*
+** power_tools.c
+*/
+int		ft_list2_to1(t_algo *algo, int cmt);
+void	ft_reset_power(t_room *room, int nbroom, t_algo *algo);
+
+/*
+** struct_tools.c
+*/
+void	ft_sort_index(t_room *room, int i);
+void	ft_sort_room(t_room *room, t_all *all);
+int		ft_nm(char *str, t_room *room, int fourmis, int nbroom);
+int		ft_verif_link(t_room *room, char *str, t_all *all);
+int		ft_verif_link2(t_room *room, char *str, t_all *all, int indexa);
+
+/*
+** tools.c
+*/
+int		ft_verif_tube(int indexa, int indexb, t_room *room);
+int		nbr_space(char *str, char c);
+int		ft_str_is_digit(char *str, char c);
+
+/*
+** tools2.c
+*/
+void			ft_cpint_n(int *path, int *dest, int len);
+void	ft_cp_dbdint(t_path *way, int k, int nb_path, int exept);
+t_special_ant	*ft_init_ant(int nbrfourmis, t_all *all);
+
+/*
+** OTHERS
+*/
+char			*ft_strsub_lem(char const *s, unsigned int start, size_t len);
+char			**ft_strsplit_lem(char const *s, char c);
+void			ft_stop(void);
 
 #endif
