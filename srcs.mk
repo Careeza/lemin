@@ -18,4 +18,3 @@ SRCV += srcs/visu/main.c
 SRCV += srcs/visu/tools.c
 SRCV += srcs/visu/init.c
 SRCV += srcs/visu/play.c
-SRCV += srcs/visu/shell_visu.c
