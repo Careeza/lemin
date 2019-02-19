@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 02:08:24 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 02:19:35 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ typedef struct	s_algo
 }				t_algo;
 
 char			**ft_strsplit_lem(char const *s, char c);
-int				ft_malloc_list(t_algo *algo, int room);
 int				ft_algo(t_room *room, t_algo *algo, t_all *all);
 
 int				ft_verif_doublons(t_room *room, t_all *all, t_algo *algo);
@@ -93,7 +92,6 @@ int				ft_str_is_digit(char *str, char c);
 int				ft_verif_link(t_room *room, char *str, t_all *all);
 int				nbr_space(char *str, char c);
 int				ft_verif_link2(t_room *room, char *str, t_all *all, int inlink);
-int				ft_index_for(char *str, t_room *room, int nbrroom, int lenstr);
 int				ft_verif_tube(int indexa, int indexb, t_room *room);
 
 void			ft_display(int curr_ant, t_special_ant *ghost, t_room *room,
@@ -110,23 +108,13 @@ int				ft_light_error(char *str);
 
 int				ft_call_power(t_room *room, t_algo *algo, t_all *all);
 
-int				ft_found_path(t_algo *algo, t_room *room, t_all *all);
-int				ft_cycle_detector(t_special_ant *fourmis, int curr_ant,
-				t_room *room);
 void			ft_cpint_n(int *path, int *dest, int len);
-int				ft_fill_fourmi(int curr_ant, t_special_ant *ant, int lencycle,
-				t_all *all);
-
-int				ft_print_ant_path(t_special_ant *ant, t_all *all, t_room *room,
-				t_algo *algo);
 
 void			ft_color(int step, int i);
 void			ft_stop(void);
 
 int				ft_putstr_color_red(char *str);
 int				ft_putstr_color_yellow(char *str);
-void			ft_reset_i(t_room *room, int nbroom);
-void			ft_init_db_int(int *list, int len);
 t_special_ant	*ft_init_ant(int nbrfourmis, t_all *all);
 
 t_path			*ft_init_path(t_room *room, t_algo *algo, t_all *all);

@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:24:22 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/09 03:49:04 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 02:13:21 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,6 @@ int		ft_str_is_digit(char *str, char c)
 			return (-1);
 		i++;
 	}
-	return (0);
-}
-
-int		ft_malloc_list(t_algo *algo, int room)
-{
-	if (!(algo->list1 = (int*)malloc(sizeof(int) * (room))))
-		return (-1);
-	if (!(algo->list2 = (int*)malloc(sizeof(int) * (room))))
-		return (-1);
-	algo->list1[0] = algo->index_end;
-	algo->list1[1] = -42;
 	return (0);
 }
 
