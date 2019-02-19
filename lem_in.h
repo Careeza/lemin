@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 20:13:29 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 21:00:44 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 # define LEM_IN_H
 
 # include "libft/libft.h"
-# include <stdio.h>
 
 # define BUFF_SIZE 4096
-
 # define CSI "\033["
 # define CSI_GREEN CSI "32;01m"
 # define CSI_WHITE CSI "37;01m"
@@ -76,7 +74,6 @@ typedef struct	s_algo
 	int		flag;
 	int		k;
 	int		lesslink;
-	int		deck;
 	int		cmt;
 }				t_algo;
 
