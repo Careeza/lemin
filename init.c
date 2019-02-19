@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 00:57:31 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 02:57:21 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 05:07:18 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,21 @@ static int	ft_init_path2(t_path *way, int i, int lesslink, t_all *all)
 	return (0);
 }
 
-t_path		*ft_init_path(t_room *room, t_algo *algo, t_all *all)
+t_path		*ft_init_path(t_algo *algo, t_all *all)
 {
 	t_path		*way;
 	int			i;
 	int			j;
-	int			lesslink;
 
-	lesslink = room[algo->index_start].links >
-		room[algo->index_end].links ? room[algo->index_end].links :
-		room[algo->index_start].links;
-	if (!(way = (t_path*)malloc(sizeof(t_path) * lesslink)))
+	if (!(way = (t_path*)malloc(sizeof(t_path) * algo->lesslink)))
 		return (NULL);
 	i = 0;
-	while (i < lesslink)
+	while (i < algo->lesslink)
 	{
-		if (ft_init_path2(way, i, lesslink, all) == -1)
+		if (ft_init_path2(way, i, algo->lesslink, all) == -1)
 			return (NULL);
 		j = 0;
-		while (j < lesslink)
+		while (j < algo->lesslink)
 		{
 			if (!(way[i].path[j] = (int*)malloc(sizeof(int) * (all->room))))
 				return (NULL);

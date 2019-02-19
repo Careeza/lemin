@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 04:37:03 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 05:07:35 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,14 @@ int		ft_play_and_print(t_special_ant *ant, t_room *room, t_algo *algo,
 */
 
 int		ft_init_algo(t_algo *algo, t_all *all, t_room *room);
-t_path *ft_init_path(t_room *room, t_algo *algo, t_all *all);
+t_path *ft_init_path(t_algo *algo, t_all *all);
 
 /*
 ** parser.c
 */
 
 int			ft_start_end(t_room *room, t_all *all, int index, int *i);
-int			ft_result(int start_and_end[2], int i);
+int			ft_result(int start_and_end[2], int i, t_all *all, t_room *room);
 int			ft_parser(t_all *all, t_room *room, int i, int index);
 
 /*
@@ -140,7 +140,7 @@ int			ft_parser(t_all *all, t_room *room, int i, int index);
 int		ft_verif_doublons(t_room *room, t_all *all, t_algo *algo);
 int		ft_check_link(t_all *all, t_room *room, int start);
 int		ft_light_error(char *str);
-int		ft_parser_error(char *str, int i, t_all *all);
+int		ft_parser_error(char *str, int i, t_all *all, t_room *room);
 
 /*
 ** power.c
@@ -171,6 +171,7 @@ int		ft_verif_link2(t_room *room, char *str, t_all *all, int indexa);
 int		ft_verif_tube(int indexa, int indexb, t_room *room);
 int		nbr_space(char *str, char c);
 int		ft_str_is_digit(char *str, char c);
+int		ft_free(t_room *room, t_all *all, t_path *way, t_algo *algo);
 
 /*
 ** tools2.c

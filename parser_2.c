@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 05:27:39 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 04:37:00 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 04:47:28 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		ft_verif_doublons(t_room *room, t_all *all, t_algo *algo)
 		if (room[i].start_end == 2)
 			algo->index_end = i;
 		if (room[i].links == 0)
-			return (ft_parser_error("Doublons or no links\n"));
+			return (ft_light_error("Doublons or no links\n"));
 		i++;
 	}
 	return (0);
@@ -59,13 +59,12 @@ int		ft_light_error(char *str)
 	return (0);
 }
 
-int		ft_parser_error(char *str, int i, t_all *all)
+int		ft_parser_error(char *str, int i, t_all *all, t_room *room)
 {
-	if (i == 0)
-	{
-		if (all->str != NULL)
-			free(all->str);
-	}
+	if (i >= 0)
+		ft_free_all(all);
+	if (i >= 1)
+		ft_free_room(room, all->room);
 	ft_putstr_color_red("ERROR : ");
 	ft_putstr_fd(str, 2);
 	return (-1);

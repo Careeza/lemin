@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 04:33:27 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 05:12:54 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,19 +110,19 @@ int		main(int argc, const char **argv)
 	if (argc != 1)
 		ft_check_arg(&algo, argv, argc);
 	if (ft_reading(&all) == -1)
-		return (ft_parser_error("Reading failed\n"));
+		return (ft_parser_error("Reading failed\n", 0, &all, NULL));
 	if ((i = ft_nbrfourmis(&all)) == -1)
-		return (ft_parser_error("Nombre de fourmis invalides\n"));
+		return (ft_parser_error("Nombre de fourmis invalides\n", 0, &all, NULL));
 	if (ft_nbr_room(&all) == -1)
-		return (ft_parser_error("Pas assez de room\n"));
+		return (ft_parser_error("Pas assez de room\n", 0, &all, NULL));
 	if (!(room = (t_room *)malloc(sizeof(t_room) * (all.room + 1))))
-		return (ft_parser_error("Impossible malloc\n"));
+		return (ft_parser_error("Impossible malloc\n", 0, &all, NULL));
 	if ((i = ft_parser(&all, room, i, 0)) == -1)
 		return (-1);
 	if (ft_check_link(&all, room, i) == -1)
 		return (-1);
 	ft_verif_doublons(room, &all, &algo);
 	if (ft_call_power(room, &algo, &all) == -1)
-		return (ft_parser_error("Impossible malloc\n"));
+		return (-1);
 	return (0);
 }

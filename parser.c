@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:45 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/09 05:30:31 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 04:44:54 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int			ft_start_end(t_room *room, t_all *all, int index, int *i)
 	return (start_end);
 }
 
-int			ft_result(int start_and_end[2], int i)
+int			ft_result(int start_and_end[2], int i, t_all *all, t_room *room)
 {
 	if (start_and_end[0] == 1 && start_and_end[1] == 1)
 		return (i);
-	return (ft_parser_error("Start end error\n"));
+	return (ft_parser_error("Start end error\n", 1, all, room));
 }
 
 static void	ft_init(int *start_end, int start_and_end[2])
@@ -54,7 +54,7 @@ int			ft_parser(t_all *all, t_room *room, int i, int index)
 		if (all->map[i][0] != '#')
 		{
 			if (ft_nm(all->map[i], &room[index], all->fourmis, all->room) == -1)
-				return (ft_parser_error("Coordoonnees invalides\n"));
+				return (ft_parser_error("Coordoonnees invalides\n", 1, all, room));
 			index++;
 		}
 		else if (all->map[i][0] == '#')
@@ -69,5 +69,5 @@ int			ft_parser(t_all *all, t_room *room, int i, int index)
 		start_end = 0;
 		i++;
 	}
-	return (ft_result(start_and_end, i));
+	return (ft_result(start_and_end, i, all, room));
 }

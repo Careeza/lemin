@@ -6,11 +6,20 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:24:22 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 02:13:21 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 05:08:41 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+int		ft_free(t_room *room, t_all *all, t_path *way, t_algo *algo)
+{
+	ft_free_room(room, all->room);
+	ft_free_path(way, algo->lesslink);
+	ft_free_all(all);
+	ft_free_list(algo->list1, algo->list2);
+	return (0);
+}
 
 int		ft_verif_tube(int indexa, int indexb, t_room *room)
 {

@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:48:47 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 03:34:07 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 05:09:16 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		ft_call_power(t_room *room, t_algo *algo, t_all *all)
 		: room[algo->index_start].links;
 	if (ft_init_algo(algo, all, room) == -1)
 		return (-1);
-	if (!(way = (ft_init_path(room, algo, all))))
+	if (!(way = (ft_init_path(algo, all))))
 		return (-1);
 	while (1)
 	{
@@ -90,5 +90,5 @@ int		ft_call_power(t_room *room, t_algo *algo, t_all *all)
 	i = ft_gestion_pack(algo, way);
 	ant = ft_give_path_to_ant(algo, way, i, all);
 	ft_play_and_print(ant, room, algo, all);
-	return (0);
+	return (ft_free(room, all, way, algo));
 }
