@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/18 22:54:32 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/19 01:22:01 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,17 @@ int		ft_putstr_color_yellow(char *str);
 void	ft_reset_i(t_room *room, int nbroom);
 void	ft_init_db_int(int *list, int len);
 t_special_ant *ft_init_ant(int nbrfourmis, t_all *all);
+
+t_path *ft_init_path(t_room *room, t_algo *algo, t_all *all);
+int		ft_init_algo(t_algo *algo, t_all *all, t_room *room);
+void	ft_cp_dbdint(t_path *way, int k, int nb_path, int exept);
+
+int		ft_create_flux(t_room *room, t_algo *algo, t_path *way);
+int		ft_gestion_pack(t_algo *algo, t_path *way);
+t_special_ant	*ft_give_path_to_ant(t_algo *algo, t_path *way, int i, t_all *all);
+int		ft_play_and_print(t_special_ant *ant, t_room *room, t_algo *algo, t_all *all);
+
+void			ft_reset_power(t_room *room, int nbroom, t_algo *algo);
+int		ft_list2_to1(t_algo *algo, int cmt);
 
 #endif

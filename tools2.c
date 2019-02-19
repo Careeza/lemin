@@ -6,25 +6,11 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 05:41:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/18 23:11:40 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/19 01:01:45 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-/*void			ft_reset_i(t_room *room, int nbroom)
-{
-	int i;
-
-	i = 0;
-	while (i < nbroom)
-	{
-		room[i].pass = 0;
-		room[i].i = 0;
-		room[i].previous = -42;
-		i++;
-	}
-}*/
 
 void			ft_cpint_n(int *path, int *dest, int len)
 {
@@ -36,6 +22,26 @@ void			ft_cpint_n(int *path, int *dest, int len)
 		dest[i] = path[i];
 		i++;
 	}
+}
+
+void	ft_cp_dbdint(t_path *way, int k, int nb_path, int exept)
+{
+	int i;
+	int j;
+
+	j = 0;
+	i = 0;
+	while (j < nb_path)
+	{
+		if (j != exept)
+		{
+			ft_cpint_n(way[k].path[j], way[k + 1].path[i], way[k].len_path[j]);
+			way[k + 1].len_path[i] = way[k].len_path[j];
+			i++;
+		}
+		j++;
+	}
+	way[k + 1].nb_path = i;
 }
 
 void			ft_init_db_int(int *list, int len)

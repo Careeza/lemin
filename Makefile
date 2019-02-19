@@ -6,14 +6,15 @@
 #    By: prastoin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 11:13:09 by prastoin          #+#    #+#              #
-#    Updated: 2019/02/18 18:52:16 by prastoin         ###   ########.fr        #
+#    Updated: 2019/02/19 01:17:25 by prastoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem-in
 
 SRC = main.c struct_tools.c parser.c tools.c display.c free.c power.c \
-	  ft_strsplitlem.c ft_strsublem.c parser_2.c tools2.c debug.c
+	  ft_strsplitlem.c ft_strsublem.c parser_2.c tools2.c debug.c init.c \
+	  ft_find_path.c ft_play_print.c power_tools.c
 
 OBJ = $(SRC:.c=.o)
 
