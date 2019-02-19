@@ -1,44 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   power_tools.c                                      :+:      :+:    :+:   */
+/*   ft_find_path2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/19 01:14:23 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 01:39:26 by prastoin         ###   ########.fr       */
+/*   Created: 2019/02/19 02:01:34 by prastoin          #+#    #+#             */
+/*   Updated: 2019/02/19 02:03:12 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		ft_list2_to1(t_algo *algo, int cmt)
+void			ft_init_create_flux(int *len, int *curr,
+		int *prev, t_algo *algo)
 {
-	int	i;
-
-	algo->list2[cmt] = -42;
-	i = 0;
-	while (algo->list2[i] != -42)
-	{
-		algo->list1[i] = algo->list2[i];
-		i++;
-	}
-	algo->list1[i] = -42;
-	return (0);
+	*len = 0;
+	*prev = 0;
+	*curr = algo->index_end;
 }
 
-void	ft_reset_power(t_room *room, int nbroom, t_algo *algo)
+void			ft_create_flux2(t_room *room, t_path *way,
+		t_algo *algo, int len)
 {
 	int i;
 
-	i = 0;
-	while (i < nbroom)
+	(void)room;
+	while (len >= 0)
 	{
-		room[i].power = 0;
-		room[i].prev = 0;
-		i++;
+		i = way[algo->k].len_path[way[algo->k].nb_path];
+		way[algo->k].path[way[algo->k].nb_path][i] = way[0].rev[len];
+		way[algo->k].len_path[way[algo->k].nb_path]++;
+		len--;
 	}
-	room[algo->index_start].power = 1;
-	algo->list1[0] = algo->index_start;
-	algo->list1[1] = -42;
+	way[algo->k].nb_path++;
 }
