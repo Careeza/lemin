@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/18 23:24:52 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/19 04:33:27 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,20 @@ int		ft_reading(t_all *all)
 	char	buff[BUFF_SIZE];
 	int		ret;
 	int		check;
+	char	*tmp;
 
+	tmp = NULL;
 	check = 0;
 	all->str = ft_strnew(0);
 	while ((ret = read(0, buff, BUFF_SIZE - 1)) > 0)
 	{
 		buff[ret] = '\0';
 		check++;
+		tmp = all->str;
 		if (!(all->str = ft_strjoin(all->str, buff)))
 			return (-1);
+		if (tmp != NULL)
+			free(tmp);
 	}
 	if (!(all->map = ft_strsplit_lem(all->str, '\n')))
 		return (-1);

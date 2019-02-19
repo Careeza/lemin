@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 02:40:16 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 04:37:03 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ int			ft_parser(t_all *all, t_room *room, int i, int index);
 int		ft_verif_doublons(t_room *room, t_all *all, t_algo *algo);
 int		ft_check_link(t_all *all, t_room *room, int start);
 int		ft_light_error(char *str);
-int		ft_parser_error(char *str);
+int		ft_parser_error(char *str, int i, t_all *all);
 
 /*
 ** power.c
@@ -178,6 +178,15 @@ int		ft_str_is_digit(char *str, char c);
 void			ft_cpint_n(int *path, int *dest, int len);
 void	ft_cp_dbdint(t_path *way, int k, int nb_path, int exept);
 t_special_ant	*ft_init_ant(int nbrfourmis, t_all *all);
+
+/*
+** free.c
+*/
+int		ft_free_room(t_room *room, int nb);
+int		ft_free_path(t_path *way, int nb);
+int		ft_free_list(int *s1, int *s2);
+int		ft_free_ant(t_special_ant *ant, int nb);
+int		ft_free_all(t_all *all);
 
 /*
 ** OTHERS

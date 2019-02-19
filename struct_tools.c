@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/18 23:19:16 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/19 04:31:45 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,10 @@ int		ft_verif_link(t_room *room, char *str, t_all *all)
 		return (ft_parser_error("ft_strdup failed\n"));
 	while ((index < all->room) && (ft_strcmp(name, room[index].name) != 0))
 		index++;
+	if (name != NULL)
+		free(name);
 	if (index == all->room)
 		return (ft_parser_error("Linked room doesn't exist\n"));
-	free(name);
 	return (index);
 }
 
@@ -108,6 +109,8 @@ int		ft_verif_link2(t_room *room, char *str, t_all *all, int indexa)
 		return (ft_parser_error("ft_strdup failed\n"));
 	while ((indexb < (all->room)) && (ft_strcmp(name, room[indexb].name) != 0))
 		indexb++;
+	if (name != NULL)
+		free(name);
 	if (indexb == all->room)
 		return (ft_parser_error("Linked room doesn't exist\n"));
 	if (indexa == indexb)
