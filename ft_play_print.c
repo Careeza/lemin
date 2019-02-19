@@ -6,13 +6,13 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 01:12:07 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 02:28:56 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 02:47:06 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void		ft_move(t_special_ant *ant, int curr_ant, t_room *room)
+void			ft_move(t_special_ant *ant, int curr_ant, t_room *room)
 {
 	const int		previous = ant[curr_ant].curr;
 	const int		curr = ant[curr_ant].path[ant[curr_ant].i];
@@ -22,7 +22,27 @@ void		ft_move(t_special_ant *ant, int curr_ant, t_room *room)
 	ant[curr_ant].curr = curr;
 }
 
-int		ft_play_and_print(t_special_ant *ant, t_room *room, t_algo *algo, t_all *all)
+static	void	ft_play_and_print2(int *curr_ant, t_algo *algo, t_room *room,
+		t_special_ant *ant)
+{
+	while (*curr_ant < algo->fourmis)
+	{
+		if (ant[*curr_ant].curr != algo->index_end)
+		{
+			if (room[ant[*curr_ant].path[ant[*curr_ant].i]].slot == 0
+				|| ant[*curr_ant].path[ant[*curr_ant].i] == algo->index_end)
+			{
+				ft_move(ant, *curr_ant, room);
+				ft_display(*curr_ant, ant, room, algo);
+				ant[*curr_ant].i++;
+			}
+		}
+		(*curr_ant)++;
+	}
+}
+
+int				ft_play_and_print(t_special_ant *ant, t_room *room,
+		t_algo *algo, t_all *all)
 {
 	int	curr_ant;
 	int	i;
@@ -42,22 +62,9 @@ int		ft_play_and_print(t_special_ant *ant, t_room *room, t_algo *algo, t_all *al
 		if (algo->flag == 1 || algo->flag == 3)
 			ft_color(algo->step, 0);
 		curr_ant = 0;
-		while (curr_ant < all->fourmis)
-		{
-			if (ant[curr_ant].curr != algo->index_end)
-			{
-				if (room[ant[curr_ant].path[ant[curr_ant].i]].slot == 0 || ant[curr_ant].path[ant[curr_ant].i] == algo->index_end)
-				{
-					ft_move(ant, curr_ant, room);
-					ft_display(curr_ant, ant, room, algo);
-					ant[curr_ant].i++;
-				}
-			}
-			curr_ant++;
-		}
+		ft_play_and_print2(&curr_ant, algo, room, ant);
 		algo->step++;
 		ft_putchar('\n');
 	}
 	return (0);
 }
-
