@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:48:47 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 01:40:40 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 03:34:07 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int		ft_call_power(t_room *room, t_algo *algo, t_all *all)
 		return (-1);
 	while (1)
 	{
+		algo->cmt = 1;
 		if (ft_fill_power(room, algo, 0) == -1)
 			break ;
 		if (ft_create_flux(room, algo, way) == -1)
