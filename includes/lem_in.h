@@ -6,14 +6,14 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 21:00:44 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 21:38:28 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-# include "libft/libft.h"
+# include "libft.h"
 
 # define BUFF_SIZE 4096
 # define CSI "\033["

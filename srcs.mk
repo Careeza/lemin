@@ -1,0 +1,16 @@
+SRC += srcs/main.c
+SRC += srcs/struct_tools.c
+SRC += srcs/parser.c
+SRC += srcs/tools.c
+SRC += srcs/display.c
+SRC += srcs/free.c
+SRC += srcs/power.c
+SRC += srcs/ft_strsplitlem.c
+SRC += srcs/ft_strsublem.c
+SRC += srcs/parser_2.c
+SRC += srcs/tools2.c
+SRC += srcs/init.c
+SRC += srcs/ft_find_path.c
+SRC += srcs/ft_play_print.c
+SRC += srcs/power_tools.c
+SRC += srcs/ft_find_path2.c
