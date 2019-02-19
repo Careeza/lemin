@@ -6,13 +6,13 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 22:07:36 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 23:58:30 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 00:52:18 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/visu.h"
 
-void		ft_y(t_data *data, char **jeu, int *verif)
+void		ft_y(t_data *data, char **jeu)
 {
 	if (data->save_x == data->x)
 		jeu[data->y][data->x] = '|';
@@ -24,46 +24,34 @@ void		ft_y(t_data *data, char **jeu, int *verif)
 		jeu[data->y][data->x] = '\\';
 	if (data->save_y > data->y && data->save_x < data->x)
 		jeu[data->y][data->x] = '/';
-	*verif = 1;
+	data->verif = 1;
 }
 
-void		ft_x(t_data *data, char **jeu, int *verif, int y_inc)
+void		ft_x(t_data *data, char **jeu, int y_inc)
 {
-	if (*verif != 1)
+	if (data->x != data->save_x && data->y == data->save_y && data->verif == 0)
+		jeu[data->y][data->x] = '=';
+	else
 	{
-		if (data->x < data->save_x)
-			jeu[data->y][data->x] = '=';
-		else if (data->x > data->save_x)
-		{
-			if (jeu[data->y + y_inc][data->x] == ' ')
-				jeu[data->y + y_inc][data->x] = '_';
-		}
+		if (jeu[data->y + y_inc][data->x] == ' ')
+			jeu[data->y + y_inc][data->x] = '_';
 	}
-	*verif = 0;
 }
 
 
 void	ft_print_trait(t_data *data, char **jeu, int y_inc)
 {
-	static int		verif;
-
-	if (!(verif))
-	{
-		verif = 0;
-		data->save_x = data->x;
-		data->save_y = data->y;
-	}
 	if (jeu[data->y][data->x] == ' ')
 	{
 		if (data->save_y != data->y)
-			ft_y(data, jeu, &verif);
+			ft_y(data, jeu);
 		else
-			ft_x(data, jeu, &verif, y_inc);
+			ft_x(data, jeu, y_inc);
 		data->save_x = data->x;
 		data->save_y = data->y;
 	}
-}
 
+}
 
 int		ft_oui(t_data *data)
 {
@@ -83,6 +71,9 @@ int		ft_shell_tracertrait(t_data *data, char **jeu)
 	const int	dy = data->y1 >data->y ? data->y1 - data->y : data->y - data->y1;
 	int			e[2];
 
+	data->save_x = data->x;
+	data->save_y = data->y;
+	data->verif = 0;
 	e[0] = dx > dy ? dx / 2 : -dy / 2;
 	while (data->x != data->x1 || data->y != data->y1)
 	{
@@ -119,28 +110,31 @@ void	ft_get_coord_max(t_room *room, t_data *data, int nbroom)
 	}
 }
 
-void	ft_print_dbchar(char **tab)
+void	ft_print_dbchar(char **tab, int end)
 {
-	int		i;
-	int		k;
-	int		count;
+	int	deb;
+	int	j;
+	int	stop;
 
-	count = 0;
-	k = 0;
-	i = 0;
-	while (tab[i])
+	j = 0;
+	deb = 0;
+	stop = 0;
+	while (tab[deb] && stop == 0)
 	{
-		k = 0;
-		count = 0;
-		while(tab[i][k])
+		j = 0;
+		while (tab[deb][j] && stop == 0)
 		{
-			if (tab[i][k] != ' ' && tab[i][k] != '\0')
-				count++;
-			k++;
+			if (tab[deb][j] != ' ' && tab[deb][j] != '\0')
+				stop = 1;
+			j++;
 		}
-	//	if (count != 0)
-		printf("%s\n",tab[i]);
-		i++;
+		deb++;
+	}
+	deb--;
+	while (deb <= end)
+	{
+		printf("%s\n", tab[deb]);
+		deb++;
 	}
 }
 
@@ -227,8 +221,8 @@ int		ft_get_links(t_room *room, t_data *data)
 			indexb = ft_index_for(ft_strdup(data->map[i] + len + 1), room, data->room);
 			if (indexa != -1 && indexb != -1)
 			{
-				data->xstart = ((room[indexa].x * 4) + 4);
-				data->ystart = (room[indexa].y * 4);
+				data->x = ((room[indexa].x * 4) + 4);
+				data->y = (room[indexa].y * 4);
 				data->x1 = ((room[indexb].x * 4) + 4);
 				data->y1 = (room[indexb].y * 4);
 				ft_shell_tracertrait(data, data->jeu);
@@ -245,6 +239,6 @@ int		ft_shell_visu(t_data *data, t_room *room)
 		return (-1);
 	ft_fill_jeu(data->jeu, room, data);
 	ft_get_links(room, data);
-	ft_print_dbchar(data->jeu);
+	ft_print_dbchar(data->jeu, data->y_max * 4);
 	return (0);
 }

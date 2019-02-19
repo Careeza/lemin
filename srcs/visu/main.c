@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 09:23:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 23:37:57 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 00:11:33 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ void	ft_init_data(t_data *data)
 	data->x = 0;
 	data->y = 0;
 	data->x1 = 0;
+	data->verif = 0;
 	data->y1 = 0;
 	data->save_x = 0;
 	data->save_y = 0;
