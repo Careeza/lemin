@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 05:41:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 02:37:14 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 02:41:01 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void			ft_cpint_n(int *path, int *dest, int len)
 	}
 }
 
-void	ft_cp_dbdint(t_path *way, int k, int nb_path, int exept)
+void			ft_cp_dbdint(t_path *way, int k, int nb_path, int exept)
 {
 	int i;
 	int j;
