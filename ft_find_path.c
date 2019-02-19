@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 01:05:08 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 02:25:53 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 20:07:37 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ int				ft_create_flux(t_room *room, t_algo *algo, t_path *way)
 	}
 	len--;
 	if (prev == 0)
-		ft_create_flux2(room, way, algo, len);
+		ft_create_flux2(way, algo, len);
 	else
 	{
 		if (algo->k + 1 == algo->lesslink)
 			return (-1);
 		ft_create_new_flux(room, way, algo, len + 1);
-		ft_create_flux2(room, way, algo, len);
+		ft_create_flux2(way, algo, len);
 	}
 	return (0);
 }

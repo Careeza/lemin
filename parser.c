@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:45 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 04:44:54 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 20:09:06 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			ft_parser(t_all *all, t_room *room, int i, int index)
 		if (all->map[i][0] != '#')
 		{
 			if (ft_nm(all->map[i], &room[index], all->fourmis, all->room) == -1)
-				return (ft_parser_error("Coordoonnees invalides\n", 1, all, room));
+				return (ft_parser_error("Invalids Coords\n", 1, all, room));
 			index++;
 		}
 		else if (all->map[i][0] == '#')

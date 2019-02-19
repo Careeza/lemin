@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 05:12:54 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 20:09:53 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,11 @@ int		main(int argc, const char **argv)
 	if (ft_reading(&all) == -1)
 		return (ft_parser_error("Reading failed\n", 0, &all, NULL));
 	if ((i = ft_nbrfourmis(&all)) == -1)
-		return (ft_parser_error("Nombre de fourmis invalides\n", 0, &all, NULL));
+		return (ft_parser_error("Invalid ant number\n", 0, &all, NULL));
 	if (ft_nbr_room(&all) == -1)
-		return (ft_parser_error("Pas assez de room\n", 0, &all, NULL));
+		return (ft_parser_error("Not enought rooms\n", 0, &all, NULL));
 	if (!(room = (t_room *)malloc(sizeof(t_room) * (all.room + 1))))
-		return (ft_parser_error("Impossible malloc\n", 0, &all, NULL));
+		return (ft_parser_error("Malloc failed\n", 0, &all, NULL));
 	if ((i = ft_parser(&all, room, i, 0)) == -1)
 		return (-1);
 	if (ft_check_link(&all, room, i) == -1)

@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 00:57:31 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 05:07:18 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/19 20:06:56 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int			ft_init_algo(t_algo *algo, t_all *all, t_room *room)
 	algo->list1[1] = -42;
 	algo->courant = 0;
 	algo->cmt = 1;
+	algo->deck = 0;
 	algo->step = 1;
+	algo->k = 0;
 	room[algo->index_start].power = 1;
 	return (0);
 }
