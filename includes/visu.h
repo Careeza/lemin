@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 09:24:57 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 03:13:15 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 17:17:37 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct		s_data
 	int		ypos[2];
 	int		use;
 	int		rayon;
+	int		fd;
 }					t_data;
 
 int		ft_shell_visu(t_data *data, t_room *room);

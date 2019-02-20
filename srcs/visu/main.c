@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 09:23:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 03:17:03 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 17:30:34 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,18 @@ int		main(void)
 	t_data	data;
 	t_room	*room;
 	t_ant	*ant;
+	char	buff[10];
 
+	if ((data.fd = open("visu.txt", O_RDWR)) == -1)
+		return (0);
+	read(data.fd, buff, 10);
+	if (ft_strcmp(buff, "#Visu OK\n") != 0)
+	{
+		ft_putstr("Invalid map\n");
+		return (0);
+	}
+	else
+		system("echo "" > visu.txt");
 	ft_init_data(&data);
 	if (!(room = ft_init(&data)))
 		return (-1);

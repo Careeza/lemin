@@ -6,11 +6,11 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 04:02:41 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 17:27:33 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "../../includes/lem_in.h"
 
 int		ft_nbr_room(t_all *all)
 {
@@ -109,6 +109,9 @@ int		main(int argc, const char **argv)
 	t_algo	algo;
 	int		i;
 
+	system("echo "" > visu.txt");
+	if ((algo.fd = open("visu.txt", O_RDWR)) == -1)
+		return (ft_parser_error("Open error can't open\n", -1, NULL, NULL));
 	if (argc != 1)
 		ft_check_arg(&algo, argv, argc);
 	if (ft_reading(&all) == -1)

@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 21:38:28 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 17:03:50 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define LEM_IN_H
 
 # include "libft.h"
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 # define BUFF_SIZE 4096
 # define CSI "\033["
@@ -75,6 +78,7 @@ typedef struct	s_algo
 	int		k;
 	int		lesslink;
 	int		cmt;
+	int		fd;
 }				t_algo;
 
 /*
