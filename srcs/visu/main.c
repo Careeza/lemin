@@ -6,12 +6,11 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 09:23:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 00:53:37 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 03:17:03 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visu.h"
-
 
 int		ft_tracertrait(t_data *data, int x, int y)
 {
@@ -42,16 +41,22 @@ int		ft_tracertrait(t_data *data, int x, int y)
 	return (0);
 }
 
-int	deal_key(int key, t_data *data)
+int		deal_key(int key, t_data *data)
 {
+	data->use = 1;
 	if (key == KEY_RIGHT && data->oto == 0)
 		ft_play(data);
 	if (key == KEY_LEFT && data->oto == 0)
 		ft_inv_play(data);
 	if (key == KEY_ESC)
-		exit (0);
+		exit(0);
+	if (key == KEY_PLUS)
+		data->speed *= 1.5;
+	if (key == KEY_LESS)
+		data->speed *= 0.75;
 	if (key == KEY_SPACE)
 	{
+		data->clk = clock();
 		data->time = time(NULL);
 		data->oto = data->oto == 0 ? 1 : 0;
 	}
@@ -59,8 +64,7 @@ int	deal_key(int key, t_data *data)
 	return (0);
 }
 
-
-char		*ft_reading(void)
+char	*ft_reading(void)
 {
 	char	buff[BUFF_SIZE];
 	int		ret;
@@ -81,7 +85,7 @@ char		*ft_reading(void)
 	return (str);
 }
 
-char		**ft_read(void)
+char	**ft_read(void)
 {
 	char	*str;
 	char	**map;
@@ -95,8 +99,8 @@ char		**ft_read(void)
 
 void	ft_init_join(t_data *data, t_room *room)
 {
-	int y;
-	int len;
+	int		y;
+	int		ln;
 	char	**map;
 	int		indexa;
 	int		indexb;
@@ -109,29 +113,43 @@ void	ft_init_join(t_data *data, t_room *room)
 	{
 		if (map[y][0] != '#')
 		{
-			len = ft_len_to_c(map[y], '-');
-			indexa = ft_index_for(ft_strndup(map[y], len), room, data->room);
-			indexb = ft_index_for(ft_strdup(map[y] + len + 1), room, data->room);
-			printf("map[%d] = %s\n", y, map[y]);
-			printf("indexa = %d -- indexb = %d\n", indexa, indexb);
+			ln = ft_len_to_c(map[y], '-');
+			indexa = ft_index_for(ft_strndup(map[y], ln), room, data->room);
+			indexb = ft_index_for(ft_strdup(map[y] + ln + 1), room, data->room);
 			data->xstart = data->zm + room[indexa].x * data->zm;
 			data->ystart = data->zm2 + room[indexa].y * data->zm2;
-			ft_tracertrait(data, (data->zm + room[indexb].x * data->zm), (data->zm2 + room[indexb].y * data->zm2));
+			ft_tracertrait(data, (data->zm + room[indexb].x * data->zm),
+					(data->zm2 + room[indexb].y * data->zm2));
 		}
 		y++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img2, 0,  0);
-	printf ("first join %d\n", data->x_extrem / SIZE);
+	mlx_put_image_to_window(data->mlx, data->win, data->img2, 0, 0);
 }
 
 int		auto_play(t_data *data)
 {
-	mlx_string_put(data->mlx, data->win, data->xpos[0] - 22, data->ypos[0] - 10, 0xFFFFFF, "START");
-	mlx_string_put(data->mlx, data->win, data->xpos[1] - 14, data->ypos[1] - 10, 0xFFFFFF, "END");
-	if (data->time != time(NULL) && data->oto == 1)
+	if (clock() > (data->clk + (data->ticks / data->speed)) && data->oto == 1)
 	{
 		ft_play(data);
 		data->time = time(NULL);
+	}
+	if (data->use == 1 || (clock() > (data->clk
+		+ (data->ticks / data->speed)) && data->oto == 1))
+	{
+		mlx_string_put(data->mlx, data->win,
+				data->xpos[0] - 22, data->ypos[0] - 10, 0xFFFFFF, "START");
+		mlx_string_put(data->mlx, data->win,
+				data->xpos[1] - 14, data->ypos[1] - 10, 0xFFFFFF, "END");
+		mlx_string_put(data->mlx, data->win,
+				700, 960, 0xFFFFFF, "Ant number in end   = ");
+		mlx_string_put(data->mlx, data->win,
+				700, 930, 0xFFFFFF, "Ant number in start = ");
+		mlx_string_put(data->mlx, data->win,
+				940, 960, 0xFFFFFF, ft_itoa(data->antend));
+		mlx_string_put(data->mlx, data->win,
+				940, 930, 0xFFFFFF, ft_itoa(data->antstart));
+		data->use = 0;
+		data->clk = clock();
 	}
 	return (0);
 }
@@ -139,8 +157,8 @@ int		auto_play(t_data *data)
 void	ft_init_data(t_data *data)
 {
 	data->room = 0;
-	data->x_extrem= 0;
-	data->y_extrem= 0;
+	data->x_extrem = 0;
+	data->y_extrem = 0;
 	data->time = time(NULL);
 	data->oto = 0;
 	data->i = 0;
@@ -155,9 +173,14 @@ void	ft_init_data(t_data *data)
 	data->xpos[0] = 0;
 	data->ypos[1] = 0;
 	data->ypos[0] = 0;
+	data->speed = SPEED;
+	data->ticks = CLOCKS_PER_SEC;
+	data->antstart = 0;
+	data->antend = 0;
+	data->use = 1;
 }
 
-int main(void)
+int		main(void)
 {
 	t_data	data;
 	t_room	*room;
@@ -168,10 +191,11 @@ int main(void)
 		return (-1);
 	if (!(ant = ft_init_ant(&data, room)))
 		return (-1);
+	data.antstart = data.fourmis;
 	data.ant = ant;
 	data.room2 = room;
 	mlx_key_hook(data.win, deal_key, &data);
 	mlx_loop_hook(data.mlx, auto_play, &data);
 	mlx_loop(data.mlx);
-	return 0;
+	return (0);
 }

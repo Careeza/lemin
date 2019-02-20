@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 09:24:57 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 00:54:57 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 03:13:15 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include <mlx.h>
 # include "../libft/includes/libft.h"
 #include <time.h>
-
-#include <stdio.h>
 
 # define SIZE 2
 # define BUFF_SIZE 4096
@@ -38,6 +36,7 @@
 # define KEY_NUM3 85
 # define SCREEN_X 1000
 # define SCREEN_Y 1000
+# define SPEED 2
 
 typedef struct		s_ant
 {
@@ -45,6 +44,7 @@ typedef struct		s_ant
 	int		previous;
 	int		coup;
 	int		i;
+	int		firstind;
 }					t_ant;
 
 typedef struct		s_room
@@ -81,12 +81,19 @@ typedef struct		s_data
 	t_ant	*ant;
 	int		oto;
 	time_t  time;
+	clock_t	clk;
+	long	ticks;
+	float	speed;
+	int		antstart;
+	int		antend;
 	int		xpos[2];
 	int		ypos[2];
+	int		use;
+	int		rayon;
 }					t_data;
 
 int		ft_shell_visu(t_data *data, t_room *room);
-void	ft_circle(int x, int y, int rayon, t_data *data, int color);
+void	ft_circle(int x, int y, t_data *data, int color);
 int		ft_fill_info(char *str, t_room *room, t_data *data);
 int		ft_fill_room(t_data *data, t_room *room, int i);
 t_room	*ft_init_complete(t_data *data);
@@ -94,7 +101,6 @@ void	ft_init_sqare(t_data *data, t_room *room);
 t_room	*ft_init(t_data *data);
 int		ft_index_for(char *str, t_room *room, int nbrroom);
 int		ft_len_to_c(char *str, char c);
-void	ft_print_struc(t_room *room, int nbroom);
 int ft_nbr_room(t_data *data);
 char		**ft_read(void);
 int	deal_key(int key, t_data *data);

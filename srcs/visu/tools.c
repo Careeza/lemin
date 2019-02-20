@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 23:19:49 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/02/09 02:13:02 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/20 00:58:43 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,23 +85,6 @@ int		ft_index_for(char *str, t_room *room, int nbrroom)
 	return (-1);
 }
 
-void	ft_print_struc(t_room *room, int nbroom)
-{
-	int i;
-
-	i = 0;
-	while (i < nbroom)
-	{
-		printf ("room[%d] ", i);
-		printf("name = %s\n", room[i].name);
-		printf("x = %d\n", room[i].x);
-		printf("y = %d\n", room[i].y);
-		printf("start_end = %d\n", room[i].start_end);
-		printf ("\n");
-		i++;
-	}
-}
-
 int		ft_len_to_c(char *str, char c)
 {
 	int i;
@@ -109,7 +92,6 @@ int		ft_len_to_c(char *str, char c)
 	i = 0;
 	while (str[i] && str[i] != c)
 		i++;
-//	printf ("len to c = %d\n", i);
 	return (i);
 }
 
