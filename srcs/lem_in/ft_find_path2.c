@@ -6,14 +6,14 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 02:01:34 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 20:06:43 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 22:34:23 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
 void			ft_init_create_flux(int *len, int *curr,
-		int *prev, t_algo *algo)
+	int *prev, t_algo *algo)
 {
 	*len = 0;
 	*prev = 0;

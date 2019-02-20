@@ -15,7 +15,9 @@ if [ -z $m ]
 then
 	m="vide"
 fi
-while [ $m != "--flow-one" ] && [ $m != "--flow-ten" ] && [ $m != "--flow-thousand" ] && [ $m != "--big" ] && [ $m != "--big-superposition" ]
+while [ $m != "--flow-one" ] && [ $m != "--flow-ten" ] \
+	&& [ $m != "--flow-thousand" ] && [ $m != "--big" ] \
+	&& [ $m != "--big-superposition" ]
 do
 	read -p "Try again : " m
 	if [ -z $m ]

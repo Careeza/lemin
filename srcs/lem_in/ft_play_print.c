@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 01:12:07 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 21:59:51 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 22:33:50 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void			ft_move(t_special_ant *ant, int curr_ant, t_room *room)
 }
 
 static	void	ft_play_and_print2(int *curr_ant, t_algo *algo, t_room *room,
-		t_special_ant *ant)
+	t_special_ant *ant)
 {
 	while (*curr_ant < algo->fourmis)
 	{
@@ -42,7 +42,7 @@ static	void	ft_play_and_print2(int *curr_ant, t_algo *algo, t_room *room,
 }
 
 void			ft_play_and_print(t_special_ant *ant, t_room *room,
-		t_algo *algo, t_all *all)
+	t_algo *algo, t_all *all)
 {
 	int	curr_ant;
 	int	i;

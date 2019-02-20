@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:48:47 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 22:05:59 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 22:39:27 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	ft_fill_power_cut(t_room *room, t_algo *algo, int i, int j)
 {
 	if (room[room[algo->list1[i]].index[j]].power == 0
 		&& room[algo->list1[i]].index[j] != algo->index_end
-		&& (!(room[algo->list1[i]].prev == 1
-		&& room[room[algo->list1[i]].index[j]].courant == INT_MAX)))
+			&& (!(room[algo->list1[i]].prev == 1
+				&& room[room[algo->list1[i]].index[j]].courant == INT_MAX)))
 	{
 		if (room[algo->list1[i]].courant == INT_MAX
 			|| room[algo->list1[i]].courant
-			<= room[room[algo->list1[i]].index[j]].courant)
+				<= room[room[algo->list1[i]].index[j]].courant)
 		{
 			room[room[algo->list1[i]].index[j]].power = 1;
 			algo->list2[algo->cmt] = room[algo->list1[i]].index[j];
@@ -82,7 +82,7 @@ t_path	*ft_init_power_cut(t_algo *algo, t_room *room, t_all *all)
 		return (NULL);
 	algo->lesslink = room[algo->index_start].links
 		> room[algo->index_end].links ? room[algo->index_end].links
-		: room[algo->index_start].links;
+			: room[algo->index_start].links;
 	if (algo->lesslink == 0)
 		algo->lesslink = 1;
 	if (ft_init_algo(algo, all, room) == -1)

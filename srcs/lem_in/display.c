@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 13:20:30 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 18:39:42 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 22:33:57 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_color(int line, int i)
 }
 
 void	ft_display(int curr_ant, t_special_ant *ghost, t_room *room,
-		t_algo *algo)
+	t_algo *algo)
 {
 	if (curr_ant != -1)
 	{

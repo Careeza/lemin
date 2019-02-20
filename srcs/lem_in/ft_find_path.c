@@ -6,19 +6,18 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 01:05:08 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 20:46:29 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 22:34:17 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
 void			ft_create_new_flux(t_room *room, t_path *way,
-		t_algo *algo, int len)
+	t_algo *algo, int len)
 {
 	int i;
 	int j;
 
-	(void)room;
 	i = 0;
 	while (way[0].rev[len - 1] != way[algo->k].path[i][0])
 		i++;
@@ -113,7 +112,7 @@ int				ft_give_path_to_ant2(t_path *way, int i, int *power)
 }
 
 t_special_ant	*ft_give_path_to_ant(t_algo *algo, t_path *way,
-		int i, t_all *all)
+	int i, t_all *all)
 {
 	t_special_ant	*ant;
 	int				*power;
@@ -129,7 +128,7 @@ t_special_ant	*ft_give_path_to_ant(t_algo *algo, t_path *way,
 	{
 		index = ft_give_path_to_ant2(way, i, power);
 		ft_cpint_n(way[i].path[index], ant[algo->cmt].path,
-				way[i].len_path[index]);
+			way[i].len_path[index]);
 		ant[algo->cmt].len = way[i].len_path[index];
 		algo->cmt++;
 		power[index]++;

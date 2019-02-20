@@ -6,7 +6,7 @@
 #    By: prastoin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 11:13:09 by prastoin          #+#    #+#              #
-#    Updated: 2019/02/20 21:16:41 by prastoin         ###   ########.fr        #
+#    Updated: 2019/02/20 22:25:01 by prastoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ $(NAME): $(OBJ) includes/lem_in.h
 		gcc $(FLAG) $(INC) -o $(NAME) $(OBJ) $(LIB)
 
 $(NAMEV): $(OBJV) includes/visu.h
-		gcc -lmlx -framework OpenGL -framework AppKit $(FLAG) $(INC) -o $(NAMEV) $(OBJV) $(LIB)
+		gcc -lmlx -framework OpenGL -framework AppKit $(FLAG) $(INC) \
+			-o $(NAMEV) $(OBJV) $(LIB)
 
 %.o: %.c
 		gcc $(FLAG) $(INC) -o $@ -c $<
