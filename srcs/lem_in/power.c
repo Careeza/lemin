@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:48:47 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 21:57:17 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 22:05:59 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_path	*ft_init_power_cut(t_algo *algo, t_room *room, t_all *all)
 	algo->list1 = NULL;
 	algo->list2 = NULL;
 	if (ft_file(all) == -1)
-		return(NULL);
+		return (NULL);
 	algo->lesslink = room[algo->index_start].links
 		> room[algo->index_end].links ? room[algo->index_end].links
 		: room[algo->index_start].links;

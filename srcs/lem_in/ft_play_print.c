@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 01:12:07 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 21:23:43 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 21:59:51 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static	void	ft_play_and_print2(int *curr_ant, t_algo *algo, t_room *room,
 	}
 }
 
-int				ft_play_and_print(t_special_ant *ant, t_room *room,
+void			ft_play_and_print(t_special_ant *ant, t_room *room,
 		t_algo *algo, t_all *all)
 {
 	int	curr_ant;
@@ -51,6 +51,7 @@ int				ft_play_and_print(t_special_ant *ant, t_room *room,
 	curr_ant = 0;
 	if (algo->flag >= 42 && all->room < 30)
 		ft_putstr_fd("#Visu OK\n", all->fd);
+	close(all->fd);
 	ft_putstr(all->str);
 	ft_putchar('\n');
 	while (i < all->fourmis)
@@ -68,5 +69,4 @@ int				ft_play_and_print(t_special_ant *ant, t_room *room,
 		algo->step++;
 		ft_putchar('\n');
 	}
-	return (0);
 }

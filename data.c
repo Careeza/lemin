@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 09:25:46 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 21:20:09 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 22:11:42 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int		ft_count_instructions(char *str)
 			count++;
 		i++;
 	}
-	printf("%d\n", count);
 	return (count);
 }
 

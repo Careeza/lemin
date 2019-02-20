@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 21:46:39 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 22:00:23 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void			ft_display(int curr_ant, t_special_ant *ghost, t_room *room,
 */
 
 void			ft_move(t_special_ant *ant, int curr_ant, t_room *room);
-int				ft_play_and_print(t_special_ant *ant, t_room *room,
+void			ft_play_and_print(t_special_ant *ant, t_room *room,
 					t_algo *algo, t_all *all);
 
 /*

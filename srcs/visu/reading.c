@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 18:05:25 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 19:22:21 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 22:06:43 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,11 @@ void	ft_check_visu_txt(t_data *data)
 	int		i;
 
 	if ((data->fd = open("visu.txt", O_RDWR)) == -1)
-	{
 		ft_putstr("\nCan't open the file visu.txt .\n");
-		exit(0);
-	}
 	read(data->fd, buff, 10);
+	close(data->fd);
+	if (data->fd == -1)
+		exit(0);
 	if (ft_strcmp(buff, "#Visu OK\n") != 0)
 	{
 		ft_putstr("\nInvalid map.\n");
