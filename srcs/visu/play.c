@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 00:47:31 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/02/20 18:32:07 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 22:48:45 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ int		ft_play_cut2(t_room *room, t_data *data, t_ant *ant, int y)
 		ant->coup = (y % 5) + 1;
 	}
 	if (ant->curr != data->index_end)
-		ft_put_green_square(data, room, ant->curr,
-				*ant);
+		ft_put_green_square(data, room, ant->curr, *ant);
 	else
 		data->antend++;
 	return (0);

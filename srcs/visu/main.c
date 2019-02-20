@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 09:23:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 19:48:38 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 22:48:22 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int		ft_tracertrait(t_data *data, int x, int y)
 	e[0] = dx > dy ? dx / 2 : -dy / 2;
 	while (data->xstart != x || data->ystart != y)
 	{
-		if (data->ystart >= 0 && data->ystart < SCREEN_Y &&
-				y < SCREEN_Y && y >= 0 && data->xstart >= 0 &&
-				data->xstart < SCREEN_X && x < SCREEN_X && x > 0)
+		if (data->ystart >= 0 && data->ystart < SCREEN_Y
+			&& y < SCREEN_Y && y >= 0 && data->xstart >= 0
+				&& data->xstart < SCREEN_X && x < SCREEN_X && x > 0)
 			data->img_ptr2[data->ystart * SCREEN_X + data->xstart] = 0xFFFFFF;
 		if ((e[1] = e[0]) > -dx)
 		{
@@ -88,7 +88,7 @@ void	ft_init_join(t_data *data, t_room *room)
 			data->xstart = data->zm + room[indexa].x * data->zm;
 			data->ystart = data->zm2 + room[indexa].y * data->zm2;
 			ft_tracertrait(data, (data->zm + room[indexb].x * data->zm),
-					(data->zm2 + room[indexb].y * data->zm2));
+				(data->zm2 + room[indexb].y * data->zm2));
 		}
 		y++;
 	}
@@ -106,13 +106,13 @@ int		auto_play(t_data *data)
 		+ (data->ticks / data->speed)) && data->oto == 1))
 	{
 		mlx_string_put(data->mlx, data->win,
-				data->xpos[0] - 22, data->ypos[0] - 10, 0xFFFFFF, "START");
+			data->xpos[0] - 22, data->ypos[0] - 10, 0xFFFFFF, "START");
 		mlx_string_put(data->mlx, data->win,
-				data->xpos[1] - 14, data->ypos[1] - 10, 0xFFFFFF, "END");
+			data->xpos[1] - 14, data->ypos[1] - 10, 0xFFFFFF, "END");
 		mlx_string_put(data->mlx, data->win,
-				700, 960, 0xFFFFFF, "Ant number in end   = ");
+			700, 960, 0xFFFFFF, "Ant number in end   = ");
 		mlx_string_put(data->mlx, data->win,
-				700, 930, 0xFFFFFF, "Ant number in start = ");
+			700, 930, 0xFFFFFF, "Ant number in start = ");
 		ft_display_nbr_ant_visu(data);
 		data->use = 0;
 		data->clk = clock();

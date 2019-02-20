@@ -6,11 +6,11 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 18:52:02 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 19:51:32 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 22:46:32 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/visu.h"
+#include "visu.h"
 
 void	ft_display_nbr_ant_visu(t_data *data)
 {

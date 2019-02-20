@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 18:05:25 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 22:06:43 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 22:49:53 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_circle(int x, int y, t_data *data, int color)
 		while (x2 < data->rayon)
 		{
 			if (((x2 / (double)data->rayon) * (x2 / (double)data->rayon)
-					+ (y2 / (double)data->rayon)
+				+ (y2 / (double)data->rayon)
 					* (y2 / (double)data->rayon)) <= 1)
 				data->img_ptr2[(y2 + y) * (SCREEN_X) + (x2 + x)] = color;
 			x2++;
