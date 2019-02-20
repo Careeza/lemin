@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 05:41:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 17:40:37 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 18:47:06 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_special_ant	*ft_init_ant(int nbrfourmis, t_all *all)
 	return (ant);
 }
 
-void		ft_file(t_algo *algo)
+void			ft_file(t_algo *algo)
 {
 	int	i;
 

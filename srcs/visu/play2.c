@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 18:17:28 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 18:20:47 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 18:53:58 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int		ft_play(t_data *data)
 	if (data->map[data->i] && data->map[data->i][0] == 'L')
 		ft_play_cut(data->room2, data, data->ant, data->i);
 	else
+	{
+		ft_free_visu(data);
 		exit(0);
+	}
 	data->i++;
 	return (0);
 }

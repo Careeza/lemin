@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 18:05:25 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 18:38:25 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 18:49:02 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	**ft_read(void)
 	return (map);
 }
 
-void		ft_circle(int x, int y, t_data *data, int color)
+void	ft_circle(int x, int y, t_data *data, int color)
 {
 	int x2;
 	int y2;
@@ -101,7 +101,7 @@ void	ft_check_visu_txt(t_data *data)
 	if ((data->fd = open("visu.txt", O_RDWR)) == -1)
 	{
 		ft_putstr("\nCan't open the file visu.txt .\n");
-		exit (0);
+		exit(0);
 	}
 	read(data->fd, buff, 10);
 	if (ft_strcmp(buff, "#Visu OK\n") != 0)
@@ -117,6 +117,6 @@ void	ft_check_visu_txt(t_data *data)
 		if (i == -1)
 			ft_putstr("\nFork or waitpid error.\n");
 		if (i == 127 || i == -1)
-			exit (0);
+			exit(0);
 	}
 }

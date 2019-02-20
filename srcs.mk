@@ -20,3 +20,4 @@ SRCV += srcs/visu/init.c
 SRCV += srcs/visu/play.c
 SRCV += srcs/visu/reading.c
 SRCV += srcs/visu/play2.c
+SRCV += srcs/visu/free.c

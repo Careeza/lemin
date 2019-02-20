@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 09:24:57 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 18:45:47 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 19:11:03 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct		s_room
 	int		y;
 	int		start_end;
 	int		slot;
-	int		*index;
 }					t_room;
 
 typedef struct		s_data
@@ -149,5 +148,11 @@ void				ft_play_inv_cut(t_room *room, t_data *data, t_ant *ant,
 int					ft_play_inv_cut3(t_room *room, t_data *data, t_ant *ant,
 						int y);
 int					ft_inv_play(t_data *data);
+
+/*
+** free.c
+*/
+void				ft_free_visu(t_data *data);
+void				ft_free_visu_room(t_room *room, int nbr);
 
 #endif

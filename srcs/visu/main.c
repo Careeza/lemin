@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 09:23:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 18:33:20 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 19:12:33 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ int		deal_key(int key, t_data *data)
 	if (key == KEY_LEFT && data->oto == 0)
 		ft_inv_play(data);
 	if (key == KEY_ESC)
+	{
+		ft_free_visu(data);
+		while(1);
 		exit(0);
+	}
 	if (key == KEY_PLUS)
 		data->speed *= 1.5;
 	if (key == KEY_LESS)
@@ -62,7 +66,6 @@ int		deal_key(int key, t_data *data)
 	}
 	return (0);
 }
-
 
 void	ft_init_join(t_data *data, t_room *room)
 {
