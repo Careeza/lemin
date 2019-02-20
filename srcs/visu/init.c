@@ -6,11 +6,11 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 23:14:53 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/02/20 17:12:55 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/20 18:32:15 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/visu.h"
+#include "visu.h"
 
 int			ft_fill_info(char *str, t_room *room, t_data *data)
 {
@@ -68,28 +68,6 @@ t_room		*ft_init_complete(t_data *data)
 		return (NULL);
 	ft_fill_room(data, room, 0);
 	return (room);
-}
-
-void		ft_circle(int x, int y, t_data *data, int color)
-{
-	int x2;
-	int y2;
-
-	y2 = -data->rayon;
-	while (y2 < data->rayon)
-	{
-		x2 = -data->rayon;
-		while (x2 < data->rayon)
-		{
-			if (((x2 / (double)data->rayon) * (x2 / (double)data->rayon)
-					+ (y2 / (double)data->rayon)
-					* (y2 / (double)data->rayon)) <= 1)
-				data->img_ptr2[(y2 + y) * (SCREEN_X) + (x2 + x)] = color;
-			x2++;
-		}
-		y2++;
-	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img2, 0, 0);
 }
 
 void		ft_init_sqare(t_data *data, t_room *room)

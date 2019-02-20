@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 13:20:30 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 04:34:20 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 18:39:42 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	ft_color(int line, int i)
 	if (i == 0)
 	{
 		write(2, CSI_GREEN, (sizeof(CSI_GREEN) - 1));
-		ft_putchar_fd('L', 2);
-		ft_putnbr_fd(line, 2);
-		ft_putstr_fd(" : ", 2);
+		ft_putchar_fd('L', 1);
+		ft_putnbr_fd(line, 1);
+		ft_putstr_fd(" : ", 1);
 		write(2, CSI_RESET, (sizeof(CSI_RESET) - 1));
 	}
 	if (i == 1)

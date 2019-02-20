@@ -6,11 +6,11 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 09:23:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 17:30:34 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/20 18:33:20 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/visu.h"
+#include "visu.h"
 
 int		ft_tracertrait(t_data *data, int x, int y)
 {
@@ -60,42 +60,9 @@ int		deal_key(int key, t_data *data)
 		data->time = time(NULL);
 		data->oto = data->oto == 0 ? 1 : 0;
 	}
-	(void)data;
 	return (0);
 }
 
-char	*ft_reading(void)
-{
-	char	buff[BUFF_SIZE];
-	int		ret;
-	int		check;
-	char	*str;
-
-	check = 0;
-	str = ft_strnew(0);
-	while ((ret = read(0, buff, BUFF_SIZE - 1)) > 0)
-	{
-		buff[ret] = '\0';
-		check++;
-		if (!(str = ft_strjoin(str, buff)))
-			return (NULL);
-	}
-	if (ret < 0 || check == 0)
-		return (NULL);
-	return (str);
-}
-
-char	**ft_read(void)
-{
-	char	*str;
-	char	**map;
-
-	if (!(str = ft_reading()))
-		return (NULL);
-	if (!(map = ft_strsplit(str, '\n')))
-		return (NULL);
-	return (map);
-}
 
 void	ft_init_join(t_data *data, t_room *room)
 {
@@ -154,49 +121,13 @@ int		auto_play(t_data *data)
 	return (0);
 }
 
-void	ft_init_data(t_data *data)
-{
-	data->room = 0;
-	data->x_extrem = 0;
-	data->y_extrem = 0;
-	data->time = time(NULL);
-	data->oto = 0;
-	data->i = 0;
-	data->step1 = 0;
-	data->xstart = 0;
-	data->ystart = 0;
-	data->index_start = 0;
-	data->index_end = 0;
-	data->zm = 0;
-	data->zm2 = 0;
-	data->xpos[1] = 0;
-	data->xpos[0] = 0;
-	data->ypos[1] = 0;
-	data->ypos[0] = 0;
-	data->speed = SPEED;
-	data->ticks = CLOCKS_PER_SEC;
-	data->antstart = 0;
-	data->antend = 0;
-	data->use = 1;
-}
-
 int		main(void)
 {
 	t_data	data;
 	t_room	*room;
 	t_ant	*ant;
-	char	buff[10];
 
-	if ((data.fd = open("visu.txt", O_RDWR)) == -1)
-		return (0);
-	read(data.fd, buff, 10);
-	if (ft_strcmp(buff, "#Visu OK\n") != 0)
-	{
-		ft_putstr("Invalid map\n");
-		return (0);
-	}
-	else
-		system("echo "" > visu.txt");
+	ft_check_visu_txt(&data);
 	ft_init_data(&data);
 	if (!(room = ft_init(&data)))
 		return (-1);

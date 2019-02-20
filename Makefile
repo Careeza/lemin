@@ -6,7 +6,7 @@
 #    By: prastoin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 11:13:09 by prastoin          #+#    #+#              #
-#    Updated: 2019/02/19 23:58:59 by prastoin         ###   ########.fr        #
+#    Updated: 2019/02/20 18:29:10 by prastoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,21 +20,23 @@ OBJ = $(SRC:.c=.o)
 
 OBJV = $(SRCV:.c=.o)
 
-FLAG = -Wall -Wextra -Werror
+FLAG = -Wall -Wextra -Werror -g -fsanitize=address
 
 LIB = libft/libft.a
 
 INC = -Ilibft/includes -Iincludes
 
-all: $(NAME) visu
+all: $(NAME) $(NAMEV)
 
 $(OBJ) : Makefile srcs.mk
+
+$(OBJV) : Makefile srcs.mk
 
 $(NAME): $(OBJ) includes/lem_in.h
 		make -C libft libft.a
 		gcc $(FLAG) $(INC) -o $(NAME) $(OBJ) $(LIB)
 
-visu: $(OBJV)
+$(NAMEV): $(OBJV) includes/visu.h
 		gcc -lmlx -framework OpenGL -framework AppKit $(FLAG) $(INC) -o $(NAMEV) $(OBJV) $(LIB)
 
 %.o: %.c
@@ -52,4 +54,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: clean fclean re all visu
+.PHONY: clean fclean re all

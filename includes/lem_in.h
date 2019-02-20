@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 17:03:50 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/20 17:39:48 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ int				ft_free(t_room *room, t_all *all, t_path *way, t_algo *algo);
 void			ft_cpint_n(int *path, int *dest, int len);
 void			ft_cp_dbdint(t_path *way, int k, int nb_path, int exept);
 t_special_ant	*ft_init_ant(int nbrfourmis, t_all *all);
+void			ft_file(t_algo *algo);
 
 /*
 ** free.c

@@ -6,12 +6,12 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 09:24:57 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 17:17:37 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/20 18:45:47 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef VISU_H
+# define VISU_H
 
 # include <math.h>
 # include <sys/types.h>
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include "../libft/includes/libft.h"
-#include <time.h>
+# include <time.h>
 
 # define SIZE 2
 # define BUFF_SIZE 4096
@@ -80,7 +80,7 @@ typedef struct		s_data
 	t_room	*room2;
 	t_ant	*ant;
 	int		oto;
-	time_t  time;
+	time_t	time;
 	clock_t	clk;
 	long	ticks;
 	float	speed;
@@ -93,23 +93,61 @@ typedef struct		s_data
 	int		fd;
 }					t_data;
 
-int		ft_shell_visu(t_data *data, t_room *room);
-void	ft_circle(int x, int y, t_data *data, int color);
-int		ft_fill_info(char *str, t_room *room, t_data *data);
-int		ft_fill_room(t_data *data, t_room *room, int i);
-t_room	*ft_init_complete(t_data *data);
-void	ft_init_sqare(t_data *data, t_room *room);
-t_room	*ft_init(t_data *data);
-int		ft_index_for(char *str, t_room *room, int nbrroom);
-int		ft_len_to_c(char *str, char c);
-int ft_nbr_room(t_data *data);
-char		**ft_read(void);
-int	deal_key(int key, t_data *data);
-void	ft_init_join(t_data *data, t_room *room);
-int			nbr_space(char *str, char c);
-int			ft_inv_play(t_data *data);
-int			ft_play(t_data *data);
-t_ant	*ft_init_ant(t_data *data, t_room *room);
-int		ft_index_for_links(char *str, t_room *room, int nbrroom, int len);
+/*
+** reading.c
+*/
+char				*ft_reading(void);
+char				**ft_read(void);
+void				ft_init_data(t_data *data);
+void				ft_check_visu_txt(t_data *data);
+void				ft_circle(int x, int y, t_data *data, int color);
+
+/*
+** main.c
+*/
+int					ft_tracertrait(t_data *data, int x, int y);
+int					deal_key(int key, t_data *data);
+void				ft_init_join(t_data *data, t_room *room);
+int					auto_play(t_data *data);
+
+/*
+** init.c
+*/
+int					ft_fill_info(char *str, t_room *room, t_data *data);
+int					ft_fill_room(t_data *data, t_room *room, int i);
+t_room				*ft_init_complete(t_data *data);
+void				ft_init_sqare(t_data *data, t_room *room);
+t_room				*ft_init(t_data *data);
+
+/*
+** tools.c
+*/
+int					nbr_space(char *str, char c);
+int					ft_nbr_room(t_data *data);
+int					ft_index_for_links(char *str, t_room *room, int nbrroom,
+						int len);
+int					ft_index_for(char *str, t_room *room, int nbrroom);
+int					ft_len_to_c(char *str, char c);
+
+/*
+** play.c
+*/
+int					ft_get_index_start(t_room *room, t_data *data);
+t_ant				*ft_init_ant(t_data *data, t_room *room);
+void				ft_put_red_square(t_data *data, t_room *room, int i);
+void				ft_put_green_square(t_data *data, t_room *room, int i,
+						t_ant ant);
+int					ft_play_cut2(t_room *room, t_data *data, t_ant *ant, int y);
+
+/*
+** play2.c
+*/
+int					ft_play_cut(t_room *room, t_data *data, t_ant *ant, int y);
+int					ft_play(t_data *data);
+void				ft_play_inv_cut(t_room *room, t_data *data, t_ant *ant,
+						int y);
+int					ft_play_inv_cut3(t_room *room, t_data *data, t_ant *ant,
+						int y);
+int					ft_inv_play(t_data *data);
 
 #endif

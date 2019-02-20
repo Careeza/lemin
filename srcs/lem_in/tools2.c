@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 05:41:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 02:41:01 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 17:40:37 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,22 @@ t_special_ant	*ft_init_ant(int nbrfourmis, t_all *all)
 		i++;
 	}
 	return (ant);
+}
+
+void		ft_file(t_algo *algo)
+{
+	int	i;
+
+	i = system("echo "" > visu.txt");
+	if (i == -1)
+		ft_parser_error("Fork Waitpid failed\n", -1, NULL, NULL);
+	if (i == 127)
+		ft_parser_error("Shell execution failed\n", -1, NULL, NULL);
+	if (i == 127 || i == -1)
+		exit(0);
+	if ((algo->fd = open("visu.txt", O_RDWR)) == -1)
+	{
+		ft_parser_error("Open error can't open\n", -1, NULL, NULL);
+		exit(0);
+	}
 }

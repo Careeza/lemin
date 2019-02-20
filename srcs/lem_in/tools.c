@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:24:22 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 20:38:40 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 18:37:00 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,9 @@ int		ft_str_is_digit(char *str, char c)
 
 void	ft_stop(void)
 {
-	ft_putstr("Usage = ./lem-in -c -l < [map]\n");
-	ft_putstr("-c :print colors\n-l print lines\n");
+	ft_putstr_fd("Usage = ./lem-in -c -l < [map]\n", 2);
+	ft_putstr_fd("        ./lem-in -v < [map] | ./visu\n", 2);
+	ft_putstr_fd("-c :print colors\n-l print lines\n", 2);
+	ft_putstr_fd("-v launch visualisateur\n", 2);
 	exit(0);
 }

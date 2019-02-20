@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 17:27:33 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/02/20 18:28:45 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int		ft_check_arg(t_algo *algo, const char **argv, int argc)
 {
 	int		i;
 
-	algo->flag = 0;
 	i = 1;
 	if (argc > 4)
 		ft_stop();
@@ -109,9 +108,8 @@ int		main(int argc, const char **argv)
 	t_algo	algo;
 	int		i;
 
-	system("echo "" > visu.txt");
-	if ((algo.fd = open("visu.txt", O_RDWR)) == -1)
-		return (ft_parser_error("Open error can't open\n", -1, NULL, NULL));
+	ft_file(&algo);
+	algo.flag = 0;
 	if (argc != 1)
 		ft_check_arg(&algo, argv, argc);
 	if (ft_reading(&all) == -1)
