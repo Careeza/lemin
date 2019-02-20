@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 18:05:25 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 18:49:02 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 19:22:21 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,19 @@ char	*ft_reading(void)
 	int		ret;
 	int		check;
 	char	*str;
+	char	*tmp;
 
 	check = 0;
 	str = ft_strnew(0);
 	while ((ret = read(0, buff, BUFF_SIZE - 1)) > 0)
 	{
+		tmp = str;
 		buff[ret] = '\0';
 		check++;
 		if (!(str = ft_strjoin(str, buff)))
 			return (NULL);
+		if (tmp != NULL)
+			free(tmp);
 	}
 	if (ret < 0 || check == 0)
 		return (NULL);
@@ -42,6 +46,8 @@ char	**ft_read(void)
 		return (NULL);
 	if (!(map = ft_strsplit(str, '\n')))
 		return (NULL);
+	if (str != NULL)
+		free(str);
 	return (map);
 }
 

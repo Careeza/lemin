@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 18:17:28 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 18:53:58 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 19:49:36 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int		ft_play_cut(t_room *room, t_data *data, t_ant *ant, int y)
 			ft_put_red_square(data, room, ant[curr_ant - 1].previous);
 		else
 			data->antstart--;
-		ant[curr_ant - 1].curr = ft_index_for_links(data->map[y] + i, room,
-				data->room, ft_len_to_c(data->map[y] + i, ' '));
+		ant[curr_ant - 1].curr = ft_index_for_links(ft_strdup(data->map[y] + i),
+				room, data->room, ft_len_to_c(data->map[y] + i, ' '));
 		i += ft_len_to_c(data->map[y] + i, ' ');
 		ft_play_cut2(room, data, &(ant[curr_ant - 1]), y);
 		i += i < (int)ft_strlen(data->map[y]) ? 1 : 0;
@@ -71,8 +71,8 @@ void	ft_play_inv_cut(t_room *room, t_data *data, t_ant *ant, int y)
 			i++;
 		curr_ant = ft_atoi(data->map[y] + i);
 		i += ft_lennbr(curr_ant) + 1;
-		ant[curr_ant - 1].curr = ft_index_for_links(data->map[y] + i, room,
-				data->room, ft_len_to_c(data->map[y] + i, ' '));
+		ant[curr_ant - 1].curr = ft_index_for_links(ft_strdup(data->map[y] + i),
+				room, data->room, ft_len_to_c(data->map[y] + i, ' '));
 		i += ft_len_to_c(data->map[y] + i, ' ');
 		if (ant[curr_ant - 1].curr != data->index_end)
 			ft_put_red_square(data, room, ant[curr_ant - 1].curr);
@@ -100,8 +100,8 @@ int		ft_play_inv_cut3(t_room *room, t_data *data, t_ant *ant, int y)
 			i++;
 		curr_ant = ft_atoi(data->map[y] + i);
 		i += ft_lennbr(curr_ant) + 1;
-		ant[curr_ant - 1].curr = ft_index_for_links(data->map[y] + i, room,
-				data->room, ft_len_to_c(data->map[y] + i, ' '));
+		ant[curr_ant - 1].curr = ft_index_for_links(ft_strdup(data->map[y] + i),
+					room, data->room, ft_len_to_c(data->map[y] + i, ' '));
 		i += ft_len_to_c(data->map[y] + i, ' ');
 		if (ant[curr_ant - 1].coup == 0)
 			ant[curr_ant - 1].coup = (y % 6) + 1;

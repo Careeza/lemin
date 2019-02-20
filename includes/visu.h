@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 09:24:57 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 19:11:03 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 19:33:53 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,5 +154,6 @@ int					ft_inv_play(t_data *data);
 */
 void				ft_free_visu(t_data *data);
 void				ft_free_visu_room(t_room *room, int nbr);
+void				ft_display_nbr_ant_visu(t_data *data);
 
 #endif

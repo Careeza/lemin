@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 09:23:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 19:12:33 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 19:48:38 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int		deal_key(int key, t_data *data)
 	if (key == KEY_ESC)
 	{
 		ft_free_visu(data);
-		while(1);
 		exit(0);
 	}
 	if (key == KEY_PLUS)
@@ -114,10 +113,7 @@ int		auto_play(t_data *data)
 				700, 960, 0xFFFFFF, "Ant number in end   = ");
 		mlx_string_put(data->mlx, data->win,
 				700, 930, 0xFFFFFF, "Ant number in start = ");
-		mlx_string_put(data->mlx, data->win,
-				940, 960, 0xFFFFFF, ft_itoa(data->antend));
-		mlx_string_put(data->mlx, data->win,
-				940, 930, 0xFFFFFF, ft_itoa(data->antstart));
+		ft_display_nbr_ant_visu(data);
 		data->use = 0;
 		data->clk = clock();
 	}

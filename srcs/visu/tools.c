@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 23:19:49 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/02/20 18:15:09 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 19:48:16 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,15 @@ int			ft_index_for_links(char *str, t_room *room, int nbrroom, int len)
 		lenstr = ft_strlen(room[a].name);
 		if (len == lenstr)
 			if (ft_strncmp(room[a].name, str, lenstr) == 0)
+			{
+				if (str != NULL)
+					free(str);
 				return (a);
+			}
 		a++;
 	}
-	free(str);
+	if (str != NULL)
+		free(str);
 	return (-1);
 }
 
@@ -78,10 +83,15 @@ int			ft_index_for(char *str, t_room *room, int nbrroom)
 		len = ft_strlen(room[a].name);
 		if (len == lenstr)
 			if (ft_strncmp(room[a].name, str, lenstr) == 0)
+			{
+				if (str != NULL)
+					free(str);
 				return (a);
+			}
 		a++;
 	}
-	free(str);
+	if (str != NULL)
+		free(str);
 	return (-1);
 }
 
