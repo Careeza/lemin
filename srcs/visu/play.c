@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 00:47:31 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/02/20 03:59:17 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 04:43:34 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,12 @@ void	ft_put_red_square(t_data *data, t_room *room, int i)
 
 void	ft_put_green_square(t_data *data, t_room *room, int i, t_ant ant)
 {
-	int x;
-	int y;
-	int dx;
-	int dy;
-	static int color;
+	int			x;
+	int			y;
+	int			dx;
+	int			dy;
+	static int	color;
 
-	(void)ant;
 	if (ant.coup == 1)
 		color = 0xffcc99;
 	else if (ant.coup == 2)
@@ -89,8 +88,23 @@ void	ft_put_green_square(t_data *data, t_room *room, int i, t_ant ant)
 	ft_circle(x, y, data, color);
 }
 
+int		ft_play_cut2(t_room *room, t_data *data, t_ant *ant, int y)
+{
+	if (ant->coup == 0)
+	{
+		ant->firstind = ant->curr;
+		ant->coup = (y % 5) + 1;
+	}
+	if (ant->curr != data->index_end)
+		ft_put_green_square(data, room, ant->curr,
+				*ant);
+	else
+		data->antend++;
+	return (0);
+}
+
 int		ft_play_cut(t_room *room, t_data *data, t_ant *ant, int y)
-{>>>>>>
+{
 	int		curr_ant;
 	int		i;
 
@@ -105,17 +119,10 @@ int		ft_play_cut(t_room *room, t_data *data, t_ant *ant, int y)
 			ft_put_red_square(data, room, ant[curr_ant - 1].previous);
 		else
 			data->antstart--;
-		ant[curr_ant - 1].curr = ft_index_for_links(data->map[y] + i, room, data->room, ft_len_to_c(data->map[y] + i, ' '));
+		ant[curr_ant - 1].curr = ft_index_for_links(data->map[y] + i, room,
+				data->room, ft_len_to_c(data->map[y] + i, ' '));
 		i += ft_len_to_c(data->map[y] + i, ' ');
-		if (ant[curr_ant - 1].coup == 0)
-		{
-			ant[curr_ant - 1].firstind = ant[curr_ant - 1].curr;
-			ant[curr_ant - 1].coup = (y % 5) + 1;
-		}
-		if (ant[curr_ant - 1].curr != data->index_end)
-			ft_put_green_square(data, room, ant[curr_ant - 1].curr, ant[curr_ant - 1]);
-		else
-			data->antend++;
+		ft_play_cut2(room, data, &(ant[curr_ant - 1]), y);
 		i += i < (int)ft_strlen(data->map[y]) ? 1 : 0;
 		ant[curr_ant - 1].previous = ant[curr_ant - 1].curr;
 	}
@@ -140,7 +147,7 @@ int		ft_play(t_data *data)
 	return (0);
 }
 
-int		ft_play_inv_cut(t_room *room, t_data *data, t_ant *ant, int y, int min)
+void	ft_play_inv_cut(t_room *room, t_data *data, t_ant *ant, int y)
 {
 	int		curr_ant;
 	int		i;
@@ -152,10 +159,9 @@ int		ft_play_inv_cut(t_room *room, t_data *data, t_ant *ant, int y, int min)
 			i++;
 		curr_ant = ft_atoi(data->map[y] + i);
 		i += ft_lennbr(curr_ant) + 1;
-		ant[curr_ant - 1].curr = ft_index_for_links(data->map[y] + i, room, data->room, ft_len_to_c(data->map[y] + i, ' '));
+		ant[curr_ant - 1].curr = ft_index_for_links(data->map[y] + i, room,
+				data->room, ft_len_to_c(data->map[y] + i, ' '));
 		i += ft_len_to_c(data->map[y] + i, ' ');
-		if (ant[curr_ant - 1].coup == 0)
-			ant[curr_ant - 1].coup = (y % 6) + 1;
 		if (ant[curr_ant - 1].curr != data->index_end)
 			ft_put_red_square(data, room, ant[curr_ant - 1].curr);
 		else
@@ -168,29 +174,33 @@ int		ft_play_inv_cut(t_room *room, t_data *data, t_ant *ant, int y, int min)
 		i += i < (int)ft_strlen(data->map[y]) ? 1 : 0;
 		ant[curr_ant - 1].previous = ant[curr_ant - 1].curr;
 	}
-	y--;
-	if (y >= min)
+}
+
+int		ft_play_inv_cut3(t_room *room, t_data *data, t_ant *ant, int y)
+{
+	int i;
+	int curr_ant;
+
+	i = 0;
+	while (data->map[y][i])
 	{
-		i = 0;
-		while (data->map[y][i])
-		{
-			if (data->map[y][i] == 'L')
-				i++;
-			curr_ant = ft_atoi(data->map[y] + i);
-			i += ft_lennbr(curr_ant) + 1;
-			ant[curr_ant - 1].curr = ft_index_for_links(data->map[y] + i, room, data->room, ft_len_to_c(data->map[y] + i, ' '));
-			i += ft_len_to_c(data->map[y] + i, ' ');
-			if (ant[curr_ant - 1].coup == 0)
-				ant[curr_ant - 1].coup = (y % 6) + 1;
-			if (ant[curr_ant - 1].curr != data->index_end)
-				ft_put_green_square(data, room, ant[curr_ant - 1].curr, ant[curr_ant - 1]);
-			i += i < (int)ft_strlen(data->map[y]) ? 1 : 0;
-			ant[curr_ant - 1].previous = ant[curr_ant - 1].curr;
-		}
+		if (data->map[y][i] == 'L')
+			i++;
+		curr_ant = ft_atoi(data->map[y] + i);
+		i += ft_lennbr(curr_ant) + 1;
+		ant[curr_ant - 1].curr = ft_index_for_links(data->map[y] + i, room,
+				data->room, ft_len_to_c(data->map[y] + i, ' '));
+		i += ft_len_to_c(data->map[y] + i, ' ');
+		if (ant[curr_ant - 1].coup == 0)
+			ant[curr_ant - 1].coup = (y % 6) + 1;
+		if (ant[curr_ant - 1].curr != data->index_end)
+			ft_put_green_square(data, room, ant[curr_ant - 1].curr,
+					ant[curr_ant - 1]);
+		i += i < (int)ft_strlen(data->map[y]) ? 1 : 0;
+		ant[curr_ant - 1].previous = ant[curr_ant - 1].curr;
 	}
 	return (0);
 }
-
 
 int		ft_inv_play(t_data *data)
 {
@@ -201,8 +211,12 @@ int		ft_inv_play(t_data *data)
 			i++;
 	data->i--;
 	if (data->i >= i)
-		ft_play_inv_cut(data->room2, data, data->ant, data->i, i);
+		ft_play_inv_cut(data->room2, data, data->ant, data->i);
 	else
 		data->i++;
+	data->i--;
+	if (data->i >= i)
+		ft_play_inv_cut3(data->room2, data, data->ant, data->i);
+	data->i++;
 	return (i);
 }

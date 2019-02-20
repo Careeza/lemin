@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 20:53:25 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 04:02:41 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		ft_check_arg(t_algo *algo, const char **argv, int argc)
 
 	algo->flag = 0;
 	i = 1;
-	if (argc > 3)
+	if (argc > 4)
 		ft_stop();
 	while (i < argc)
 	{
@@ -92,6 +92,8 @@ int		ft_check_arg(t_algo *algo, const char **argv, int argc)
 				algo->flag += 2;
 			else if (ft_strcmp("-l", argv[i]) == 0)
 				algo->flag += 1;
+			else if (ft_strcmp("-v", argv[i]) == 0)
+				algo->flag = 42;
 			else
 				ft_stop();
 		}

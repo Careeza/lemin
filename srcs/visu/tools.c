@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 23:19:49 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/02/20 00:58:43 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 04:45:34 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			nbr_space(char *str, char c)
 
 	i = 0;
 	space = 0;
-	if (str[0] =='#')
+	if (str[0] == '#')
 		return (0);
 	while (str[i])
 	{
@@ -30,7 +30,7 @@ int			nbr_space(char *str, char c)
 	return (space);
 }
 
-int ft_nbr_room(t_data *data)
+int			ft_nbr_room(t_data *data)
 {
 	int i;
 
@@ -46,7 +46,7 @@ int ft_nbr_room(t_data *data)
 	return (0);
 }
 
-int		ft_index_for_links(char *str, t_room *room, int nbrroom, int len)
+int			ft_index_for_links(char *str, t_room *room, int nbrroom, int len)
 {
 	int		a;
 	int		lenstr;
@@ -57,14 +57,14 @@ int		ft_index_for_links(char *str, t_room *room, int nbrroom, int len)
 		lenstr = ft_strlen(room[a].name);
 		if (len == lenstr)
 			if (ft_strncmp(room[a].name, str, lenstr) == 0)
-				return(a);
+				return (a);
 		a++;
 	}
 	free(str);
 	return (-1);
 }
 
-int		ft_index_for(char *str, t_room *room, int nbrroom)
+int			ft_index_for(char *str, t_room *room, int nbrroom)
 {
 	int		a;
 	int		len;
@@ -78,14 +78,14 @@ int		ft_index_for(char *str, t_room *room, int nbrroom)
 		len = ft_strlen(room[a].name);
 		if (len == lenstr)
 			if (ft_strncmp(room[a].name, str, lenstr) == 0)
-				return(a);
+				return (a);
 		a++;
 	}
 	free(str);
 	return (-1);
 }
 
-int		ft_len_to_c(char *str, char c)
+int			ft_len_to_c(char *str, char c)
 {
 	int i;
 
@@ -94,4 +94,3 @@ int		ft_len_to_c(char *str, char c)
 		i++;
 	return (i);
 }
-

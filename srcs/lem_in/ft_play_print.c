@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 01:12:07 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 02:47:06 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 04:04:39 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int				ft_play_and_print(t_special_ant *ant, t_room *room,
 
 	i = 0;
 	curr_ant = 0;
+	if (algo->flag >= 42)
+		ft_putstr("#Visu OK\n");
 	ft_putstr(all->str);
 	ft_putchar('\n');
 	while (i < all->fourmis)

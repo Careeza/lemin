@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 23:14:53 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/02/20 03:19:02 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 04:44:25 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,10 @@ t_room		*ft_init(t_data *data)
 	k = -1;
 	if (!(data->map = ft_read()))
 		return (NULL);
+	if (ft_strcmp(data->map[0], "#Visu OK") != 0)
+		ft_putstr("Invalid map\n");
+	if (ft_strcmp(data->map[0], "#Visu OK") != 0)
+		exit(0);
 	if (!(room = ft_init_complete(data)))
 		return (NULL);
 	if (!(data->mlx = mlx_init()))
