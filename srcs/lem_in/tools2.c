@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 05:41:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 22:40:34 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 23:38:14 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,17 @@ t_special_ant	*ft_init_ant(int nbrfourmis, t_all *all)
 
 	i = 0;
 	if (!(ant = (t_special_ant*)malloc(sizeof(t_special_ant) * (nbrfourmis))))
+	{
+		ft_parser_error("Malloc failed\n", -1, NULL, NULL);
 		return (NULL);
+	}
 	while (i < nbrfourmis)
 	{
 		if (!(ant[i].path = (int*)malloc(sizeof(int) * (all->room))))
+		{
+			ft_parser_error("Malloc failed\n", -1, NULL, NULL);
 			return (NULL);
+		}
 		ant[i].len = 0;
 		ant[i].i = 0;
 		ant[i].curr = 0;

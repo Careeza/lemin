@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 01:05:08 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 22:34:17 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 23:37:34 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,10 @@ t_special_ant	*ft_give_path_to_ant(t_algo *algo, t_path *way,
 	if (!(ant = ft_init_ant(all->fourmis, all)))
 		return (NULL);
 	if (!(power = (int*)malloc(sizeof(int) * way[i].nb_path)))
+	{
+		ft_parser_error("Malloc failed\n", -1, NULL, NULL);
 		return (NULL);
+	}
 	ft_cpint_n(way[i].len_path, power, way[i].nb_path);
 	algo->cmt = 0;
 	while (algo->cmt < algo->fourmis)
