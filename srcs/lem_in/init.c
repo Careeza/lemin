@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 00:57:31 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 20:59:57 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 21:43:58 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int			ft_init_algo(t_algo *algo, t_all *all, t_room *room)
 {
 	if (!(algo->list1 = (int*)malloc(sizeof(int) * (all->room))))
-		return (-1);
+		ft_parser_error("Malloc failed\n", -1, NULL, NULL);
 	if (!(algo->list2 = (int*)malloc(sizeof(int) * (all->room))))
-		return (-1);
+		ft_parser_error("Malloc failed\n", -1, NULL, NULL);
 	algo->list1[0] = algo->index_start;
 	algo->list1[1] = -42;
 	algo->courant = 0;

@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 18:28:45 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 21:45:39 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ft_nbr_room(t_all *all)
 	return (0);
 }
 
-int		ft_nbrfourmis(t_all *all)
+int		ft_nbrfourmis(t_all *all, t_algo *algo)
 {
 	int	i;
 
@@ -42,6 +42,7 @@ int		ft_nbrfourmis(t_all *all)
 	while (all->map[i][0] == '#')
 		i++;
 	all->fourmis = ft_atoi(all->map[i]);
+	algo->fourmis = all->fourmis;
 	if (all->fourmis <= 0 || all->fourmis >= INT_MAX)
 		return (-1);
 	return (i + 1);
@@ -108,13 +109,12 @@ int		main(int argc, const char **argv)
 	t_algo	algo;
 	int		i;
 
-	ft_file(&algo);
 	algo.flag = 0;
 	if (argc != 1)
 		ft_check_arg(&algo, argv, argc);
 	if (ft_reading(&all) == -1)
 		return (ft_parser_error("Reading failed\n", 0, &all, NULL));
-	if ((i = ft_nbrfourmis(&all)) == -1)
+	if ((i = ft_nbrfourmis(&all, &algo)) == -1)
 		return (ft_parser_error("Invalid ant number\n", 0, &all, NULL));
 	if (ft_nbr_room(&all) == -1)
 		return (ft_parser_error("Not enought rooms\n", 0, &all, NULL));
@@ -125,7 +125,6 @@ int		main(int argc, const char **argv)
 	if (ft_check_link(&all, room, i) == -1)
 		return (-1);
 	ft_verif_doublons(room, &all, &algo);
-	if (ft_call_power(room, &algo, &all) == -1)
-		return (-1);
+	ft_call_power(room, &algo, &all);
 	return (0);
 }

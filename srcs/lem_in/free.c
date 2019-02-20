@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 09:52:55 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 20:56:00 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 21:54:47 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,6 @@ int		ft_free_ant(t_special_ant *ant, int nb)
 	}
 	if (ant != NULL)
 		free(ant);
-	return (0);
-}
-
-int		ft_free_list(int *s1, int *s2)
-{
-	if (s1 != NULL)
-	{
-		free(s1);
-		s1 = NULL;
-	}
-	if (s2 != NULL)
-	{
-		free(s2);
-		s2 = NULL;
-	}
 	return (0);
 }
 

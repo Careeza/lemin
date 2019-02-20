@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 17:39:48 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 21:46:39 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct	s_all
 	long	fourmis;
 	int		room;
 	char	*str;
+	int		fd;
 }				t_all;
 
 typedef struct	s_room
@@ -78,7 +79,6 @@ typedef struct	s_algo
 	int		k;
 	int		lesslink;
 	int		cmt;
-	int		fd;
 }				t_algo;
 
 /*
@@ -133,6 +133,7 @@ int				ft_start_end(t_room *room, t_all *all, int index, int *i);
 int				ft_result(int start_and_end[2], int i, t_all *all,
 					t_room *room);
 int				ft_parser(t_all *all, t_room *room, int i, int index);
+int				ft_broken_path(t_path *way, t_algo *algo, t_all *all);
 
 /*
 ** parser_2.c
@@ -147,7 +148,7 @@ int				ft_parser_error(char *str, int i, t_all *all, t_room *room);
 */
 
 void			ft_fill_power_cut(t_room *room, t_algo *algo, int i, int j);
-int				ft_fill_power(t_room *room, t_algo *algo, int i);
+int				ft_fill_power(t_room *room, t_algo *algo, int i, t_path *path);
 int				ft_call_power(t_room *room, t_algo *algo, t_all *all);
 
 /*
@@ -179,7 +180,7 @@ int				ft_free(t_room *room, t_all *all, t_path *way, t_algo *algo);
 void			ft_cpint_n(int *path, int *dest, int len);
 void			ft_cp_dbdint(t_path *way, int k, int nb_path, int exept);
 t_special_ant	*ft_init_ant(int nbrfourmis, t_all *all);
-void			ft_file(t_algo *algo);
+int				ft_file(t_all *all);
 
 /*
 ** free.c

@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:24:22 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 18:37:00 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 21:54:28 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,22 @@
 
 int		ft_free(t_room *room, t_all *all, t_path *way, t_algo *algo)
 {
-	(void)way;
-	ft_free_room(room, all->room);
-	ft_free_path(way, algo->lesslink);
-	ft_free_all(all);
-	ft_free_list(algo->list1, algo->list2);
+	if (room != NULL)
+		ft_free_room(room, all->room);
+	if (way != NULL)
+		ft_free_path(way, algo->lesslink);
+	if (all != NULL)
+		ft_free_all(all);
+	if (algo->list1 != NULL)
+	{
+		free(algo->list1);
+		algo->list1 = NULL;
+	}
+	if (algo->list2 != NULL)
+	{
+		free(algo->list2);
+		algo->list2 = NULL;
+	}
 	return (0);
 }
 

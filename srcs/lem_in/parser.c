@@ -6,11 +6,28 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:45 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/19 20:09:06 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 21:56:13 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+int			ft_broken_path(t_path *way, t_algo *algo, t_all *all)
+{
+	ft_free_path(way, algo->lesslink);
+	if (algo->list1 != NULL)
+	{
+		free(algo->list1);
+		algo->list1 = NULL;
+	}
+	if (algo->list2 != NULL)
+	{
+		free(algo->list2);
+		algo->list2 = NULL;
+	}
+	close(all->fd);
+	exit(0);
+}
 
 int			ft_start_end(t_room *room, t_all *all, int index, int *i)
 {
