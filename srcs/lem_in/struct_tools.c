@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 22:40:20 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 23:15:01 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,18 @@ void	ft_sort_room(t_room *room, t_all *all)
 	}
 }
 
-int		ft_nm(char *str, t_room *room, int fourmis, int nbroom)
+int		ft_nm(char *str, t_room *room, int nbroom, t_all *all)
 {
 	int len;
 
 	len = 0;
 	while (str[len] != ' ')
 		len++;
+	room->index = NULL;
 	if (nbr_space(str, ' ') != 2)
-		return (-1);
+		return (ft_parser_error("Invalid Coord\n", 2, all, room));
 	if (ft_str_is_digit((str + len), '\0') == -1)
-		return (-1);
+		return (ft_parser_error("Invalid Coord\n", 2, all, room));
 	room->name = ft_strndup(str, len);
 	room->links = 0;
 	room->prev = 0;
@@ -69,8 +70,7 @@ int		ft_nm(char *str, t_room *room, int fourmis, int nbroom)
 	room->previous = -42;
 	room->courant = INT_MAX;
 	if (!(room->index = (int*)malloc(sizeof(int) * nbroom)))
-		return (-2);
-	(void)fourmis;
+		return (ft_parser_error("Malloc failed\n", 2, all, room));
 	return (0);
 }
 

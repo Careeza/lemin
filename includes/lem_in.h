@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:30:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 22:00:23 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/20 23:14:17 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void			ft_reset_power(t_room *room, int nbroom, t_algo *algo);
 */
 void			ft_sort_index(t_room *room, int i);
 void			ft_sort_room(t_room *room, t_all *all);
-int				ft_nm(char *str, t_room *room, int fourmis, int nbroom);
+int				ft_nm(char *str, t_room *room, int nbroom, t_all *all);
 int				ft_verif_link(t_room *room, char *str, t_all *all);
 int				ft_verif_link2(t_room *room, char *str, t_all *all, int indexa);
 
