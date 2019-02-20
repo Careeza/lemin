@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 clear
-echo "" > result
 cpt=0
 m="start"
 game=0;
