@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:45 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 23:05:10 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/21 00:47:22 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,20 @@ int			ft_result(int start_and_end[2], int i, t_all *all, t_room *room)
 	return (ft_parser_error("Start end error\n", 1, all, room));
 }
 
-static void	ft_init(int *start_end, int start_and_end[2])
+static void	ft_init(int *start_end, int start_and_end[2], t_room *room, int nb)
 {
+	int	i;
+
+	i = 0;
 	start_and_end[0] = 0;
 	start_and_end[1] = 0;
 	*start_end = 0;
+	while (i < nb)
+	{
+		room[i].name = NULL;
+		room[i].index = NULL;
+		i++;
+	}
 }
 
 int			ft_parser(t_all *all, t_room *room, int i, int index)
@@ -65,13 +74,13 @@ int			ft_parser(t_all *all, t_room *room, int i, int index)
 	int	start_end;
 	int	start_and_end[2];
 
-	ft_init(&start_end, start_and_end);
+	ft_init(&start_end, start_and_end, room, all->room);
 	while (index < all->room)
 	{
 		if (all->map[i][0] != '#')
 		{
 			if (ft_nm(all->map[i], &room[index], all->room, all) == -1)
-				return (-1);
+				return (ft_parser_error("exit\n", 2, all, room));
 			index++;
 		}
 		else if (all->map[i][0] == '#')

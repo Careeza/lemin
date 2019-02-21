@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:11:52 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 22:35:48 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/21 00:23:05 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ int		ft_nbr_room(t_all *all)
 	int		i;
 
 	i = 0;
+	while (all->map[i][0] == '#' && all->map[i])
+		i++;
+	i++;
 	all->room = 0;
 	while (all->map[i])
 	{
@@ -26,6 +29,8 @@ int		ft_nbr_room(t_all *all)
 		{
 			if (nbr_space(all->map[i], ' ') == 2)
 				all->room++;
+			else
+				break ;
 		}
 		i++;
 	}

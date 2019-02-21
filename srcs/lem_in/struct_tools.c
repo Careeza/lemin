@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 10:12:01 by prastoin          #+#    #+#             */
-/*   Updated: 2019/02/20 23:15:01 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/02/21 01:06:07 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,17 @@ int		ft_nm(char *str, t_room *room, int nbroom, t_all *all)
 {
 	int len;
 
+	(void)all;
 	len = 0;
 	while (str[len] != ' ')
 		len++;
-	room->index = NULL;
 	if (nbr_space(str, ' ') != 2)
-		return (ft_parser_error("Invalid Coord\n", 2, all, room));
+		return (ft_parser_error("Invalid Coord\n", -1, NULL, NULL));
 	if (ft_str_is_digit((str + len), '\0') == -1)
-		return (ft_parser_error("Invalid Coord\n", 2, all, room));
+		return (ft_parser_error("Invalid Coord\n", -1, NULL, NULL));
 	room->name = ft_strndup(str, len);
+	if (room->name[0] == 'L')
+		return (ft_parser_error("Invalid name\n", -1, NULL, NULL));
 	room->links = 0;
 	room->prev = 0;
 	room->slot = 0;
@@ -70,7 +72,7 @@ int		ft_nm(char *str, t_room *room, int nbroom, t_all *all)
 	room->previous = -42;
 	room->courant = INT_MAX;
 	if (!(room->index = (int*)malloc(sizeof(int) * nbroom)))
-		return (ft_parser_error("Malloc failed\n", 2, all, room));
+		return (ft_parser_error("Malloc failed\n", -1, NULL, NULL));
 	return (0);
 }
 
